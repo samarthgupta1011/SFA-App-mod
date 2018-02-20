@@ -30,7 +30,6 @@ import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 public class QcDetailsActivity extends AppCompatActivity {
 
     Button btProceed;
-    Progress A,B;
     Dialog dialog;
 
     @Override
@@ -47,49 +46,6 @@ public class QcDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                A = new Progress();
-                B = new Progress();
-                dialog.show();
-
-                final CheckBox cbA = (CheckBox) dialog.findViewById(R.id.cb_A);
-                final CheckBox cbB = (CheckBox) dialog.findViewById(R.id.cb_B);
-                ((Button)dialog.findViewById(R.id.bt_done)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(cbA.isChecked()){
-                            A = new Progress(true);
-                        }
-
-                        if(cbB.isChecked()){
-                            B = new Progress(true);
-                        }
-
-                        ProcessesNO p = new ProcessesNO(A,B);
-                        jobTicket.setProcesses(p);
-
-                        Log.e("Json",new GsonBuilder().create().toJson( jobTicket));
-
-
-                        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-                        DataInterface client = retrofit.create(DataInterface.class);
-                        Call<JobTicket> call = client.postTicket(jobTicket);
-                        call.enqueue(new Callback<JobTicket>() {
-                            @Override
-                            public void onResponse(Call<JobTicket> call, Response<JobTicket> response) {
-                                Toast.makeText(QcDetailsActivity.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(QcDetailsActivity.this,HomeActivity.class );
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onFailure(Call<JobTicket> call, Throwable t) {
-                                Toast.makeText(QcDetailsActivity.this,"Error",Toast.LENGTH_LONG);
-                            }
-                        });
-
-                    }
-                });
 
 
 
