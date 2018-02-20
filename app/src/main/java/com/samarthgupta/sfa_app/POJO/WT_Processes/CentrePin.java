@@ -11,7 +11,7 @@ public class CentrePin {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_____> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -21,11 +21,11 @@ public class CentrePin {
         this.isRequired = isRequired;
     }
 
-    public List<Update_____> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_____> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

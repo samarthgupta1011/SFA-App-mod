@@ -12,7 +12,7 @@ public class Pasting {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_________________________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Pasting {
         this.isRequired = isRequired;
     }
 
-    public List<Update_________________________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_________________________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

@@ -12,7 +12,7 @@ public class Folding {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Folding {
         this.isRequired = isRequired;
     }
 
-    public List<Update_> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

@@ -12,7 +12,7 @@ public class Lamination {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update____________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Lamination {
         this.isRequired = isRequired;
     }
 
-    public List<Update____________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update____________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

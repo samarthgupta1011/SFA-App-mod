@@ -1,14 +1,22 @@
+package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
-package package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
+
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Box;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Cover;
 
 public class Processes {
 
     @SerializedName("_id")
     @Expose
     private String id;
+    @SerializedName("ticket_id")
+    @Expose
+    private String ticket_id;
     @SerializedName("job-type")
     @Expose
     private String jobType;
@@ -30,6 +38,14 @@ public class Processes {
     @SerializedName("box")
     @Expose
     private Box box;
+
+    public String getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(String ticket_id) {
+        this.ticket_id = ticket_id;
+    }
 
     public String getId() {
         return id;

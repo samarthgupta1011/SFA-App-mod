@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Machine;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Paper;
@@ -92,7 +97,6 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 date = System.currentTimeMillis();
                 dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
-
                 jobTicket.setNotes(((EditText)findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
                 jobTicket.setPriority("5");
@@ -191,6 +195,10 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
 
 
+                //Post ticket here
+                //start act in onResponse
+//                Get ticket id and success status in response
+                //Send to next act
 
 
                 startActivity(new Intent(JobDetailsActivity.this, QcDetailsActivity.class));
@@ -210,6 +218,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
             }
         });
+
         cbMachKba.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -220,6 +229,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
             }
         });
+
         cbMachSm72.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -241,12 +251,13 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
             }
         });
+
         cbMachOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (cbMachOther.isChecked()) {
                     machines.add(etMachOther.getText().toString());
-                }
+                } //else statement not added ?
             }
         });
 

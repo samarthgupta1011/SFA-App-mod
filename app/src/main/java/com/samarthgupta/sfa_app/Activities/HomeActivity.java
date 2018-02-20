@@ -26,9 +26,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONArray;
@@ -83,36 +85,33 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-//        Retrofit.Builder builder = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).
-//                baseUrl("http://ec2-13-126-93-101.ap-south-1.compute.amazonaws.com/");
-//        Retrofit retrofit = builder.build();
-//        DataInterface client = retrofit.create(DataInterface.class);
-//
-//        Call<String> call = client.getLol(new Lol("Sam", 12));
-//        call.enqueue(new Callback<String>() {
+
+        //FOR REFERENCE
+
+//        String url ="http://ac298a6f.ngrok.io/ticket";
+//        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 //            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.d("Json", "R " + response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.d("Json", "E " + t.toString());
-//            }
-//        });
+//            public void onResponse(String response) {
+
+//                Log.d("RESPONSE",response);
+//                JobTicket[] jt = new GsonBuilder().create().fromJson(response, JobTicket[].class);
+//                Log.d("RESPONSE",jt[0].getDate());
+
+//                try {
+//                    JSONArray arr = new JSONArray(response);
+//                    Log.d("RESPONSE",arr.getJSONObject(0).getString("date"));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
 
-//        call.enqueue(new Callback<Lol>() {
-//            @Override
-//            public void onResponse(Call<Lol> call, retrofit2.Response<Lol> response) {
-//                Log.d("Json", "R " + response.body());
 //            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
 //
-//            @Override
-//            public void onFailure(Call<Lol> call, Throwable t) {
-//                Log.d("Json", "E " + t.toString());
 //            }
-//        });
+//        }));
 
 
     }
