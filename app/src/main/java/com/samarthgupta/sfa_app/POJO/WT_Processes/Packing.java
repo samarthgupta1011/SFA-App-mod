@@ -12,7 +12,7 @@ public class Packing {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_______> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Packing {
         this.isRequired = isRequired;
     }
 
-    public List<Update_______> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_______> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

@@ -12,7 +12,7 @@ public class Dispatch {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Dispatch {
         this.isRequired = isRequired;
     }
 
-    public List<Update________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

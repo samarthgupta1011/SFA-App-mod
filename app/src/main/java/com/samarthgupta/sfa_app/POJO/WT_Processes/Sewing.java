@@ -11,7 +11,7 @@ public class Sewing {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update____> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -21,11 +21,11 @@ public class Sewing {
         this.isRequired = isRequired;
     }
 
-    public List<Update____> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update____> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

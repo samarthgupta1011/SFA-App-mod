@@ -12,7 +12,7 @@ public class DieCut {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update________________________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class DieCut {
         this.isRequired = isRequired;
     }
 
-    public List<Update________________________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update________________________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.DataInterface;
-import com.samarthgupta.sfa_app.POJO.JobTicket;
 import com.samarthgupta.sfa_app.POJO.ProcessesNO;
 import com.samarthgupta.sfa_app.POJO.Progress;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Lamination;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Printing;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.R;
 
 import retrofit2.Call;
@@ -65,8 +68,7 @@ public class QcDetailsActivity extends AppCompatActivity {
                         }
 
                         ProcessesNO p = new ProcessesNO(A,B);
-                        jobTicket.setProcesses(p);
-
+                      //  jobTicket.setProcesses(A,B) ;
                         Log.e("Json",new GsonBuilder().create().toJson( jobTicket));
 
 

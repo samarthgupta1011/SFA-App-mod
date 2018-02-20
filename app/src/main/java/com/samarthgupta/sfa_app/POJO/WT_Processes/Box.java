@@ -8,19 +8,19 @@ public class Box {
 
     @SerializedName("designing")
     @Expose
-    private Designing__ designing;
+    private Designing designing;
     @SerializedName("ferro")
     @Expose
-    private Ferro__ ferro;
+    private Ferro ferro;
     @SerializedName("plates")
     @Expose
-    private Plates__ plates;
+    private Plates plates;
     @SerializedName("printing")
     @Expose
-    private Printing__ printing;
+    private Printing printing;
     @SerializedName("lamination")
     @Expose
-    private Lamination_ lamination;
+    private Lamination lamination;
     @SerializedName("uv")
     @Expose
     private Uv uv;
@@ -38,54 +38,54 @@ public class Box {
     private Pasting pasting;
     @SerializedName("packing")
     @Expose
-    private Packing__ packing;
+    private Packing packing;
     @SerializedName("dispatch")
     @Expose
-    private Dispatch__ dispatch;
+    private Dispatch dispatch;
     @SerializedName("challan")
     @Expose
-    private Challan__ challan;
+    private Challan challan;
     @SerializedName("bill")
     @Expose
-    private Bill__ bill;
+    private Bill bill;
 
-    public Designing__ getDesigning() {
+    public Designing getDesigning() {
         return designing;
     }
 
-    public void setDesigning(Designing__ designing) {
+    public void setDesigning(Designing designing) {
         this.designing = designing;
     }
 
-    public Ferro__ getFerro() {
+    public Ferro getFerro() {
         return ferro;
     }
 
-    public void setFerro(Ferro__ ferro) {
+    public void setFerro(Ferro ferro) {
         this.ferro = ferro;
     }
 
-    public Plates__ getPlates() {
+    public Plates getPlates() {
         return plates;
     }
 
-    public void setPlates(Plates__ plates) {
+    public void setPlates(Plates plates) {
         this.plates = plates;
     }
 
-    public Printing__ getPrinting() {
+    public Printing getPrinting() {
         return printing;
     }
 
-    public void setPrinting(Printing__ printing) {
+    public void setPrinting(Printing printing) {
         this.printing = printing;
     }
 
-    public Lamination_ getLamination() {
+    public Lamination getLamination() {
         return lamination;
     }
 
-    public void setLamination(Lamination_ lamination) {
+    public void setLamination(Lamination lamination) {
         this.lamination = lamination;
     }
 
@@ -129,35 +129,35 @@ public class Box {
         this.pasting = pasting;
     }
 
-    public Packing__ getPacking() {
+    public Packing getPacking() {
         return packing;
     }
 
-    public void setPacking(Packing__ packing) {
+    public void setPacking(Packing packing) {
         this.packing = packing;
     }
 
-    public Dispatch__ getDispatch() {
+    public Dispatch getDispatch() {
         return dispatch;
     }
 
-    public void setDispatch(Dispatch__ dispatch) {
+    public void setDispatch(Dispatch dispatch) {
         this.dispatch = dispatch;
     }
 
-    public Challan__ getChallan() {
+    public Challan getChallan() {
         return challan;
     }
 
-    public void setChallan(Challan__ challan) {
+    public void setChallan(Challan challan) {
         this.challan = challan;
     }
 
-    public Bill__ getBill() {
+    public Bill getBill() {
         return bill;
     }
 
-    public void setBill(Bill__ bill) {
+    public void setBill(Bill bill) {
         this.bill = bill;
     }
 
