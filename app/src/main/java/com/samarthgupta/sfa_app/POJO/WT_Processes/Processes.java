@@ -1,8 +1,13 @@
+package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
-package package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
+
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Box;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Cover;
 
 public class Processes {
 

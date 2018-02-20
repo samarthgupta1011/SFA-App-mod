@@ -12,7 +12,7 @@ public class Foiling {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_______________________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Foiling {
         this.isRequired = isRequired;
     }
 
-    public List<Update_______________________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_______________________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

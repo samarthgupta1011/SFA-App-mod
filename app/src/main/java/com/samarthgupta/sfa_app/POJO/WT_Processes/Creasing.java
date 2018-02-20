@@ -12,7 +12,7 @@ public class Creasing {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update_____________> updates = null;
+    private List<Update> updates = null;
 
     public Boolean getIsRequired() {
         return isRequired;
@@ -22,11 +22,11 @@ public class Creasing {
         this.isRequired = isRequired;
     }
 
-    public List<Update_____________> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update_____________> updates) {
+    public void setUpdates(List<Update> updates) {
         this.updates = updates;
     }
 

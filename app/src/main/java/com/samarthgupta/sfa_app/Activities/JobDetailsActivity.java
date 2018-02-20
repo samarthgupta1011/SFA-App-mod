@@ -92,7 +92,6 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 date = System.currentTimeMillis();
                 dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
-
                 jobTicket.setNotes(((EditText)findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
                 jobTicket.setPriority("5");
@@ -246,7 +245,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (cbMachOther.isChecked()) {
                     machines.add(etMachOther.getText().toString());
-                }
+                } //else statement not added ?
             }
         });
 

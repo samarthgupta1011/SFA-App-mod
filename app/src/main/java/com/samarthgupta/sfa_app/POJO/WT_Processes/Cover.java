@@ -8,16 +8,16 @@ public class Cover {
 
     @SerializedName("designing")
     @Expose
-    private Designing_ designing;
+    private Designing designing;
     @SerializedName("ferro")
     @Expose
-    private Ferro_ ferro;
+    private Ferro ferro;
     @SerializedName("plates")
     @Expose
-    private Plates_ plates;
+    private Plates plates;
     @SerializedName("printing")
     @Expose
-    private Printing_ printing;
+    private Printing printing;
     @SerializedName("lamination")
     @Expose
     private Lamination lamination;
@@ -29,46 +29,46 @@ public class Cover {
     private Binding binding;
     @SerializedName("packing")
     @Expose
-    private Packing_ packing;
+    private Packing packing;
     @SerializedName("dispatch")
     @Expose
-    private Dispatch_ dispatch;
+    private Dispatch dispatch;
     @SerializedName("challan")
     @Expose
-    private Challan_ challan;
+    private Challan challan;
     @SerializedName("bill")
     @Expose
-    private Bill_ bill;
+    private Bill bill;
 
-    public Designing_ getDesigning() {
+    public Designing getDesigning() {
         return designing;
     }
 
-    public void setDesigning(Designing_ designing) {
+    public void setDesigning(Designing designing) {
         this.designing = designing;
     }
 
-    public Ferro_ getFerro() {
+    public Ferro getFerro() {
         return ferro;
     }
 
-    public void setFerro(Ferro_ ferro) {
+    public void setFerro(Ferro ferro) {
         this.ferro = ferro;
     }
 
-    public Plates_ getPlates() {
+    public Plates getPlates() {
         return plates;
     }
 
-    public void setPlates(Plates_ plates) {
+    public void setPlates(Plates plates) {
         this.plates = plates;
     }
 
-    public Printing_ getPrinting() {
+    public Printing getPrinting() {
         return printing;
     }
 
-    public void setPrinting(Printing_ printing) {
+    public void setPrinting(Printing printing) {
         this.printing = printing;
     }
 
@@ -96,35 +96,35 @@ public class Cover {
         this.binding = binding;
     }
 
-    public Packing_ getPacking() {
+    public Packing getPacking() {
         return packing;
     }
 
-    public void setPacking(Packing_ packing) {
+    public void setPacking(Packing packing) {
         this.packing = packing;
     }
 
-    public Dispatch_ getDispatch() {
+    public Dispatch getDispatch() {
         return dispatch;
     }
 
-    public void setDispatch(Dispatch_ dispatch) {
+    public void setDispatch(Dispatch dispatch) {
         this.dispatch = dispatch;
     }
 
-    public Challan_ getChallan() {
+    public Challan getChallan() {
         return challan;
     }
 
-    public void setChallan(Challan_ challan) {
+    public void setChallan(Challan challan) {
         this.challan = challan;
     }
 
-    public Bill_ getBill() {
+    public Bill getBill() {
         return bill;
     }
 
-    public void setBill(Bill_ bill) {
+    public void setBill(Bill bill) {
         this.bill = bill;
     }
 
