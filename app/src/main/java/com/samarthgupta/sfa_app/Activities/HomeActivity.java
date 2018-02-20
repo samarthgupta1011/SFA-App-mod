@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity
 
         //FOR REFERENCE
 
-//        String url ="http://ac298a6f.ngrok.io/ticket";
+        String url ="http://ac298a6f.ngrok.io/ticket";
 //        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 //            @Override
 //            public void onResponse(String response) {
@@ -105,6 +105,29 @@ public class HomeActivity extends AppCompatActivity
 //                }
 
 
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }));
+
+
+        //Post request VOLLEY
+//        JSONObject obj = new JSONObject();
+//        try {
+//            obj.put("name","shhivam");
+//            obj.put("age",10);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Log.d("RESPONSE", obj+"");
+//        Volley.newRequestQueue(this).add(new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                //Use Response
 //            }
 //        }, new Response.ErrorListener() {
 //            @Override
