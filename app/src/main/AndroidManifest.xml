@@ -18,9 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SignInActivity"
-            android:label="Sign in">
-
-        </activity>
+            android:label="Sign in" />
         <activity
             android:name=".Activities.RegisterActivity"
             android:label="Register"
@@ -42,7 +40,8 @@
         <activity
             android:name=".Activities.UpdateProgressActivity"
             android:parentActivityName=".Activities.TasksActivity" />
-        <activity android:name=".Activities.SplashScreenActivity"
+        <activity
+            android:name=".Activities.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +49,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.Books_Processes" />
+        <activity android:name=".Activities.Box_Processes" />
+        <activity android:name=".Activities.Cover_Processes" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -72,10 +73,13 @@ public class QcDetailsActivity extends AppCompatActivity {
                         Log.e("Json",new GsonBuilder().create().toJson( jobTicket));
 
 
+
+/*
                         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
                         DataInterface client = retrofit.create(DataInterface.class);
                         Call<JobTicket> call = client.postTicket(jobTicket);
                         call.enqueue(new Callback<JobTicket>() {
+                            @SuppressLint("WrongConstant")
                             @Override
                             public void onResponse(Call<JobTicket> call, Response<JobTicket> response) {
                                 Toast.makeText(QcDetailsActivity.this, "Job ticket created", Toast.LENGTH_SHORT).show();
@@ -89,6 +93,8 @@ public class QcDetailsActivity extends AppCompatActivity {
                                 Toast.makeText(QcDetailsActivity.this,"Error",Toast.LENGTH_LONG);
                             }
                         });
+*/
+
 
                     }
                 });

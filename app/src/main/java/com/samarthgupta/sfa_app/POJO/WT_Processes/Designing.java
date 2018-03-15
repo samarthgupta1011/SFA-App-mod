@@ -26,6 +26,7 @@ public class Designing {
     }
 
     public void setIsDone(Boolean isDone) {
+        isDone = false ;
         this.isDone = isDone;
     }
 

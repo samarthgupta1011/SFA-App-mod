@@ -3,6 +3,7 @@ package com.samarthgupta.sfa_app;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.UpdateObject;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public interface DataInterface {
 
     @POST("/ticket")
     Call<JobTicket> postTicket(@Body JobTicket jt);
+
+    @POST("/ticket")
+    Call<Processes> postTicket(@Body Processes processes) ;
 
     @POST("/login")
     Call<Employee> empLogin(@Body Employee emp);

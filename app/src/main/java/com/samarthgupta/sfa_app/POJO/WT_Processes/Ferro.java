@@ -26,6 +26,7 @@ public class Ferro {
     }
 
     public void setIsDone(Boolean isDone) {
+        isDone = false ;
         this.isDone = isDone;
     }
 

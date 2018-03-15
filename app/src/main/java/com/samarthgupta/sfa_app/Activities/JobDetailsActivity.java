@@ -1,9 +1,11 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,17 +16,29 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.samarthgupta.sfa_app.DataInterface;
+import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Machine;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Paper;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Plate;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
 import com.samarthgupta.sfa_app.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 
 public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
@@ -92,7 +106,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 date = System.currentTimeMillis();
                 dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
-                jobTicket.setNotes(((EditText)findViewById(R.id.et_notes)).getText().toString());
+                jobTicket.setNotes(((EditText) findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
                 jobTicket.setPriority("5");
 
@@ -116,12 +130,11 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 } else {
                     jobTicket.setJob(job);
 
-                    String wt = (job.getName()+dateFormat.format(date)).trim().replace(" ","").replace(",","").replace(":","");
+                    String wt = (job.getName() + dateFormat.format(date)).trim().replace(" ", "").replace(",", "").replace(":", "");
                     jobTicket.setWt(wt);
                     //To be corrected
                     jobTicket.setDeliveryDate("AAJ");
                 }
-
 
 
                 Machine machine = new Machine(machines, etMachOther.getText().toString());
@@ -144,9 +157,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
 
                 //Plate name is null. To be corrected
-
                 Plate plate = new Plate(plateType, "Plate", etPlateQuan.getText().toString());
-                if (plate.getPlate()!=null && plate.getPlate().isEmpty()) {
+                if (plate.getPlate() != null && plate.getPlate().isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
                     builder.setTitle("Enter job details");
                     builder.setMessage("Please enter plate");
@@ -168,10 +180,10 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 papDetails = ((EditText) findViewById(R.id.et_paper_details)).getText().toString();
                 papQuality = ((EditText) findViewById(R.id.et_paper_quality)).getText().toString();
                 papQuan = ((EditText) findViewById(R.id.et_paper_quantity)).getText().toString();
-                Log.i("ARE",papBy+" ");
+                Log.i("ARE", papBy + " ");
                 papLocation = ((EditText) findViewById(R.id.et_paper_loc)).getText().toString();
                 Paper paper = new Paper(papDetails, papQuality, papQuan, papBy, papLocation);
-                if (paper.getQuantity()!= null && paper.getPaperBy() !=null && (paper.getQuantity().isEmpty() || paper.getQuality().isEmpty() || paper.getPaperBy().isEmpty() || paper.getLocation().isEmpty())) {
+                if (paper.getQuantity() != null && paper.getPaperBy() != null && (paper.getQuantity().isEmpty() || paper.getQuality().isEmpty() || paper.getPaperBy().isEmpty() || paper.getLocation().isEmpty())) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
                     builder.setTitle("Enter job details");
                     builder.setMessage("Please enter paper details");
@@ -190,11 +202,13 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
 
 
-
-
-                startActivity(new Intent(JobDetailsActivity.this, QcDetailsActivity.class));
-
-
+                if (rbBook.isChecked()) {
+                    startActivity(new Intent(JobDetailsActivity.this, Books_Processes.class));
+                } else if (rbBox.isChecked()) {
+                    startActivity(new Intent(JobDetailsActivity.this, Box_Processes.class));
+                } else if (rbCover.isChecked()) {
+                    startActivity(new Intent(JobDetailsActivity.this, Cover_Processes.class));
+                }
             }
         });
 
@@ -245,7 +259,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (cbMachOther.isChecked()) {
                     machines.add(etMachOther.getText().toString());
-                } //else statement not added ?
+                }
+
             }
         });
 
@@ -317,7 +332,25 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             case R.id.rb_paper_self:
                 papBy = rbPaperSelf.getText().toString();
                 break;
-
         }
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        DataInterface client = retrofit.create(DataInterface.class);
+        Call<JobTicket> call = client.postTicket(jobTicket);
+        call.enqueue(new Callback<JobTicket>() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onResponse(Call<JobTicket> call, Response<JobTicket> response) {
+                Toast.makeText(JobDetailsActivity.this, "Job ticket created", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(JobDetailsActivity.this,HomeActivity.class );
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<JobTicket> call, Throwable t) {
+                Toast.makeText(JobDetailsActivity.this,"Error",Toast.LENGTH_LONG);
+            }
+        });
     }
 }

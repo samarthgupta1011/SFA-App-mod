@@ -26,6 +26,7 @@ public class Plates {
     }
 
     public void setIsDone(Boolean isDone) {
+        isDone = false ;
         this.isDone = isDone;
     }
 
