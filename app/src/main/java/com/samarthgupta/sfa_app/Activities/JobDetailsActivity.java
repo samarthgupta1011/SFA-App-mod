@@ -14,22 +14,28 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Machine;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Paper;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Plate;
 import com.samarthgupta.sfa_app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 
 public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
@@ -97,7 +103,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 date = System.currentTimeMillis();
                 dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
-                jobTicket.setNotes(((EditText)findViewById(R.id.et_notes)).getText().toString());
+                jobTicket.setNotes(((EditText) findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
                 jobTicket.setPriority("5");
 
@@ -121,12 +127,11 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 } else {
                     jobTicket.setJob(job);
 
-                    String wt = (job.getName()+dateFormat.format(date)).trim().replace(" ","").replace(",","").replace(":","");
+                    String wt = (job.getName() + dateFormat.format(date)).trim().replace(" ", "").replace(",", "").replace(":", "");
                     jobTicket.setWt(wt);
                     //To be corrected
                     jobTicket.setDeliveryDate("AAJ");
                 }
-
 
 
                 Machine machine = new Machine(machines, etMachOther.getText().toString());
@@ -151,7 +156,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 //Plate name is null. To be corrected
 
                 Plate plate = new Plate(plateType, "Plate", etPlateQuan.getText().toString());
-                if (plate.getPlate()!=null && plate.getPlate().isEmpty()) {
+                if (plate.getPlate() != null && plate.getPlate().isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
                     builder.setTitle("Enter job details");
                     builder.setMessage("Please enter plate");
@@ -173,10 +178,9 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 papDetails = ((EditText) findViewById(R.id.et_paper_details)).getText().toString();
                 papQuality = ((EditText) findViewById(R.id.et_paper_quality)).getText().toString();
                 papQuan = ((EditText) findViewById(R.id.et_paper_quantity)).getText().toString();
-                Log.i("ARE",papBy+" ");
                 papLocation = ((EditText) findViewById(R.id.et_paper_loc)).getText().toString();
                 Paper paper = new Paper(papDetails, papQuality, papQuan, papBy, papLocation);
-                if (paper.getQuantity()!= null && paper.getPaperBy() !=null && (paper.getQuantity().isEmpty() || paper.getQuality().isEmpty() || paper.getPaperBy().isEmpty() || paper.getLocation().isEmpty())) {
+                if (paper.getQuantity() != null && paper.getPaperBy() != null && (paper.getQuantity().isEmpty() || paper.getQuality().isEmpty() || paper.getPaperBy().isEmpty() || paper.getLocation().isEmpty())) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
                     builder.setTitle("Enter job details");
                     builder.setMessage("Please enter paper details");
@@ -197,12 +201,81 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
                 //Post ticket here
                 //start act in onResponse
-//                Get ticket id and success status in response
+                //Get ticket id and success status in response
                 //Send to next act
 
 
-                startActivity(new Intent(JobDetailsActivity.this, QcDetailsActivity.class));
+                final String res = new GsonBuilder().create().toJson(jobTicket);
+                try {
 
+                    //Ticket object to be posted
+                    JSONObject ticketObj = new JSONObject(res);
+
+                    String url = baseUrl + "/ticket";
+                    Volley.newRequestQueue(JobDetailsActivity.this).add(new JsonObjectRequest(Request.Method.POST,
+                            url, ticketObj, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+//                            Response
+//                            {
+//                                "success": true,
+//                                    "wt_id": "asdfghj"
+//                            }
+
+                            JSONObject resp = null;
+                            try {
+                                resp = new JSONObject(String.valueOf(response));
+                                boolean status = resp.getBoolean("success");
+
+                                if (status) {
+
+                                    String wtId = resp.getString("wt_id");
+
+                                    if (jobType.equals("Book")) {
+                                        Intent intent = new Intent(JobDetailsActivity.this, Books_Processes.class);
+                                        intent.putExtra("wt_id", wtId);
+                                        startActivity(intent);
+                                        finish();
+
+                                    } else if (jobType.equals("Box")) {
+                                        Intent intent = new Intent(JobDetailsActivity.this, Box_Processes.class);
+                                        intent.putExtra("wt_id", wtId);
+                                        startActivity(intent);
+                                        finish();
+
+                                    } else if (jobType.equals("Cover")) {
+                                        Intent intent = new Intent(JobDetailsActivity.this, Cover_Processes.class);
+                                        intent.putExtra("wt_id", wtId);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+
+                                } else {
+
+                                    Toast.makeText(JobDetailsActivity.this, "Job ticket couldn't be created", Toast.LENGTH_SHORT).show();
+                                    return;
+
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
 
             }
         });
