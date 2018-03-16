@@ -345,26 +345,26 @@ public class Box_Processes extends AppCompatActivity {
                 processes.setBox(box);
 
 
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-                DataInterface client = retrofit.create(DataInterface.class);
-                Call<Processes> call = client.postTicket(processes);
-                call.enqueue(new Callback<Processes>() {
-                    @SuppressLint("WrongConstant")
-                    @Override
-                    public void onResponse(Call<Processes> call, Response<Processes> response) {
-                        Toast.makeText(Box_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-
-
-                        Intent intent = new Intent(Box_Processes.this,HomeActivity.class );
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onFailure(Call<Processes> call, Throwable t) {
-                        Toast.makeText(Box_Processes.this,"Error",Toast.LENGTH_LONG);
-                    }
-                });
+//                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+//                DataInterface client = retrofit.create(DataInterface.class);
+//                Call<Processes> call = client.postTicket(processes);
+//                call.enqueue(new Callback<Processes>() {
+//                    @SuppressLint("WrongConstant")
+//                    @Override
+//                    public void onResponse(Call<Processes> call, Response<Processes> response) {
+//                        Toast.makeText(Box_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
+//
+//
+//                        Intent intent = new Intent(Box_Processes.this,HomeActivity.class );
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Processes> call, Throwable t) {
+//                        Toast.makeText(Box_Processes.this,"Error",Toast.LENGTH_LONG);
+//                    }
+//                });
             }
         });
     }

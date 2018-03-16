@@ -44,7 +44,7 @@ public class JobTicket {
     @SerializedName("Plate")
     @Expose
     private Plate plate;
-    @SerializedName("ProcessesNO")
+    @SerializedName("processes")
     @Expose
     private Processes processes ;
 
