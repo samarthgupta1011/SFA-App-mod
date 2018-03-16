@@ -2,20 +2,16 @@ package com.samarthgupta.sfa_app.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samarthgupta.sfa_app.DataInterface;
-import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.CentrePin;
@@ -44,74 +40,74 @@ import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 
 public class Books_Processes extends AppCompatActivity {
-    private CheckBox check_printing, check_folding,check_design,check_ferro, check_plates, check_gathering,check_sewing, check_perfect,check_cpin, check_finishing,check_packing, check_dispatch, check_challan, check_bill  ;
-    private   EditText et_noOfSets, et_noOfForms ;
-    Button bt_proceed_Books ;
+    private CheckBox check_printing, check_folding, check_design, check_ferro, check_plates, check_gathering, check_sewing, check_perfect, check_cpin, check_finishing, check_packing, check_dispatch, check_challan, check_bill;
+    private EditText et_noOfSets, et_noOfForms;
+    Button bt_proceed_Books;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_books__processes);
-        addListenerToCheckBox() ;
+        addListenerToCheckBox();
     }
+
     private void addListenerToCheckBox() {
 
 
-        check_design = (CheckBox)findViewById(R.id.checkBox_design) ;
-        check_ferro = (CheckBox)findViewById(R.id.checkBox_ferro) ;
-        check_plates = (CheckBox)findViewById(R.id.checkBox_plates) ;
-        check_printing = (CheckBox)findViewById(R.id.checkBox_printing);
-        check_folding = (CheckBox)findViewById(R.id.checkBox_folding) ;
-        check_gathering = (CheckBox)findViewById(R.id.checkBox_gathering) ;
-        check_sewing = (CheckBox)findViewById(R.id.checkBox_sewing) ;
-        check_perfect = (CheckBox)findViewById(R.id.checkBox_perfect) ;
-        check_cpin = (CheckBox)findViewById(R.id.checkBox_cpin) ;
-        check_finishing = (CheckBox)findViewById(R.id.checkBox_finishing) ;
-        check_packing= (CheckBox)findViewById(R.id.checkBox_packing) ;
-        check_dispatch = (CheckBox)findViewById(R.id.checkBox_dispatch) ;
-        check_challan = (CheckBox)findViewById(R.id.checkBox_challan) ;
-        check_bill = (CheckBox)findViewById(R.id.checkBox_bill) ;
+        check_design = (CheckBox) findViewById(R.id.checkBox_design);
+        check_ferro = (CheckBox) findViewById(R.id.checkBox_ferro);
+        check_plates = (CheckBox) findViewById(R.id.checkBox_plates);
+        check_printing = (CheckBox) findViewById(R.id.checkBox_printing);
+        check_folding = (CheckBox) findViewById(R.id.checkBox_folding);
+        check_gathering = (CheckBox) findViewById(R.id.checkBox_gathering);
+        check_sewing = (CheckBox) findViewById(R.id.checkBox_sewing);
+        check_perfect = (CheckBox) findViewById(R.id.checkBox_perfect);
+        check_cpin = (CheckBox) findViewById(R.id.checkBox_cpin);
+        check_finishing = (CheckBox) findViewById(R.id.checkBox_finishing);
+        check_packing = (CheckBox) findViewById(R.id.checkBox_packing);
+        check_dispatch = (CheckBox) findViewById(R.id.checkBox_dispatch);
+        check_challan = (CheckBox) findViewById(R.id.checkBox_challan);
+        check_bill = (CheckBox) findViewById(R.id.checkBox_bill);
 
-        et_noOfSets = (EditText)findViewById(R.id.et_noOfsets) ; //on checking printing activity. for entering no. of sets
-        et_noOfForms = (EditText)findViewById(R.id.et_noOfForms) ; //on checking folding activity. for entering no. of forms
+        et_noOfSets = (EditText) findViewById(R.id.et_noOfsets); //on checking printing activity. for entering no. of sets
+        et_noOfForms = (EditText) findViewById(R.id.et_noOfForms); //on checking folding activity. for entering no. of forms
 
 
         et_noOfSets.setVisibility(View.GONE); // initially don't want to show
         et_noOfForms.setVisibility(View.GONE);  // initially don't want to show
 
-        bt_proceed_Books = (Button)findViewById(R.id.bt_proceed) ;
+        bt_proceed_Books = (Button) findViewById(R.id.bt_proceed);
 
-        final Processes processes = new Processes() ;
+        final Processes processes = new Processes();
 
         //making new Objects of each processes.
-        final Designing designing = new Designing() ;
-        final Ferro ferro = new Ferro() ;
+        final Designing designing = new Designing();
+        final Ferro ferro = new Ferro();
         final Plates plates = new Plates();
-        final Printing printing = new Printing() ;
-        final Gathering gathering = new Gathering() ;
-        final Folding folding = new Folding() ;
-        final Sewing sewing = new Sewing() ;
-        final Perfect perfect = new Perfect() ;
-        final CentrePin centrePin = new CentrePin() ;
+        final Printing printing = new Printing();
+        final Gathering gathering = new Gathering();
+        final Folding folding = new Folding();
+        final Sewing sewing = new Sewing();
+        final Perfect perfect = new Perfect();
+        final CentrePin centrePin = new CentrePin();
         final Finishing finishing = new Finishing();
-        final Packing packing = new Packing() ;
-        final Dispatch dispatch = new Dispatch() ;
-        final Challan challan = new Challan() ;
-        final Bill bill = new Bill() ;
-
+        final Packing packing = new Packing();
+        final Dispatch dispatch = new Dispatch();
+        final Challan challan = new Challan();
+        final Bill bill = new Bill();
 
 
         check_design.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "DESIGN selected", Toast.LENGTH_SHORT).show();
 
                             designing.setIsRequired(true);
 
 
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "DESIGN deselected", Toast.LENGTH_SHORT).show();
                             designing.setIsRequired(false);
                         }
@@ -120,14 +116,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_ferro.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "FERRO selected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "FERRO deselected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(false);
                         }
@@ -136,14 +131,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_plates.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PLATES selected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PLATES deselected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(false);
                         }
@@ -152,16 +146,15 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_printing.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.VISIBLE);
                             Toast.makeText(Books_Processes.this, "PRINTING selected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(true);
                             processes.setTotalSets(et_noOfSets.getText().toString()); //what if printing is checked and noOfSets not Entered?
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.GONE);
                             Toast.makeText(Books_Processes.this, "PRINTING deselected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(false);
@@ -172,14 +165,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_gathering.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "GATHERING selected", Toast.LENGTH_SHORT).show();
                             gathering.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "GATHERING deselected", Toast.LENGTH_SHORT).show();
                             gathering.setIsRequired(false);
                         }
@@ -188,16 +180,15 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_folding.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             et_noOfForms.setVisibility(View.VISIBLE);
                             Toast.makeText(Books_Processes.this, "FOLDING selected", Toast.LENGTH_SHORT).show();
                             folding.setIsRequired(true);
                             processes.setTotalForms(et_noOfForms.getText().toString());//what is folding checked and noOfForms not entered?
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             et_noOfForms.setVisibility(View.GONE);
                             Toast.makeText(Books_Processes.this, "FOLDING deselected", Toast.LENGTH_SHORT).show();
                             folding.setIsRequired(false);
@@ -208,14 +199,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_sewing.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "SEWING selected", Toast.LENGTH_SHORT).show();
                             sewing.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "SEWING deselected", Toast.LENGTH_SHORT).show();
                             sewing.setIsRequired(false);
                         }
@@ -223,14 +213,13 @@ public class Books_Processes extends AppCompatActivity {
                 }
         );
         check_perfect.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PERFECT selected", Toast.LENGTH_SHORT).show();
                             perfect.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PERFECT deselected", Toast.LENGTH_SHORT).show();
                             perfect.setIsRequired(false);
                         }
@@ -239,14 +228,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_cpin.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "C. PIN selected", Toast.LENGTH_SHORT).show();
                             centrePin.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "C. PIN deselected", Toast.LENGTH_SHORT).show();
                             centrePin.setIsRequired(false);
                         }
@@ -255,14 +243,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_finishing.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "FINISHING selected", Toast.LENGTH_SHORT).show();
                             finishing.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "FINISHING deselected", Toast.LENGTH_SHORT).show();
                             finishing.setIsRequired(false);
                         }
@@ -271,14 +258,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_packing.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PACKING selected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "PACKING deselected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(false);
                         }
@@ -287,14 +273,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_dispatch.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "DISPATCH selected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "DISPATCH deselected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(false);
                         }
@@ -303,14 +288,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_challan.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "CHALLAN selected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "CHALLAN deselected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(false);
                         }
@@ -319,14 +303,13 @@ public class Books_Processes extends AppCompatActivity {
         );
 
         check_bill.setOnClickListener(
-                new  View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
-                        if (((CheckBox)v).isChecked()){
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "BILL selected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(true);
-                        }
-                        else if ( !((CheckBox) v).isChecked()){
+                        } else if (!((CheckBox) v).isChecked()) {
                             Toast.makeText(Books_Processes.this, "BILL deselected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(false);
                         }
@@ -334,50 +317,51 @@ public class Books_Processes extends AppCompatActivity {
                 }
         );
 
-bt_proceed_Books.setOnClickListener(new View.OnClickListener() {
-
-    @Override
-    public void onClick(View view) {
-        final Book book = new Book() ;
-        book.setDesigning(designing);
-        book.setFerro(ferro);
-        book.setPlates(plates);
-        book.setPrinting(printing);
-        book.setFolding(folding);
-        book.setGathering(gathering);
-        book.setSewing(sewing);
-        book.setPerfect(perfect);
-        book.setCentrePin(centrePin);
-        book.setFinishing(finishing);
-        book.setPacking(packing);
-        book.setDispatch(dispatch);
-        book.setChallan(challan);
-        book.setBill(bill);
-
-        processes.setJobType("Book");
-        processes.setBook(book);
-
-        jobTicket.setProcesses(processes);
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-        DataInterface client = retrofit.create(DataInterface.class);
-        Call<Processes> call = client.postTicket(processes);
-        call.enqueue(new Callback<Processes>() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onResponse(Call<Processes> call, Response<Processes> response) {
-                Toast.makeText(Books_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Books_Processes.this,HomeActivity.class );
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
+        bt_proceed_Books.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onFailure(Call<Processes> call, Throwable t) {
-                Toast.makeText(Books_Processes.this,"Error",Toast.LENGTH_LONG);
+            public void onClick(View view) {
+                final Book book = new Book();
+                book.setDesigning(designing);
+                book.setFerro(ferro);
+                book.setPlates(plates);
+                book.setPrinting(printing);
+                book.setFolding(folding);
+                book.setGathering(gathering);
+                book.setSewing(sewing);
+                book.setPerfect(perfect);
+                book.setCentrePin(centrePin);
+                book.setFinishing(finishing);
+                book.setPacking(packing);
+                book.setDispatch(dispatch);
+                book.setChallan(challan);
+                book.setBill(bill);
+
+                processes.setJobType("Book");
+                processes.setBook(book);
+
+                jobTicket.setProcesses(processes);
+                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+                DataInterface client = retrofit.create(DataInterface.class);
+
+//                Call<Processes> call = client.postTicket(jobTicket);
+//                call.enqueue(new Callback<Processes>() {
+//                    @SuppressLint("WrongConstant")
+//                    @Override
+//                    public void onResponse(Call<Processes> call, Response<Processes> response) {
+//                        Toast.makeText(Books_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Processes> call, Throwable t) {
+//                        Toast.makeText(Books_Processes.this, "Error", Toast.LENGTH_LONG);
+//                    }
+//                });
             }
         });
-    }
-});
 
 
     }
