@@ -4,29 +4,25 @@ package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Box;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Cover;
 
 public class Processes {
 
     @SerializedName("_id")
     @Expose
     private String id;
-    @SerializedName("ticket_id")
-    @Expose
-    private String ticket_id;
-    @SerializedName("job-type")
+    @SerializedName("job_type")
     @Expose
     private String jobType;
-    @SerializedName("total-number")
+    @SerializedName("wt_id")
+    @Expose
+    private String wtId;
+    @SerializedName("total_number")
     @Expose
     private String totalNumber;
-    @SerializedName("total-sets")
+    @SerializedName("total_sets")
     @Expose
     private String totalSets;
-    @SerializedName("total-forms")
+    @SerializedName("total_forms")
     @Expose
     private String totalForms;
     @SerializedName("book")
@@ -39,12 +35,12 @@ public class Processes {
     @Expose
     private Box box;
 
-    public String getTicket_id() {
-        return ticket_id;
+    public String getWtId() {
+        return wtId;
     }
 
-    public void setTicket_id(String ticket_id) {
-        this.ticket_id = ticket_id;
+    public void setWtId(String wtId) {
+        this.wtId = wtId;
     }
 
     public String getId() {

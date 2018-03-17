@@ -49,6 +49,24 @@ public class Book {
     @Expose
     private Bill bill;
 
+    public Book() {
+
+        this.designing = new Designing();
+        this.ferro = new Ferro();
+        this.plates = new Plates();
+        this.printing = new Printing();
+        this.folding = new Folding();
+        this.gathering = new Gathering();
+        this.perfect = new Perfect();
+        this.sewing = new Sewing();
+        this.centrePin = new CentrePin();
+        this.finishing = new Finishing();
+        this.packing = new Packing();
+        this.dispatch = new Dispatch();
+        this.challan = new Challan();
+        this.bill = new Bill();
+    }
+
     public Designing getDesigning() {
         return designing;
     }

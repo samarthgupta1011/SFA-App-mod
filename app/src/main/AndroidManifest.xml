@@ -50,6 +50,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Activities.Books_Processes"/>
+        <activity
+            android:name=".Activities.Box_Processes"/>
+        <activity
+            android:name=".Activities.Cover_Processes"/>
     </application>
 
 </manifest>

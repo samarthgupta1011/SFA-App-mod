@@ -11,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
@@ -33,6 +38,9 @@ import com.samarthgupta.sfa_app.POJO.WT_Processes.Printing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Uv;
 import com.samarthgupta.sfa_app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -344,27 +352,51 @@ public class Box_Processes extends AppCompatActivity {
                 processes.setJobType("Box");
                 processes.setBox(box);
 
+                final  String BoxProcess = new GsonBuilder().create().toJson(processes) ;
+                try{
+                    JSONObject boxObj = new JSONObject(BoxProcess) ;
+                String url = baseUrl + "/processes" ;
+                    Volley.newRequestQueue(Box_Processes.this).add(new JsonObjectRequest(Request.Method.POST,url,boxObj, new  com.android.volley.Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject Response) {
+                            Intent intent = new Intent(Box_Processes.this,HomeActivity.class) ;
+                            startActivity(intent);
 
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-                DataInterface client = retrofit.create(DataInterface.class);
-                Call<Processes> call = client.postTicket(processes);
-                call.enqueue(new Callback<Processes>() {
-                    @SuppressLint("WrongConstant")
-                    @Override
-                    public void onResponse(Call<Processes> call, Response<Processes> response) {
-                        Toast.makeText(Box_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
+                        }
+                    }, new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }));
 
 
-                        Intent intent = new Intent(Box_Processes.this,HomeActivity.class );
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
 
-                    @Override
-                    public void onFailure(Call<Processes> call, Throwable t) {
-                        Toast.makeText(Box_Processes.this,"Error",Toast.LENGTH_LONG);
-                    }
-                });
+                }
+
+
+//                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+//                DataInterface client = retrofit.create(DataInterface.class);
+//                Call<Processes> call = client.postTicket(processes);
+//                call.enqueue(new Callback<Processes>() {
+//                    @SuppressLint("WrongConstant")
+//                    @Override
+//                    public void onResponse(Call<Processes> call, Response<Processes> response) {
+//                        Toast.makeText(Box_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
+//
+//
+//                        Intent intent = new Intent(Box_Processes.this,HomeActivity.class );
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Processes> call, Throwable t) {
+//                        Toast.makeText(Box_Processes.this,"Error",Toast.LENGTH_LONG);
+//                    }
+//                });
             }
         });
     }

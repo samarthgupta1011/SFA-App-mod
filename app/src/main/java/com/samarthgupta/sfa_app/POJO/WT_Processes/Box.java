@@ -49,6 +49,23 @@ public class Box {
     @Expose
     private Bill bill;
 
+    public Box() {
+        this.designing = new Designing();
+        this.ferro = new Ferro();
+        this.plates = new Plates();
+        this.printing = new Printing();
+        this.lamination = new Lamination();
+        this.uv = new Uv();
+        this.embossing = new Embossing();
+        this.foiling = new Foiling();
+        this.dieCut = new DieCut();
+        this.pasting = new Pasting();
+        this.packing = new Packing();
+        this.dispatch = new Dispatch();
+        this.challan = new Challan();
+        this.bill = new Bill();
+    }
+
     public Designing getDesigning() {
         return designing;
     }

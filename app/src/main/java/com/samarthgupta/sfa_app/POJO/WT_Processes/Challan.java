@@ -14,6 +14,8 @@ public class Challan {
     @Expose
     private List<Update> updates = null;
 
+
+
     public Boolean getIsRequired() {
         return isRequired;
     }
