@@ -339,10 +339,13 @@ public class Books_Processes extends AppCompatActivity {
                 processes.setJobType("Book");
                 processes.setBook(book);
 
-
                 String wt_id = getIntent().getExtras().getString("wt_id") ;
                 processes.setWtId(wt_id);
+                processes.setTotalForms(et_noOfForms.getText().toString());
+                processes.setTotalSets(et_noOfSets.getText().toString());
 
+                //TO BE CHANGED
+                processes.setTotalNumber("10");
 
                 final String bookProcess = new GsonBuilder().create().toJson(processes);
                 Log.d("POST", bookProcess);
@@ -373,30 +376,6 @@ public class Books_Processes extends AppCompatActivity {
                     e.printStackTrace();
 
                 }
-
-//                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-//                DataInterface client = retrofit.create(DataInterface.class);
-
-//                Call<Processes> call = client.postTicket(jobTicket);
-//                call.enqueue(new Callback<Processes>() {
-//                    @SuppressLint("WrongConstant")
-//                    @Override
-//                    public void onResponse(Call<Processes> call, Response<Processes> response) {
-//                        Toast.makeText(Books_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Processes> call, Throwable t) {
-//                        Toast.makeText(Books_Processes.this, "Error", Toast.LENGTH_LONG);
-//                    }
-//                });
-
-
-
-
 
 
             }

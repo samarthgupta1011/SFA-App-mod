@@ -30,7 +30,7 @@ public class Book {
     @SerializedName("sewing")
     @Expose
     private Sewing sewing;
-    @SerializedName("centre-pin")
+    @SerializedName("centre_pin")
     @Expose
     private CentrePin centrePin;
     @SerializedName("finishing")

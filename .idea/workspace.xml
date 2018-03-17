@@ -6,34 +6,24 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="RESPONSE" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="POST" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221ff310-b5c3-4bb0-89f2-7b0436e17b6f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Challan.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Challan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Cover.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Cover.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Creasing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Creasing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Designing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Designing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/DieCut.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/DieCut.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Dispatch.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Dispatch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Embossing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Embossing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Ferro.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Ferro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Finishing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Finishing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Foiling.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Foiling.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Folding.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Folding.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Gathering.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Gathering.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Lamination.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Lamination.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Packing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Packing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Pasting.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Pasting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Perfect.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Perfect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Plates.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Plates.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Printing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Printing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Processes.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Processes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Sewing.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Sewing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Update.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Update.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/Books_Processes.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/Books_Processes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Uv.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Uv.java" />
     </list>
     <ignored path="SFA-App.iws" />
@@ -65,7 +55,30 @@
     <favorites_list name="SFA-App" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Books_Processes.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/Books_Processes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="311" column="38" selection-start-line="311" selection-start-column="38" selection-end-line="311" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Processes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Processes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1923,7 +1936,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/Processes/Bill.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/Processes/Sam.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/JobTicket.java" />
@@ -1940,13 +1952,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/ClientDetailsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/TasksActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/DataInterface.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/UpdatePF.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Bill.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Binding.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_JobTicket/JobTicket.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/CentrePin.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/GlobalAccess.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/JobDetailsActivity.java" />
@@ -1974,6 +1984,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Sewing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Update.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Uv.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/Books_Processes.java" />
       </list>
     </option>
   </component>
@@ -2165,7 +2178,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="1540a8bb" />
+    <property name="device.picker.selection" value="fd8ad231" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../TrySms" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1519095898877" />
@@ -2520,10 +2533,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32601157" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32526475" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2531,11 +2544,11 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36762482" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3267776" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267776" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20678514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20678514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2612,18 +2625,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2045#2046#0" expanded="true" />
-            <element signature="e#2074#2075#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/DataInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -2671,13 +2672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/UpdateProgressActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -2703,13 +2697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2814,14 +2801,6 @@
             <element signature="e#781#782#0" expanded="true" />
             <element signature="e#819#820#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Cover.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2978,16 +2957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Processes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Sewing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -3015,14 +2984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Uv.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/JobDetailsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -3046,6 +3007,56 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Uv.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Cover.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Box.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/POJO/WT_Processes/Processes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/samarthgupta/sfa_app/Activities/Books_Processes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="311" column="38" selection-start-line="311" selection-start-column="38" selection-end-line="311" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
