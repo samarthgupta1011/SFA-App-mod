@@ -11,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
@@ -29,6 +34,9 @@ import com.samarthgupta.sfa_app.POJO.WT_Processes.Printing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Sewing;
 import com.samarthgupta.sfa_app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -340,9 +348,41 @@ public class Books_Processes extends AppCompatActivity {
                 processes.setJobType("Book");
                 processes.setBook(book);
 
-                jobTicket.setProcesses(processes);
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-                DataInterface client = retrofit.create(DataInterface.class);
+
+                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                processes.setTicket_id(wt_id);
+
+
+                final String bookProcess = new GsonBuilder().create().toJson(processes);
+                try {
+
+
+                    JSONObject bookObj = new JSONObject(bookProcess);
+
+                    String url = baseUrl + "/processes";
+                    Volley.newRequestQueue(Books_Processes.this).add(new JsonObjectRequest(Request.Method.POST,
+                            url, bookObj, new com.android.volley.Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject Response) {
+                                Intent intent = new Intent(Books_Processes.this,HomeActivity.class) ;
+                                startActivity(intent);
+
+                        }
+                    }, new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+//                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+//                DataInterface client = retrofit.create(DataInterface.class);
 
 //                Call<Processes> call = client.postTicket(jobTicket);
 //                call.enqueue(new Callback<Processes>() {
@@ -360,6 +400,12 @@ public class Books_Processes extends AppCompatActivity {
 //                        Toast.makeText(Books_Processes.this, "Error", Toast.LENGTH_LONG);
 //                    }
 //                });
+
+
+
+
+
+
             }
         });
 

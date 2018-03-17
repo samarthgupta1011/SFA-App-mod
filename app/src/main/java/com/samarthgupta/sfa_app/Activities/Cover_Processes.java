@@ -11,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
@@ -33,6 +38,9 @@ import com.samarthgupta.sfa_app.POJO.WT_Processes.Printing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Sewing;
 import com.samarthgupta.sfa_app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -271,6 +279,39 @@ check_design.setOnClickListener(
                 processes.setJobType("Cover");
                 processes.setCover(cover);
 
+
+
+                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                processes.setTicket_id(wt_id);
+
+
+                final String coverProcess = new GsonBuilder().create().toJson(processes);
+                try {
+
+                    //Ticket object to be posted
+                    JSONObject coverObj = new JSONObject(coverProcess);
+
+                    String url = baseUrl + "/processes";
+                    Volley.newRequestQueue(Cover_Processes.this).add(new JsonObjectRequest(Request.Method.POST,
+                            url, coverObj, new com.android.volley.Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject Response) {
+                            Intent intent = new Intent(Cover_Processes.this,HomeActivity.class) ;
+                            startActivity(intent);
+
+                        }
+                    }, new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
 //                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
 //                DataInterface client = retrofit.create(DataInterface.class);
 //                Call<Processes> call = client.postTicket(processes);

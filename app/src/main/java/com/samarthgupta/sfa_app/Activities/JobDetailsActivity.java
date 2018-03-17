@@ -26,6 +26,7 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Machine;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Paper;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Plate;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONException;
