@@ -1,8 +1,6 @@
 package com.samarthgupta.sfa_app.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,37 +9,30 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.samarthgupta.sfa_app.DataInterface;
-import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Binding;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.CentrePin;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Challan;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Cover;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Creasing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Designing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Dispatch;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Ferro;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Finishing;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Folding;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Gathering;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Lamination;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Packing;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Perfect;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Plates;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Printing;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Sewing;
 import com.samarthgupta.sfa_app.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
-import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 
 public class Cover_Processes extends AppCompatActivity {
 
@@ -271,24 +262,40 @@ check_design.setOnClickListener(
                 processes.setJobType("Cover");
                 processes.setCover(cover);
 
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-                DataInterface client = retrofit.create(DataInterface.class);
-                Call<Processes> call = client.postTicket(processes);
-                call.enqueue(new Callback<Processes>() {
-                    @SuppressLint("WrongConstant")
-                    @Override
-                    public void onResponse(Call<Processes> call, Response<Processes> response) {
-                        Toast.makeText(Cover_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Cover_Processes.this,HomeActivity.class );
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onFailure(Call<Processes> call, Throwable t) {
-                        Toast.makeText(Cover_Processes.this,"Error",Toast.LENGTH_LONG);
-                    }
-                });
+
+                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                processes.setWtId(wt_id);
+
+
+                final String coverProcess = new GsonBuilder().create().toJson(processes);
+                try {
+
+                    //Ticket object to be posted
+                    JSONObject coverObj = new JSONObject(coverProcess);
+
+                    String url = baseUrl + "/processes";
+                    Volley.newRequestQueue(Cover_Processes.this).add(new JsonObjectRequest(Request.Method.POST,
+                            url, coverObj, new com.android.volley.Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject Response) {
+                            Intent intent = new Intent(Cover_Processes.this,HomeActivity.class) ;
+                            startActivity(intent);
+
+                        }
+                    }, new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
             }
         });
 

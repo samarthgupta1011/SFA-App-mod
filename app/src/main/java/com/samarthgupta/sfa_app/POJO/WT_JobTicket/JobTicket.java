@@ -4,7 +4,7 @@ package com.samarthgupta.sfa_app.POJO.WT_JobTicket;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.samarthgupta.sfa_app.POJO.ProcessesNO;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 
 public class JobTicket {
 
@@ -44,9 +44,9 @@ public class JobTicket {
     @SerializedName("Plate")
     @Expose
     private Plate plate;
-    @SerializedName("ProcessesNO")
+    @SerializedName("processes")
     @Expose
-    private ProcessesNO Processes ;
+    private Processes processes ;
 
 
     public String getId() {
@@ -145,6 +145,6 @@ public class JobTicket {
         this.plate = plate;
     }
 
-    public void setProcesses(ProcessesNO processes) {  this.Processes = processes;
+    public void setProcesses(Processes processes) {  this.processes = processes;
     }
 }
