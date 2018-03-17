@@ -13,6 +13,11 @@ public class Designing {
     @Expose
     private Boolean isDone;
 
+    public Designing() {
+        this.isRequired = false;
+        this.isDone = false;
+    }
+
     public Boolean getIsRequired() {
         return isRequired;
     }

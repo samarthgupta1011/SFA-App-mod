@@ -12,7 +12,12 @@ private String time;
 @Expose
 private String done;
 
-public String getTime() {
+    public Update() {
+        this.time = null;
+        this.done = null;
+    }
+
+    public String getTime() {
 return time;
 }
 

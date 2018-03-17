@@ -40,6 +40,20 @@ public class Cover {
     @Expose
     private Bill bill;
 
+    public Cover() {
+        this.designing = new Designing();
+        this.ferro = new Ferro();
+        this.plates = new Plates();
+        this.printing = new Printing();
+        this.lamination = new Lamination();
+        this.creasing = new Creasing();
+        this.binding = new Binding();
+        this.packing = new Packing() ;
+        this.dispatch = new Dispatch();
+        this.challan = new Challan();
+        this.bill = new Bill();
+    }
+
     public Designing getDesigning() {
         return designing;
     }

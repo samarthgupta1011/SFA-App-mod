@@ -35,6 +35,17 @@ public class Processes {
     @Expose
     private Box box;
 
+    public Processes() {
+        this.jobType = null;
+        this.wtId = null;
+        this.totalNumber = null;
+        this.totalSets = null;
+        this.totalForms = null;
+        this.book = null;
+        this.cover = null;
+        this.box = null;
+    }
+
     public String getWtId() {
         return wtId;
     }

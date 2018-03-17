@@ -1,5 +1,6 @@
 
 package com.samarthgupta.sfa_app.POJO.WT_Processes;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,6 +13,11 @@ public class Sewing {
     @SerializedName("updates")
     @Expose
     private List<Update> updates = null;
+
+    public Sewing() {
+        this.isRequired = false;
+        this.updates = new ArrayList<>();
+    }
 
     public Boolean getIsRequired() {
         return isRequired;

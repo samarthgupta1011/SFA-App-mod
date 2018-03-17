@@ -13,6 +13,11 @@ public class Ferro {
     @Expose
     private Boolean isDone;
 
+    public Ferro() {
+        this.isRequired = false;
+        this.isDone = false;
+    }
+
     public Boolean getIsRequired() {
         return isRequired;
     }

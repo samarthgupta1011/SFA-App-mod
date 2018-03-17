@@ -13,6 +13,11 @@ public class Plates {
     @Expose
     private Boolean isDone;
 
+    public Plates() {
+        this.isRequired = false;
+        this.isDone = false;
+    }
+
     public Boolean getIsRequired() {
         return isRequired;
     }
