@@ -15,7 +15,7 @@ public class Uv {
     @Expose
     private List<Update> updates = null;
 
-    public Uv(Boolean isRequired, List<Update> updates) {
+    public Uv() {
         this.isRequired = false;
         this.updates = new ArrayList<>();
     }

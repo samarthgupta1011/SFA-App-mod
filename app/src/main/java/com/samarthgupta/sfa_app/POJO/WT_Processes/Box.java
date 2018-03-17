@@ -30,7 +30,7 @@ public class Box {
     @SerializedName("foiling")
     @Expose
     private Foiling foiling;
-    @SerializedName("die-cut")
+    @SerializedName("die_cut")
     @Expose
     private DieCut dieCut;
     @SerializedName("pasting")
