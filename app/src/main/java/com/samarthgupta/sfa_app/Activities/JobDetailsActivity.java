@@ -235,6 +235,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                                     if (jobType.equals("Book")) {
                                         Intent intent = new Intent(JobDetailsActivity.this, Books_Processes.class);
                                         intent.putExtra("wt_id", wtId);
+                                        intent.putExtra("total_number", job.getNoOfCol());
                                         startActivity(intent);
                                         finish();
 

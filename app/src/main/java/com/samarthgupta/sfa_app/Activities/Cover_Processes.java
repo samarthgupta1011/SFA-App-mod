@@ -246,6 +246,7 @@ check_design.setOnClickListener(
             @Override
             public void onClick(View view) {
 
+                bt_proceed_cover.setVisibility(View.INVISIBLE);
                 final Cover cover = new Cover() ;
                 cover.setDesigning(designing);
                 cover.setFerro(ferro);
@@ -262,10 +263,13 @@ check_design.setOnClickListener(
                 processes.setJobType("Cover");
                 processes.setCover(cover);
 
-
-
                 String wt_id = getIntent().getExtras().getString("wt_id") ;
+                String total_number = getIntent().getStringExtra("total_number");
+
                 processes.setWtId(wt_id);
+                processes.setTotalSets(et_noOfSets.getText().toString());
+                processes.setTotalForms(null);
+                processes.setTotalNumber(total_number);
 
 
                 final String coverProcess = new GsonBuilder().create().toJson(processes);
@@ -278,15 +282,27 @@ check_design.setOnClickListener(
                     Volley.newRequestQueue(Cover_Processes.this).add(new JsonObjectRequest(Request.Method.POST,
                             url, coverObj, new com.android.volley.Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject Response) {
-                            Intent intent = new Intent(Cover_Processes.this,HomeActivity.class) ;
-                            startActivity(intent);
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if(response.getBoolean("success")){
+                                    Toast.makeText(Cover_Processes.this, "Success", Toast.LENGTH_SHORT).show();
+                                    bt_proceed_cover.setVisibility(View.VISIBLE);
+
+                                    Intent intent = new Intent(Cover_Processes.this,HomeActivity.class) ;
+                                    startActivity(intent);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                         }
                     }, new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            bt_proceed_cover.setVisibility(View.VISIBLE);
+                            Toast.makeText(Cover_Processes.this, "Network error", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }));
 
