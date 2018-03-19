@@ -331,6 +331,7 @@ public class Box_Processes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                bt_proceed_box.setVisibility(View.INVISIBLE);
 
                 final Box box = new Box() ;
 
@@ -352,21 +353,42 @@ public class Box_Processes extends AppCompatActivity {
                 processes.setJobType("Box");
                 processes.setBox(box);
 
+                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                String total_number = getIntent().getStringExtra("total_number");
+
+                processes.setWtId(wt_id);
+                processes.setTotalForms(null);
+                processes.setTotalSets(et_noOfSets.getText().toString());
+                processes.setTotalNumber(total_number);
+
                 final  String BoxProcess = new GsonBuilder().create().toJson(processes) ;
                 try{
                     JSONObject boxObj = new JSONObject(BoxProcess) ;
                 String url = baseUrl + "/processes" ;
                     Volley.newRequestQueue(Box_Processes.this).add(new JsonObjectRequest(Request.Method.POST,url,boxObj, new  com.android.volley.Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject Response) {
-                            Intent intent = new Intent(Box_Processes.this,HomeActivity.class) ;
-                            startActivity(intent);
+                        public void onResponse(JSONObject response) {
+
+                            try {
+                                if(response.getBoolean("success")){
+                                    Toast.makeText(Box_Processes.this, "Success", Toast.LENGTH_SHORT).show();
+                                    bt_proceed_box.setVisibility(View.VISIBLE);
+                                    Intent intent = new Intent(Box_Processes.this,HomeActivity.class) ;
+                                    startActivity(intent);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
 
                         }
                     }, new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            bt_proceed_box.setVisibility(View.VISIBLE);
+                            Toast.makeText(Box_Processes.this, "Network error", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }));
 
@@ -376,27 +398,6 @@ public class Box_Processes extends AppCompatActivity {
 
                 }
 
-
-//                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-//                DataInterface client = retrofit.create(DataInterface.class);
-//                Call<Processes> call = client.postTicket(processes);
-//                call.enqueue(new Callback<Processes>() {
-//                    @SuppressLint("WrongConstant")
-//                    @Override
-//                    public void onResponse(Call<Processes> call, Response<Processes> response) {
-//                        Toast.makeText(Box_Processes.this, "Job ticket created", Toast.LENGTH_SHORT).show();
-//
-//
-//                        Intent intent = new Intent(Box_Processes.this,HomeActivity.class );
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Processes> call, Throwable t) {
-//                        Toast.makeText(Box_Processes.this,"Error",Toast.LENGTH_LONG);
-//                    }
-//                });
             }
         });
     }

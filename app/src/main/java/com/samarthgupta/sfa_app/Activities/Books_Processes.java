@@ -320,6 +320,10 @@ public class Books_Processes extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
+                bt_proceed_Books.setVisibility(View.INVISIBLE);
+
+
                 final Book book = new Book();
                 book.setDesigning(designing);
                 book.setFerro(ferro);
@@ -340,12 +344,12 @@ public class Books_Processes extends AppCompatActivity {
                 processes.setBook(book);
 
                 String wt_id = getIntent().getExtras().getString("wt_id") ;
+                String total_number = getIntent().getStringExtra("total_number");
+
                 processes.setWtId(wt_id);
                 processes.setTotalForms(et_noOfForms.getText().toString());
                 processes.setTotalSets(et_noOfSets.getText().toString());
-
-                //TO BE CHANGED
-                processes.setTotalNumber("10");
+                processes.setTotalNumber(total_number);
 
                 final String bookProcess = new GsonBuilder().create().toJson(processes);
                 Log.d("POST", bookProcess);
@@ -358,16 +362,29 @@ public class Books_Processes extends AppCompatActivity {
                     Volley.newRequestQueue(Books_Processes.this).add(new JsonObjectRequest(Request.Method.POST,
                             url, bookObj, new com.android.volley.Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject Response) {
+                        public void onResponse(JSONObject response) {
 
-                                Intent intent = new Intent(Books_Processes.this,HomeActivity.class) ;
-                                startActivity(intent);
+                            try {
+                                if(response.getBoolean("success")){
+                                    Toast.makeText(Books_Processes.this, "Success", Toast.LENGTH_SHORT).show();
+                                    bt_proceed_Books.setVisibility(View.VISIBLE);
+                                    Intent intent = new Intent(Books_Processes.this,HomeActivity.class) ;
+                                    startActivity(intent);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
 
                         }
                     }, new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            bt_proceed_Books.setVisibility(View.VISIBLE);
+                            Toast.makeText(Books_Processes.this, "Network error", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }));
 
