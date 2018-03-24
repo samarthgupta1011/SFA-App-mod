@@ -8,6 +8,7 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 
 //USE
 public class GlobalAccess {
+
     public static JobTicket jobTicket;
     public static String baseUrl = "http://701dc907.ngrok.io";
 }

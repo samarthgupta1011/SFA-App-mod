@@ -13,7 +13,7 @@ public class Printing {
     private Boolean isRequired;
     @SerializedName("updates")
     @Expose
-    private List<Update> updates = null;
+    private List<UpdatePF> updates = null;
 
     public Printing() {
         this.isRequired = false;
@@ -28,11 +28,11 @@ public class Printing {
         this.isRequired = isRequired;
     }
 
-    public List<Update> getUpdates() {
+    public List<UpdatePF> getUpdates() {
         return updates;
     }
 
-    public void setUpdates(List<Update> updates) {
+    public void setUpdates(List<UpdatePF> updates) {
         this.updates = updates;
     }
 

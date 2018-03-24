@@ -12,21 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.GsonBuilder;
-import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.Employee;
-import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
+import com.samarthgupta.sfa_app.POJO.WT_Processes.Update;
 import com.samarthgupta.sfa_app.R;
-
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class TasksActivity extends AppCompatActivity {
@@ -42,93 +37,120 @@ public class TasksActivity extends AppCompatActivity {
         pb = (ProgressBar) findViewById(R.id.pb_tasks);
 
         pb.setVisibility(View.VISIBLE);
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-        DataInterface client = retrofit.create(DataInterface.class);
-
-
-        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString("Data",null),
-                Employee.class);
-
+        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
         Log.d("Tasks",emp.getDept());
-        Call<List<JobTicket>> call = client.getEmpTickets(emp.getDept());
-        call.enqueue(new Callback<List<JobTicket>>() {
+        String url = baseUrl + "/task?emp="+emp.getDept();
+
+        StringRequest task = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
-            public void onResponse(Call<List<JobTicket>> call, Response<List<JobTicket>> response) {
-                Log.d("Tasks",response.toString());
-                rv.setAdapter(new TicketAdapter(response.body()));
+            public void onResponse(String response) {
 
-                pb.setVisibility(View.INVISIBLE);
-                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
-                rv.setHasFixedSize(true);
+                    Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
+                    rv.setAdapter(new TasksAdapter(tasks));
+                    pb.setVisibility(View.INVISIBLE);
+                    rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+                    rv.setHasFixedSize(true);
             }
+        },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-            @Override
-            public void onFailure(Call<List<JobTicket>> call, Throwable t) {
+                    }
+                }) ;
 
-            }
-        });
+
+                //       Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+//        DataInterface client = retrofit.create(DataInterface.class);
+
+// Task in place of JobTicket.
+//        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString("Data",null),
+//                Employee.class);
+//
+//        Log.d("Tasks",emp.getDept());
+//        Call<List<Task>> call = client.getEmpTask(emp.getDept());//write in DataIntereface(GET) for Task Activity.
+//        call.enqueue(new Callback<List<Task>>() {
+//            @Override
+//            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
+//                Log.d("Tasks",response.toString());
+//                rv.setAdapter(new TicketAdapter(response.body()));
+//
+//                pb.setVisibility(View.INVISIBLE);
+//                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+//                rv.setHasFixedSize(true);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Task>> call, Throwable t) {
+//
+//            }
+//        });
 
     }
 
-    class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketHolder> {
+    class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>{
 
-        List<JobTicket> list;
+        Task taskList[];
 
-        public TicketAdapter(List<JobTicket> listJob){
-            list = listJob;
+        public TasksAdapter(Task[] tasks){
+            taskList = tasks;
         }
 
         @Override
-        public TicketHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new TicketHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasks_recyclers,parent,false));
+        public TasksAdapter.TasksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new TasksHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasks_recyclers,parent,false));
         }
 
         @Override
-        public void onBindViewHolder(TicketHolder holder, int position) {
-            holder.tvClientName.setText(list.get(position).getClient().getName());
-            holder.tvPriority.setText(list.get(position).getPriority());
-            holder.tvDelDate.setText(list.get(position).getDeliveryDate());
+        public void onBindViewHolder(TasksAdapter.TasksHolder holder, int position) {
+            holder.clientName.setText(taskList[position].getClient().getName());
+            holder.priority.setText(taskList[position].getPriority());
+            holder.deliveryDate.setText(taskList[position].getDeliveryDate());
         }
 
         @Override
         public int getItemCount() {
-            return list.size();
+            return taskList.length;
         }
 
 
-        public class TicketHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public class TasksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-            TextView tvClientName, tvPriority, tvDelDate;
-            public TicketHolder(View itemView) {
+            TextView clientName, priority,deliveryDate;
+            public TasksHolder(View itemView) {
                 super(itemView);
+                clientName = (TextView)itemView.findViewById(R.id.tv_client_name);
+                priority = (TextView)itemView.findViewById(R.id.tv_priority) ;
+                deliveryDate = (TextView)itemView.findViewById(R.id.tv_delivery_date) ;
                 itemView.setOnClickListener(this);
-                tvClientName = (TextView) itemView.findViewById(R.id.tv_client_name);
-                tvPriority = (TextView) itemView.findViewById(R.id.tv_priority);
-                tvDelDate = (TextView) itemView.findViewById(R.id.tv_delivery_date);
             }
-
             @Override
             public void onClick(View view) {
                 int pos = getAdapterPosition();
-
-
-
-                //CHANGE HERE
-//                Intent intent = new Intent(TasksActivity.this,UpdateProgressActivity.class).
-//                        putExtra("A-use",list.get(pos).getProcesses().getA().isUse()).
-//                        putExtra("B-use",list.get(pos).getProcesses().getB().isUse()).
-//                        putExtra("A-percent",roundOffNumber(list.get(pos).getProcesses().getA().getPercentageComp())).
-//                        putExtra("B-percent",roundOffNumber(list.get(pos).getProcesses().getB().getPercentageComp())).
-//                        putExtra("wt",list.get(pos).getWt());
-//                        startActivity(intent);
-
+                String jobType = taskList[pos].getJob().getType();
+                String jobName = taskList[pos].getJob().getName() ;
+                List<Processes> process = taskList[pos].getProcesses();
+                String ConvertTostring = new GsonBuilder().create().toJson(process.get(0));
+                if (jobType.equals("Book")){
+                    Intent intent = new Intent(TasksActivity.this,Books_Task.class) ;
+                    intent.putExtra("BookProcesses", ConvertTostring) ;
+                    intent.putExtra("BookJobName", jobName) ;
+                    startActivity(intent);
+                }else if(jobType.equals("Box")){
+                    Intent intent = new Intent(TasksActivity.this,Box_Task.class) ;
+                    intent.putExtra("BoxProcesses", ConvertTostring) ;
+                    intent.putExtra("BoxJobName", jobName) ;
+                    startActivity(intent);
+                }else if (jobType.equals("Cover")){
+                    Intent intent = new Intent(TasksActivity.this,Cover_Task.class) ;
+                    intent.putExtra("CoverProcesses", ConvertTostring) ;
+                    intent.putExtra("CoverJbName", jobName) ;
+                    startActivity(intent);
+                }
+//                List<Update> updates = process.get(0).getBook().getCentrePin().getUpdates();
+//                Update up = updates.get(updates.size()-1);
 
             }
-
-            double roundOffNumber(float f){
-                return Math.round(f * 100.0) / 100.0;
-            }
-
         }
     }
 
