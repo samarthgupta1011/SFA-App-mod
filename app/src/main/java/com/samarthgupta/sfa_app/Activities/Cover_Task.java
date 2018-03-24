@@ -25,6 +25,8 @@ public class Cover_Task extends AppCompatActivity {
 
     CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_creasing, cv_binding, cv_packing, cv_dispatch, cv_challan, cv_bill ;
 
+    Button bt_cover_updateProgress ;
+
     Processes processes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class Cover_Task extends AppCompatActivity {
         billDone = (TextView) findViewById(R.id.tv_billdone);
 
         setsDoneRatio = (TextView)findViewById(R.id.tv_setsDoneRatio);
+        bt_cover_updateProgress = (Button)findViewById(R.id.bt_cover_update) ;
+
         processes = (Processes)new GsonBuilder().create().fromJson(coverProcesses,Processes.class) ;
 
         if (processes.getCover().getDesigning().getIsRequired()){

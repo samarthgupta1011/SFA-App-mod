@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -23,6 +24,8 @@ public class Box_Task extends AppCompatActivity {
     TextView setsDoneRatio ;
 
     CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing, cv_foiling, cv_dieCut, cv_pasting, cv_packing, cv_dispatch, cv_challan, cv_bill ;
+
+    Button bt_box_UpdateProgress ;
     Processes processes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,9 @@ public class Box_Task extends AppCompatActivity {
         billDone = (TextView) findViewById(R.id.tv_billdone);
 
         setsDoneRatio = (TextView)findViewById(R.id.tv_setsDoneRatio) ;
-        
+
+        bt_box_UpdateProgress = (Button)findViewById(R.id.bt_box_update);
+
         processes = (Processes)new GsonBuilder().create().fromJson(boxProcesses,Processes.class) ;
 
         if (processes.getBox().getDesigning().getIsRequired()){

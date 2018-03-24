@@ -13,14 +13,22 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Update;
 import com.samarthgupta.sfa_app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
@@ -28,37 +36,39 @@ public class TasksActivity extends AppCompatActivity {
 
     RecyclerView rv;
     ProgressBar pb;
-
+    RequestQueue rq ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
         rv = (RecyclerView) findViewById(R.id.rv_job_tickets);
         pb = (ProgressBar) findViewById(R.id.pb_tasks);
-
         pb.setVisibility(View.VISIBLE);
-        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
-        Log.d("Tasks",emp.getDept());
-        String url = baseUrl + "/task?emp="+emp.getDept();
+        rq = Volley.newRequestQueue(this) ;
 
-        StringRequest task = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                    Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
-                    rv.setAdapter(new TasksAdapter(tasks));
-                    pb.setVisibility(View.INVISIBLE);
-                    rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
-                    rv.setHasFixedSize(true);
-            }
-        },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }) ;
-
+        sendJsonrequest();
+//        StringRequest task = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.d("GETrequest",url+"success" ) ;
+//                Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
+//                pb.setVisibility(View.INVISIBLE);
+//                rv.setVisibility(View.VISIBLE);
+//                rv.setAdapter(new TasksAdapter(tasks));
+//                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+//                rv.setHasFixedSize(true);
+//            }
+//
+//
+//        },
+//                new com.android.volley.Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                }) ;
+//        RequestQueue requestQueue = Volley.newRequestQueue(this) ;
+//        requestQueue.add(task) ;
 
                 //       Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
 //        DataInterface client = retrofit.create(DataInterface.class);
@@ -88,6 +98,32 @@ public class TasksActivity extends AppCompatActivity {
 
     }
 
+    public void sendJsonrequest(){
+        final Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
+
+        final String url = baseUrl + "/task?emp="+emp.getDept();
+        Log.d("DepartmentUrl",url) ;
+        JsonObjectRequest task = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("GETrequest", url + "success");
+                Task tasks[] = new GsonBuilder().create().fromJson(String.valueOf(response), Task[].class);
+                pb.setVisibility(View.INVISIBLE);
+                rv.setVisibility(View.VISIBLE);
+                rv.setAdapter(new TasksAdapter(tasks));
+                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+                rv.setHasFixedSize(true);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) ;
+
+        rq.add(task) ;
+
+    }
     class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>{
 
         Task taskList[];
@@ -97,8 +133,10 @@ public class TasksActivity extends AppCompatActivity {
         }
 
         @Override
-        public TasksAdapter.TasksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new TasksHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasks_recyclers,parent,false));
+        public TasksHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+           return new TasksHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tasks_recyclers,parent,false));
+
+
         }
 
         @Override
