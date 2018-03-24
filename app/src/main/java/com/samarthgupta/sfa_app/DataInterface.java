@@ -3,6 +3,7 @@ package com.samarthgupta.sfa_app;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.UpdateObject;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 
 import java.util.List;
 
@@ -36,6 +37,10 @@ public interface DataInterface {
 
     @GET("/empticket")
     Call<List<JobTicket>> getEmpTickets(@Query("empId") String empId);
+
+//    //temp
+//    @GET("/task")
+//    Call<List<Task>> getEmpTask(@Query("empID") String empId) ;
 
     @POST("/updates")
     Call<UpdateObject> updateProgress(@Query("wt") String wt, @Query("empId") String empId, @Body UpdateObject obj);

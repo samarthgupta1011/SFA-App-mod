@@ -24,7 +24,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activities.RegisterActivity"
@@ -47,19 +46,15 @@
         <activity
             android:name=".Activities.UpdateProgressActivity"
             android:parentActivityName=".Activities.TasksActivity" />
-        <activity android:name=".Activities.SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
         <activity
-            android:name=".Activities.Books_Processes">
-
-        </activity>
-        <activity
-            android:name=".Activities.Box_Processes"/>
-        <activity
-            android:name=".Activities.Cover_Processes"/>
+            android:name=".Activities.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Books_Processes" />
+        <activity android:name=".Activities.Box_Processes" />
+        <activity android:name=".Activities.Cover_Processes" />
+        <activity android:name=".Activities.Books_Task" />
+        <activity android:name=".Activities.Box_Task" />
+        <activity android:name=".Activities.Cover_Task"></activity>
     </application>
 
 </manifest>
