@@ -1,6 +1,7 @@
 
 package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -18,6 +19,12 @@ public class Printing {
     public Printing() {
         this.isRequired = false;
         this.updates = new ArrayList<>();
+        UpdatePF zeroUpdate = new UpdatePF();
+        zeroUpdate.setDone("0");
+        zeroUpdate.setSetsDone("0");
+        Time time = new Time(System.currentTimeMillis());
+        zeroUpdate.setTime(time.toString());
+        this.updates.add(zeroUpdate);
     }
 
     public Boolean getIsRequired() {

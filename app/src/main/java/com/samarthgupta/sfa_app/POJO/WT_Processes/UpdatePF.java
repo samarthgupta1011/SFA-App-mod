@@ -12,7 +12,7 @@ public class UpdatePF {
     @SerializedName("done")
     @Expose
     private String done;
-    @SerializedName("sets-done")
+    @SerializedName("sets_done")
     @Expose
     private String setsDone;
 

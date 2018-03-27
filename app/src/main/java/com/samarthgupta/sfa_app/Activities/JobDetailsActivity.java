@@ -101,6 +101,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             @Override
             public void onClick(View view) {
 
+
+
                 date = System.currentTimeMillis();
                 dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
@@ -131,7 +133,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                     String wt = (job.getName() + dateFormat.format(date)).trim().replace(" ", "").replace(",", "").replace(":", "");
                     jobTicket.setWt(wt);
                     //To be corrected
-                    jobTicket.setDeliveryDate("AAJ");
+                    jobTicket.setDeliveryDate(Long.toString(System.currentTimeMillis()));
                 }
 
 
@@ -242,12 +244,14 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                                     } else if (jobType.equals("Box")) {
                                         Intent intent = new Intent(JobDetailsActivity.this, Box_Processes.class);
                                         intent.putExtra("wt_id", wtId);
+                                        intent.putExtra("total_number", job.getNoOfCol());
                                         startActivity(intent);
                                         finish();
 
                                     } else if (jobType.equals("Cover")) {
                                         Intent intent = new Intent(JobDetailsActivity.this, Cover_Processes.class);
                                         intent.putExtra("wt_id", wtId);
+                                        intent.putExtra("total_number", job.getNoOfCol());
                                         startActivity(intent);
                                         finish();
                                     }

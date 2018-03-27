@@ -1,7 +1,8 @@
 package com.samarthgupta.sfa_app.Activities;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
@@ -16,51 +17,53 @@ import com.samarthgupta.sfa_app.R;
 import java.util.List;
 
 public class Cover_Task extends AppCompatActivity {
-    TextView jobName ;
+    TextView jobName;
 
-    TextView design, ferro, plates, printing, lamination, creasing, binding, packing, dispatch, challan, bill ;
-    TextView designDone, ferroDone, platesDone, printingDone, laminationDone, creasingDone, bindingDone, packingDone, dispatchDone, challanDone, billDone ;
+    TextView design, ferro, plates, printing, lamination, creasing, binding, packing, dispatch, challan, bill;
+    TextView designDone, ferroDone, platesDone, printingDone, laminationDone, creasingDone, bindingDone, packingDone, dispatchDone, challanDone, billDone;
 
-    TextView setsDoneRatio ;
+    TextView setsDoneRatio;
 
-    CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_creasing, cv_binding, cv_packing, cv_dispatch, cv_challan, cv_bill ;
+    CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_creasing, cv_binding, cv_packing, cv_dispatch, cv_challan, cv_bill;
+    Button btUpdateProgress;
+    Processes processes;
 
-    Processes processes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cover__task);
-        Bundle bundle = getIntent().getExtras() ;
-        String coverProcesses = bundle.getString("CoverProcesses") ;
-        String CoverJobName = bundle.getString("CoverJbName") ;
+        Bundle bundle = getIntent().getExtras();
+        String coverProcesses = bundle.getString("CoverProcesses");
+        String CoverJobName = bundle.getString("CoverJbName");
+        final String wt = getIntent().getStringExtra("wt_id");
 
-        jobName = (TextView)findViewById(R.id.tv_jobname) ;
+        jobName = (TextView) findViewById(R.id.tv_jobname);
+        btUpdateProgress = (Button) findViewById(R.id.bt_cover_update);
 
         design = (TextView) findViewById(R.id.tv_designing);
         ferro = (TextView) findViewById(R.id.tv_ferro);
         plates = (TextView) findViewById(R.id.tv_plates);
         printing = (TextView) findViewById(R.id.tv_printing);
-        lamination = (TextView)findViewById(R.id.tv_lamination) ;
-        creasing = (TextView)findViewById(R.id.tv_creasing) ;
-        binding = (TextView)findViewById(R.id.tv_binding) ;
+        lamination = (TextView) findViewById(R.id.tv_lamination);
+        creasing = (TextView) findViewById(R.id.tv_creasing);
+        binding = (TextView) findViewById(R.id.tv_binding);
         packing = (TextView) findViewById(R.id.tv_packing);
         dispatch = (TextView) findViewById(R.id.tv_dispatch);
         challan = (TextView) findViewById(R.id.tv_challan);
-        bill = (TextView) findViewById(R.id.tv_bill) ;
-        
-        
-        
-        cv_designing = (CardView)findViewById(R.id.cv_design) ;
-        cv_ferro = (CardView)findViewById(R.id.cv_ferro) ;
-        cv_plates = (CardView)findViewById(R.id.cv_plates) ;
-        cv_printing = (CardView)findViewById(R.id.cv_printing) ;
-        cv_lamination = (CardView)findViewById(R.id.cv_lamination) ;
-        cv_creasing = (CardView)findViewById(R.id.cv_creasing) ;
-        cv_binding = (CardView)findViewById(R.id.cv_binding) ;
-        cv_packing = (CardView)findViewById(R.id.cv_packing) ;
-        cv_dispatch = (CardView)findViewById(R.id.cv_dispatch) ;
-        cv_challan = (CardView)findViewById(R.id.cv_challan) ;
-        cv_bill = (CardView)findViewById(R.id.cv_bill) ;
+        bill = (TextView) findViewById(R.id.tv_bill);
+
+
+        cv_designing = (CardView) findViewById(R.id.cv_design);
+        cv_ferro = (CardView) findViewById(R.id.cv_ferro);
+        cv_plates = (CardView) findViewById(R.id.cv_plates);
+        cv_printing = (CardView) findViewById(R.id.cv_printing);
+        cv_lamination = (CardView) findViewById(R.id.cv_lamination);
+        cv_creasing = (CardView) findViewById(R.id.cv_creasing);
+        cv_binding = (CardView) findViewById(R.id.cv_binding);
+        cv_packing = (CardView) findViewById(R.id.cv_packing);
+        cv_dispatch = (CardView) findViewById(R.id.cv_dispatch);
+        cv_challan = (CardView) findViewById(R.id.cv_challan);
+        cv_bill = (CardView) findViewById(R.id.cv_bill);
 
         designDone = (TextView) findViewById(R.id.tv_designDone);
         ferroDone = (TextView) findViewById(R.id.tv_ferroDone);
@@ -74,119 +77,130 @@ public class Cover_Task extends AppCompatActivity {
         challanDone = (TextView) findViewById(R.id.tv_challandone);
         billDone = (TextView) findViewById(R.id.tv_billdone);
 
-        setsDoneRatio = (TextView)findViewById(R.id.tv_setsDoneRatio);
-        processes = (Processes)new GsonBuilder().create().fromJson(coverProcesses,Processes.class) ;
+        setsDoneRatio = (TextView) findViewById(R.id.tv_setsDoneRatio);
+        processes = (Processes) new GsonBuilder().create().fromJson(coverProcesses, Processes.class);
 
-        if (processes.getCover().getDesigning().getIsRequired()){
+        if (processes.getCover().getDesigning().getIsRequired()) {
             cv_designing.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getDesigning().getIsRequired()){
+        } else if (!processes.getCover().getDesigning().getIsRequired()) {
             cv_designing.setVisibility(View.GONE);
         }
-        if (processes.getCover().getFerro().getIsRequired()){
+        if (processes.getCover().getFerro().getIsRequired()) {
             cv_ferro.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getFerro().getIsRequired()){
+        } else if (!processes.getCover().getFerro().getIsRequired()) {
             cv_ferro.setVisibility(View.GONE);
         }
-        if (processes.getCover().getPlates().getIsRequired()){
+        if (processes.getCover().getPlates().getIsRequired()) {
             cv_plates.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getPlates().getIsRequired()){
+        } else if (!processes.getCover().getPlates().getIsRequired()) {
             cv_plates.setVisibility(View.GONE);
         }
-        if (processes.getCover().getPrinting().getIsRequired()){
+        if (processes.getCover().getPrinting().getIsRequired()) {
             cv_printing.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getPrinting().getIsRequired()){
+        } else if (!processes.getCover().getPrinting().getIsRequired()) {
             cv_printing.setVisibility(View.GONE);
         }
 
-        if (processes.getCover().getLamination().getIsRequired()){
+        if (processes.getCover().getLamination().getIsRequired()) {
             cv_lamination.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getLamination().getIsRequired()){
+        } else if (!processes.getCover().getLamination().getIsRequired()) {
             cv_lamination.setVisibility(View.GONE);
         }
-        if (processes.getCover().getCreasing().getIsRequired()){
+        if (processes.getCover().getCreasing().getIsRequired()) {
             cv_creasing.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getCreasing().getIsRequired()){
+        } else if (!processes.getCover().getCreasing().getIsRequired()) {
             cv_creasing.setVisibility(View.GONE);
         }
-        if (processes.getCover().getBinding().getIsRequired()){
+        if (processes.getCover().getBinding().getIsRequired()) {
             cv_binding.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getBinding().getIsRequired()){
+        } else if (!processes.getCover().getBinding().getIsRequired()) {
             cv_binding.setVisibility(View.GONE);
         }
-        if (processes.getCover().getPacking().getIsRequired()){
+        if (processes.getCover().getPacking().getIsRequired()) {
             cv_packing.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getPacking().getIsRequired()){
+        } else if (!processes.getCover().getPacking().getIsRequired()) {
             cv_packing.setVisibility(View.GONE);
         }
-        if (processes.getCover().getDispatch().getIsRequired()){
+        if (processes.getCover().getDispatch().getIsRequired()) {
             cv_dispatch.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getDispatch().getIsRequired()){
+        } else if (!processes.getCover().getDispatch().getIsRequired()) {
             cv_dispatch.setVisibility(View.GONE);
         }
-        if (processes.getCover().getChallan().getIsRequired()){
+        if (processes.getCover().getChallan().getIsRequired()) {
             cv_challan.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getChallan().getIsRequired()){
+        } else if (!processes.getCover().getChallan().getIsRequired()) {
             cv_challan.setVisibility(View.GONE);
         }
-        if (processes.getCover().getBill().getIsRequired()){
+        if (processes.getCover().getBill().getIsRequired()) {
             cv_bill.setVisibility(View.VISIBLE);
-        }else if (!processes.getCover().getBill().getIsRequired()){
+        } else if (!processes.getCover().getBill().getIsRequired()) {
             cv_bill.setVisibility(View.GONE);
         }
 
         //JOB NAME DISPLAY
         jobName.setText(CoverJobName);
 
-        if (processes.getCover().getDesigning().getIsDone()){
+        if (processes.getCover().getDesigning().getIsDone()) {
             designDone.setText("Done");
-        }else if (!processes.getCover().getDesigning().getIsDone()){
+        } else if (!processes.getCover().getDesigning().getIsDone()) {
             designDone.setText("Not Done");
         }
-        if (processes.getCover().getFerro().getIsDone()){
+        if (processes.getCover().getFerro().getIsDone()) {
             ferroDone.setText("Done");
-        }else if (!processes.getCover().getFerro().getIsDone()){
+        } else if (!processes.getCover().getFerro().getIsDone()) {
             ferroDone.setText("Not Done");
         }
 
-        if (processes.getCover().getPlates().getIsDone()){
+        if (processes.getCover().getPlates().getIsDone()) {
             platesDone.setText("Done");
-        }else if (!processes.getCover().getPlates().getIsDone()){
+        } else if (!processes.getCover().getPlates().getIsDone()) {
             platesDone.setText("Not Done");
         }
-        List<UpdatePF> updateprinting = processes.getCover().getPrinting().getUpdates() ;
+        List<UpdatePF> updateprinting = processes.getCover().getPrinting().getUpdates();
         //setting the total done in printing
-        String printingJobDone = updateprinting.get(updateprinting.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        printingDone.setText(printingJobDone) ;
+        String printingJobDone = updateprinting.get(updateprinting.size() - 1).getDone() + "/" + processes.getTotalNumber();
+        printingDone.setText(printingJobDone);
         //setting the number of sets in printing
-        String printingSetsDone = updateprinting.get(updateprinting.size()-1).getSetsDone()+ "/" + processes.getTotalSets() ;
+        String printingSetsDone = updateprinting.get(updateprinting.size() - 1).getSetsDone() + "/" + processes.getTotalSets();
         setsDoneRatio.setText(printingSetsDone);
 
-        List<Update> updateLaminaiton = processes.getCover().getLamination().getUpdates() ;
-        String LaminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        List<Update> updateLaminaiton = processes.getCover().getLamination().getUpdates();
+        String LaminationJobDone = updateLaminaiton.get(updateLaminaiton.size() - 1).getDone() + "/" + processes.getTotalNumber();
         laminationDone.setText(LaminationJobDone);
 
-        List<Update> updateCreasing = processes.getCover().getCreasing().getUpdates() ;
-        String CreasingJobDone = updateCreasing.get(updateCreasing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        List<Update> updateCreasing = processes.getCover().getCreasing().getUpdates();
+        String CreasingJobDone = updateCreasing.get(updateCreasing.size() - 1).getDone() + "/" + processes.getTotalNumber();
         creasingDone.setText(CreasingJobDone);
 
-        List<Update> updateBinding = processes.getCover().getBinding().getUpdates() ;
-        String BindingJobDone = updateBinding.get(updateBinding.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        List<Update> updateBinding = processes.getCover().getBinding().getUpdates();
+        String BindingJobDone = updateBinding.get(updateBinding.size() - 1).getDone() + "/" + processes.getTotalNumber();
         bindingDone.setText(BindingJobDone);
 
-        List<Update> updatePacking = processes.getCover().getPacking().getUpdates() ;
-        String PackingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        List<Update> updatePacking = processes.getCover().getPacking().getUpdates();
+        String PackingJobDone = updatePacking.get(updatePacking.size() - 1).getDone() + "/" + processes.getTotalNumber();
         packingDone.setText(PackingJobDone);
 
-        List<Update> updateDispatch = processes.getCover().getDispatch().getUpdates() ;
-        String DispatchJobDone = updateDispatch.get(updateDispatch.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        List<Update> updateDispatch = processes.getCover().getDispatch().getUpdates();
+        String DispatchJobDone = updateDispatch.get(updateDispatch.size() - 1).getDone() + "/" + processes.getTotalNumber();
         dispatchDone.setText(DispatchJobDone);
 
-        List<Update> updateChallan = processes.getCover().getChallan().getUpdates() ;
-        String ChallanJobDone = updateChallan.get(updateChallan.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        List<Update> updateChallan = processes.getCover().getChallan().getUpdates();
+        String ChallanJobDone = updateChallan.get(updateChallan.size() - 1).getDone() + "/" + processes.getTotalNumber();
         challanDone.setText(ChallanJobDone);
 
-        List<Update> updateBill = processes.getCover().getBill().getUpdates() ;
-        String BillJobDone = updateBill.get(updateBill.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        List<Update> updateBill = processes.getCover().getBill().getUpdates();
+        String BillJobDone = updateBill.get(updateBill.size() - 1).getDone() + "/" + processes.getTotalNumber();
         billDone.setText(BillJobDone);
+
+        btUpdateProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Cover_Task.this, UpdateActivity.class);
+                intent.putExtra("wt_id", wt);
+                startActivity(intent);
+
+            }
+        });
     }
 }

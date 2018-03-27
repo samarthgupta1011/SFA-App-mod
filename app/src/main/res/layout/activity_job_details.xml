@@ -311,7 +311,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Plates Quantity"
-                            android:inputType="phone" />
+                            android:inputType="number" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -360,7 +360,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Paper Quantity"
-                            android:inputType="text" />
+                            android:inputType="number" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -373,7 +373,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Paper Quality"
-                            android:inputType="number" />
+                            android:inputType="text" />
 
                     </android.support.design.widget.TextInputLayout>
 

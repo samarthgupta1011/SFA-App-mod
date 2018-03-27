@@ -10,5 +10,5 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 public class GlobalAccess {
 
     public static JobTicket jobTicket;
-    public static String baseUrl = "http://701dc907.ngrok.io";
+    public static String baseUrl = "http://85f2b97b.ngrok.io";
 }

@@ -38,23 +38,24 @@
             android:label="Job Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.QcDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Activities.TasksActivity"
             android:parentActivityName=".Activities.HomeActivity" />
         <activity
-            android:name=".Activities.UpdateProgressActivity"
-            android:parentActivityName=".Activities.TasksActivity" />
-        <activity
             android:name=".Activities.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Books_Processes" />
-        <activity android:name=".Activities.Box_Processes" />
-        <activity android:name=".Activities.Cover_Processes" />
+        <activity
+            android:name=".Activities.Books_Processes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.Box_Processes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.Cover_Processes"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Books_Task" />
         <activity android:name=".Activities.Box_Task" />
-        <activity android:name=".Activities.Cover_Task"></activity>
+        <activity android:name=".Activities.Cover_Task" />
+        <activity android:name=".Activities.UpdateActivity"></activity>
     </application>
 
 </manifest>

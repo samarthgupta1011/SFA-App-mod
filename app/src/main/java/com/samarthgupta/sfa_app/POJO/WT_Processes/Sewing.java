@@ -1,5 +1,6 @@
 
 package com.samarthgupta.sfa_app.POJO.WT_Processes;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -17,6 +18,11 @@ public class Sewing {
     public Sewing() {
         this.isRequired = false;
         this.updates = new ArrayList<>();
+        Update zeroUpdate = new Update();
+        zeroUpdate.setDone("0");
+        Time time = new Time(System.currentTimeMillis());
+        zeroUpdate.setTime(time.toString());
+        this.updates.add(zeroUpdate);
     }
 
     public Boolean getIsRequired() {

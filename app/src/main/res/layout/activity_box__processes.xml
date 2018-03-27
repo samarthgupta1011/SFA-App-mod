@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Quality Check Details" />
+                app:title="Enter Box Processes" />
 
         </FrameLayout>
 
@@ -60,44 +60,46 @@
 
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/abc"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity"
-            android:id="@+id/abc">
+            tools:context=".MainActivity">
 
             <TextView
+                android:id="@+id/heading_Process"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:text="PROCESSES"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/heading_Process"
-                />
+                android:textStyle="bold" />
+
             <CheckBox
                 android:id="@+id/checkBox_design"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_below="@id/heading_Process"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentStart="true"
+                android:layout_below="@id/heading_Process"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:checked="false"
+                android:paddingLeft="30dp"
                 android:text="DESIGN" />
+
             <CheckBox
                 android:id="@+id/checkBox_ferro"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_design"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:checked="false"
+                android:paddingLeft="30dp"
                 android:text="FERRO" />
 
             <CheckBox
@@ -105,177 +107,190 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_ferro"
-                android:checked="false"
-                android:text="PLATES" />
-            <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkBox_printing"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="PLATES" />
+
+            <CheckBox
+                android:id="@+id/checkBox_printing"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_plates"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:checked="false"
-                android:text="PRINTING"/>
+                android:paddingLeft="30dp"
+                android:text="PRINTING" />
+
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/noOfsets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/noOfsets"
-                android:layout_below="@id/checkBox_printing">
+                android:layout_below="@id/checkBox_printing"
+                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
+                android:paddingBottom="5sp"
+                android:paddingTop="5sp">
+
                 <EditText
+                    android:id="@+id/et_noOfsets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_noOfsets"
                     android:layout_below="@id/checkBox_printing"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:hint="Enter the number of SETS" />
+                    android:hint="Enter the number of Sets"
+                    android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
 
 
-
             <CheckBox
+                android:id="@+id/checkBox_lamination"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="LAMINATION"
-                android:id="@+id/checkBox_lamination"
-                android:layout_below="@+id/noOfsets"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_below="@+id/noOfsets"
+                android:layout_marginLeft="10dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="LAMINATION" />
+
             <CheckBox
                 android:id="@+id/checkBox_uv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_lamination"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:checked="false"
+                android:paddingLeft="30dp"
                 android:text="U/V" />
 
 
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="EMBOSSING"
                 android:id="@+id/checkBox_embossing"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_uv"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="EMBOSSING" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="FOILING"
                 android:id="@+id/checkBox_foiling"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_embossing"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="FOILING" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="DIE CUT"
                 android:id="@+id/checkBox_diecut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_foiling"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="DIE CUT" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="PASTING"
                 android:id="@+id/checkBox_pasting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_diecut"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="PASTING" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="PACKING"
                 android:id="@+id/checkBox_packing"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_pasting"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="PACKING" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="DISPATCH"
                 android:id="@+id/checkBox_dispatch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/checkBox_packing"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="DISPATCH" />
+
             <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="CHALLAN"
                 android:id="@+id/checkBox_challan"
-                android:layout_below="@+id/checkBox_dispatch"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentStart="true"
-                android:checked="false" />
-            <CheckBox
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="BILL"
-                android:id="@+id/checkBox_bill"
-                android:layout_below="@+id/checkBox_challan"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="30dp"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentStart="true"
-                android:checked="false" />
+                android:layout_below="@+id/checkBox_dispatch"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="CHALLAN" />
+
+            <CheckBox
+                android:id="@+id/checkBox_bill"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/checkBox_challan"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:paddingLeft="30dp"
+                android:text="BILL" />
+
             <Button
                 android:id="@+id/bt_proceed_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBox_bill"
                 android:layout_margin="20sp"
                 android:background="@color/colorBackground"
                 android:text="Proceed"
-                android:layout_below="@+id/checkBox_bill"
                 android:textAllCaps="true"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
 
 
     </android.support.v4.widget.NestedScrollView>

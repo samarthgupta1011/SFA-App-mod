@@ -103,13 +103,13 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "DESIGN selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "DESIGN selected", Toast.LENGTH_SHORT).show();
 
                             designing.setIsRequired(true);
 
 
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "DESIGN deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "DESIGN deselected", Toast.LENGTH_SHORT).show();
                             designing.setIsRequired(false);
                         }
                     }
@@ -121,10 +121,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "FERRO selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FERRO selected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "FERRO deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FERRO deselected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(false);
                         }
                     }
@@ -136,10 +136,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PLATES selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PLATES selected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PLATES deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PLATES deselected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(false);
                         }
                     }
@@ -152,12 +152,12 @@ public class Books_Processes extends AppCompatActivity {
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.VISIBLE);
-                            Toast.makeText(Books_Processes.this, "PRINTING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PRINTING selected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(true);
                             processes.setTotalSets(et_noOfSets.getText().toString()); //what if printing is checked and noOfSets not Entered?
                         } else if (!((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.GONE);
-                            Toast.makeText(Books_Processes.this, "PRINTING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PRINTING deselected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(false);
                             processes.setTotalSets(null);
                         }
@@ -170,10 +170,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "GATHERING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "GATHERING selected", Toast.LENGTH_SHORT).show();
                             gathering.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "GATHERING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "GATHERING deselected", Toast.LENGTH_SHORT).show();
                             gathering.setIsRequired(false);
                         }
                     }
@@ -186,12 +186,12 @@ public class Books_Processes extends AppCompatActivity {
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
                             et_noOfForms.setVisibility(View.VISIBLE);
-                            Toast.makeText(Books_Processes.this, "FOLDING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FOLDING selected", Toast.LENGTH_SHORT).show();
                             folding.setIsRequired(true);
                             processes.setTotalForms(et_noOfForms.getText().toString());//what is folding checked and noOfForms not entered?
                         } else if (!((CheckBox) v).isChecked()) {
                             et_noOfForms.setVisibility(View.GONE);
-                            Toast.makeText(Books_Processes.this, "FOLDING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FOLDING deselected", Toast.LENGTH_SHORT).show();
                             folding.setIsRequired(false);
                             processes.setTotalForms(null);
                         }
@@ -204,10 +204,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "SEWING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "SEWING selected", Toast.LENGTH_SHORT).show();
                             sewing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "SEWING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "SEWING deselected", Toast.LENGTH_SHORT).show();
                             sewing.setIsRequired(false);
                         }
                     }
@@ -218,10 +218,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PERFECT selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PERFECT selected", Toast.LENGTH_SHORT).show();
                             perfect.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PERFECT deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PERFECT deselected", Toast.LENGTH_SHORT).show();
                             perfect.setIsRequired(false);
                         }
                     }
@@ -233,10 +233,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "C. PIN selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "C. PIN selected", Toast.LENGTH_SHORT).show();
                             centrePin.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "C. PIN deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "C. PIN deselected", Toast.LENGTH_SHORT).show();
                             centrePin.setIsRequired(false);
                         }
                     }
@@ -248,10 +248,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "FINISHING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FINISHING selected", Toast.LENGTH_SHORT).show();
                             finishing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "FINISHING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "FINISHING deselected", Toast.LENGTH_SHORT).show();
                             finishing.setIsRequired(false);
                         }
                     }
@@ -263,10 +263,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PACKING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PACKING selected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "PACKING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "PACKING deselected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(false);
                         }
                     }
@@ -278,10 +278,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "DISPATCH selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "DISPATCH selected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "DISPATCH deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "DISPATCH deselected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(false);
                         }
                     }
@@ -293,10 +293,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "CHALLAN selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "CHALLAN selected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "CHALLAN deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "CHALLAN deselected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(false);
                         }
                     }
@@ -308,10 +308,10 @@ public class Books_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "BILL selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "BILL selected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Books_Processes.this, "BILL deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Books_Processes.this, "BILL deselected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(false);
                         }
                     }
@@ -331,18 +331,20 @@ public class Books_Processes extends AppCompatActivity {
                 book.setFerro(ferro);
                 book.setPlates(plates);
                 book.setPrinting(printing);
-                if (printing.equals(true) && et_noOfSets.getText().toString()==null ){
-                    Log.i("error", et_noOfSets.getText().toString()) ;
-                    bt_proceed_Books.setVisibility(View.VISIBLE);
-                    AlertDialog dialog = new AlertDialog.Builder(Books_Processes.this).setTitle("Error").setMessage("Enter Number of Sets").setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    }).create();
-                    dialog.show();
 
-                }
+//                if (printing.equals(true) && et_noOfSets.getText().toString()==null ){
+//                    Log.i("error", et_noOfSets.getText().toString()) ;
+//                    bt_proceed_Books.setVisibility(View.VISIBLE);
+//                    AlertDialog dialog = new AlertDialog.Builder(Books_Processes.this).setTitle("Error").setMessage("Enter Number of Sets").setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            dialogInterface.dismiss();
+//                        }
+//                    }).create();
+//                    dialog.show();
+//
+//                }
+
                 book.setFolding(folding);
                 book.setGathering(gathering);
                 book.setSewing(sewing);
