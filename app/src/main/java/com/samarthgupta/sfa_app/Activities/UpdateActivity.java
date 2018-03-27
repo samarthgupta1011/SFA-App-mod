@@ -78,7 +78,7 @@ public class UpdateActivity extends AppCompatActivity {
             //Post update PF
 
 
-        } else if (empDept.equals("designing") || empDept.equals("ferro") || empDept.equals("plates") || empDept.equals("printing")) {
+        } else if (empDept.equals("designing") || empDept.equals("ferro") || empDept.equals("plates")) {
 
 
         } else {
