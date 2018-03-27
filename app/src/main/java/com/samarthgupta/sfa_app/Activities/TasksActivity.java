@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
@@ -37,54 +39,30 @@ public class TasksActivity extends AppCompatActivity {
         pb = (ProgressBar) findViewById(R.id.pb_tasks);
 
         pb.setVisibility(View.VISIBLE);
+
         Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
         Log.d("Tasks",emp.getDept());
         String url = baseUrl + "/task?emp="+emp.getDept();
 
-        StringRequest task = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                    Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
-                    rv.setAdapter(new TasksAdapter(tasks));
-                    pb.setVisibility(View.INVISIBLE);
-                    rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
-                    rv.setHasFixedSize(true);
+                Log.i("TASK", response);
+                Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
+                rv.setAdapter(new TasksAdapter(tasks));
+                pb.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
+                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+                rv.setHasFixedSize(true);
             }
-        },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-                    }
-                }) ;
-
-
-                //       Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-//        DataInterface client = retrofit.create(DataInterface.class);
-
-// Task in place of JobTicket.
-//        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString("Data",null),
-//                Employee.class);
-//
-//        Log.d("Tasks",emp.getDept());
-//        Call<List<Task>> call = client.getEmpTask(emp.getDept());//write in DataIntereface(GET) for Task Activity.
-//        call.enqueue(new Callback<List<Task>>() {
-//            @Override
-//            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-//                Log.d("Tasks",response.toString());
-//                rv.setAdapter(new TicketAdapter(response.body()));
-//
-//                pb.setVisibility(View.INVISIBLE);
-//                rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
-//                rv.setHasFixedSize(true);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Task>> call, Throwable t) {
-//
-//            }
-//        });
+            }
+        }));
 
     }
 
@@ -130,21 +108,26 @@ public class TasksActivity extends AppCompatActivity {
                 String jobType = taskList[pos].getJob().getType();
                 String jobName = taskList[pos].getJob().getName() ;
                 List<Processes> process = taskList[pos].getProcesses();
+
                 String ConvertTostring = new GsonBuilder().create().toJson(process.get(0));
+
                 if (jobType.equals("Book")){
                     Intent intent = new Intent(TasksActivity.this,Books_Task.class) ;
                     intent.putExtra("BookProcesses", ConvertTostring) ;
                     intent.putExtra("BookJobName", jobName) ;
+                    intent.putExtra("wt_id", taskList[pos].getWt());
                     startActivity(intent);
                 }else if(jobType.equals("Box")){
                     Intent intent = new Intent(TasksActivity.this,Box_Task.class) ;
                     intent.putExtra("BoxProcesses", ConvertTostring) ;
                     intent.putExtra("BoxJobName", jobName) ;
+                    intent.putExtra("wt_id", taskList[pos].getWt());
                     startActivity(intent);
                 }else if (jobType.equals("Cover")){
                     Intent intent = new Intent(TasksActivity.this,Cover_Task.class) ;
                     intent.putExtra("CoverProcesses", ConvertTostring) ;
                     intent.putExtra("CoverJbName", jobName) ;
+                    intent.putExtra("wt_id", taskList[pos].getWt());
                     startActivity(intent);
                 }
 //                List<Update> updates = process.get(0).getBook().getCentrePin().getUpdates();

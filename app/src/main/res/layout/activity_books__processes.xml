@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Quality Check Details" />
+                app:title="Enter Book Processes" />
 
         </FrameLayout>
 
@@ -124,19 +124,23 @@
                 android:layout_below="@+id/checkBox_plates"
                 android:checked="false"
                 android:text="PRINTING"/>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
                 android:id="@+id/noOfsets"
                 android:layout_below="@id/checkBox_printing">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Enter the number of Sets"
                     android:id="@+id/et_noOfsets"
-                    android:layout_below="@id/checkBox_printing"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:hint="Enter the number of SETS" />
+                    android:layout_below="@id/checkBox_printing" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -169,6 +173,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/noOfForms"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
                 android:layout_below="@id/checkBox_folding">
 
                 <EditText
@@ -176,9 +184,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/et_noOfForms"
                     android:layout_below="@id/checkBox_folding"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:hint="Enter the number of FORMS" />
+                    android:inputType="number"
+                    android:hint="Enter the number of Forms" />
+
             </android.support.design.widget.TextInputLayout>
             <CheckBox
                 android:layout_width="fill_parent"

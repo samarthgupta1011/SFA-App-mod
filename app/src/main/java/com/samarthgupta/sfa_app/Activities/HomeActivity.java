@@ -63,8 +63,10 @@ public class HomeActivity extends AppCompatActivity
         Log.e("Data", data.getDept());
 
         tvEmpDept = (TextView) findViewById(R.id.tv_emp_dept);
-        tvEmpDept.setText(data.getDept());
-        getLatestNotice();
+        String empDep = data.getDept().toUpperCase();
+        tvEmpDept.setText(empDep);
+
+//        getLatestNotice();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

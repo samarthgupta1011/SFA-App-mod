@@ -1,9 +1,11 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -21,7 +23,7 @@ public class Box_Task extends AppCompatActivity {
     TextView designDone, ferroDone, platesDone, printingDone, laminationDone, uvDone, embossingDone, foilingDone, dieCutDone,  pastingDone, packingDone, dispatchDone, challanDone, billDone ;
 
     TextView setsDoneRatio ;
-
+    Button btUpdateProgress;
     CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing, cv_foiling, cv_dieCut, cv_pasting, cv_packing, cv_dispatch, cv_challan, cv_bill ;
     Processes processes ;
     @Override
@@ -32,8 +34,10 @@ public class Box_Task extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras() ;
         String boxProcesses = bundle.getString("BoxProcesses") ;
         String BoxjobName = bundle.getString("BoxJobName") ;
+        final String wt = getIntent().getStringExtra("wt_id");
 
         jobName = (TextView)findViewById(R.id.tv_jobname) ;
+        btUpdateProgress = (Button) findViewById(R.id.bt_box_update);
 
         design = (TextView) findViewById(R.id.tv_designing);
         ferro = (TextView) findViewById(R.id.tv_ferro);
@@ -223,5 +227,17 @@ public class Box_Task extends AppCompatActivity {
         List<Update> updateBill = processes.getBox().getBill().getUpdates() ;
         String BillJobDone = updateBill.get(updateBill.size()-1).getDone() + "/" + processes.getTotalNumber() ;
         billDone.setText(BillJobDone);
+
+        btUpdateProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Box_Task.this, UpdateActivity.class);
+                intent.putExtra("wt_id", wt);
+                //Send the status of the job according to the employee
+                startActivity(intent);
+
+            }
+        });
     }
 }
