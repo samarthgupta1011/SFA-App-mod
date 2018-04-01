@@ -143,14 +143,34 @@ public class UpdateActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
 
-                                Toast.makeText(UpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
-                                finish();
+                                Log.i("UpdateResponse", response.toString());
+                                try {
+                                    Boolean status = response.getBoolean("success");
+
+                                    if(status){
+
+                                        Toast.makeText(UpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
+                                        finish();
+
+                                    } else {
+                                        Toast.makeText(UpdateActivity.this, "Please enter a valid value", Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
                             }
                         }, new com.android.volley.Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(UpdateActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpdateActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                             }
                         }));
 
