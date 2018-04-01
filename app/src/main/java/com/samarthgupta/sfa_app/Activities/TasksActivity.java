@@ -84,6 +84,8 @@ public class TasksActivity extends AppCompatActivity {
             holder.clientName.setText(taskList[position].getClient().getName());
             holder.priority.setText(taskList[position].getPriority());
             holder.deliveryDate.setText(taskList[position].getDeliveryDate());
+            holder.tvJobType.setText(taskList[position].getJob().getType());
+            holder.tvJobName.setText(taskList[position].getJob().getName());
         }
 
         @Override
@@ -94,12 +96,14 @@ public class TasksActivity extends AppCompatActivity {
 
         public class TasksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-            TextView clientName, priority,deliveryDate;
+            TextView clientName, priority,deliveryDate, tvJobType, tvJobName;
             public TasksHolder(View itemView) {
                 super(itemView);
                 clientName = (TextView)itemView.findViewById(R.id.tv_client_name);
                 priority = (TextView)itemView.findViewById(R.id.tv_priority) ;
                 deliveryDate = (TextView)itemView.findViewById(R.id.tv_delivery_date) ;
+                tvJobName = (TextView) itemView.findViewById(R.id.tv_job_name);
+                tvJobType = (TextView) itemView.findViewById(R.id.tv_job_type);
                 itemView.setOnClickListener(this);
             }
             @Override

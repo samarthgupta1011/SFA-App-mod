@@ -87,56 +87,20 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        //For testing purpose only
+        final EditText et = (EditText) findViewById(R.id.et_dept);
+        Button bt = (Button) findViewById(R.id.bt_save_dept);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        //FOR REFERENCE
-
-        String url ="http://ac298a6f.ngrok.io/ticket";
-//        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-
-//                Log.d("RESPONSE",response);
-//                JobTicket[] jt = new GsonBuilder().create().fromJson(response, JobTicket[].class);
-//                Log.d("RESPONSE",jt[0].getDate());
-
-//                try {
-//                    JSONArray arr = new JSONArray(response);
-//                    Log.d("RESPONSE",arr.getJSONObject(0).getString("date"));
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
-
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }));
-
-
-        //Post request VOLLEY
-//        JSONObject obj = new JSONObject();
-//        try {
-//            obj.put("name","shhivam");
-//            obj.put("age",10);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Log.d("RESPONSE", obj+"");
-//        Volley.newRequestQueue(this).add(new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                //Use Response
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }));
+                String dept = et.getText().toString().trim();
+                data.setDept(dept);
+                String emp = new GsonBuilder().create().toJson(data);
+                getSharedPreferences("Login", Context.MODE_PRIVATE).edit().putString("Data", emp).apply();
+                Toast.makeText(HomeActivity.this, "Employee dept changed to "+ dept, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
