@@ -172,21 +172,21 @@ public class Books_Task extends AppCompatActivity {
 
 
         if (processes.getBook().getDesigning().getIsDone()) {
-            designDone.setText("Done");
+            designDone.setText(R.string.Done);
         } else if (!processes.getBook().getDesigning().getIsDone()) {
-            designDone.setText("Not Done");
+            designDone.setText(R.string.NotDone);
         }
 
         if (processes.getBook().getFerro().getIsDone()) {
-            ferroDone.setText("Done");
+            ferroDone.setText(R.string.Done);
         } else if (!processes.getBook().getFerro().getIsDone()) {
-            ferroDone.setText("Not Done");
+            ferroDone.setText(R.string.NotDone);
         }
 
         if (processes.getBook().getPlates().getIsDone()) {
-            platesDone.setText("Done");
+            platesDone.setText(R.string.Done);
         } else if (!processes.getBook().getPlates().getIsDone()) {
-            platesDone.setText("Not Done");
+            platesDone.setText(R.string.NotDone);
         }
 
         List<UpdatePF> updateprinting = processes.getBook().getPrinting().getUpdates();

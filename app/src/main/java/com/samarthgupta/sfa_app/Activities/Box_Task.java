@@ -167,20 +167,20 @@ public class Box_Task extends AppCompatActivity {
         jobName.setText(BoxjobName);
         
         if (processes.getBox().getDesigning().getIsDone()){
-            designDone.setText("Done");
+            designDone.setText(R.string.Done);
         }else if (!processes.getBox().getDesigning().getIsDone()){
-            designDone.setText("Not Done");
+            designDone.setText(R.string.NotDone);
         }
         if (processes.getBox().getFerro().getIsDone()){
-            ferroDone.setText("Done");
+            ferroDone.setText(R.string.Done);
         }else if (!processes.getBox().getFerro().getIsDone()){
-            ferroDone.setText("Not Done");
+            ferroDone.setText(R.string.NotDone);
         }
 
         if (processes.getBox().getPlates().getIsDone()){
-            platesDone.setText("Done");
+            platesDone.setText(R.string.Done);
         }else if (!processes.getBox().getPlates().getIsDone()){
-            platesDone.setText("Not Done");
+            platesDone.setText(R.string.NotDone);
         }
         List<UpdatePF> updateprinting = processes.getBox().getPrinting().getUpdates() ;
         //setting the total done in printing

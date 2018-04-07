@@ -56,10 +56,12 @@
                         android:layout_below="@+id/cv_Jobname"
                         android:layout_centerHorizontal="true"
                         android:textColor="@color/white"
-                        android:background="@color/colorBackground"
-                        android:text="Details(click to check details)"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:background="@color/colorPrimary"
+                        android:text="Check Details"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="3sp"
                         />
                 </android.support.v7.widget.CardView>
             </RelativeLayout>
