@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical">
@@ -17,15 +18,53 @@
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp">
 
-            <TextView
-                android:id="@+id/tv_jobname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="JOB NAME"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="140dp">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_Jobname"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="5dp"
+                    app:cardBackgroundColor="@color/lightGreen">
+
+                    <TextView
+                        android:id="@+id/tv_jobname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="JOB NAME"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_Jobname"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/bt_task_details"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_Jobname"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/colorBackground"
+                        android:text="Details(click to check details)"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
 
@@ -33,8 +72,8 @@
             android:id="@+id/cv_design"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cv_jobName"
             android:layout_margin="4dp"
+            android:layout_below="@id/cv_jobName"
             android:layout_marginStart="4dp"
             android:layout_marginTop="5dp">
 
@@ -45,7 +84,8 @@
                 <TextView
                     android:id="@+id/tv_designing"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="DESIGN"
@@ -59,6 +99,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_designing"
                     android:layout_marginEnd="10dp"
+                    android:layout_centerVertical="true"
                     android:text="JobDone"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
@@ -80,10 +121,11 @@
                 <TextView
                     android:id="@+id/tv_ferro"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="FERRO"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -93,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_ferro"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -115,10 +158,11 @@
                 <TextView
                     android:id="@+id/tv_plates"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="PLATES"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -130,6 +174,7 @@
                     android:layout_alignTop="@+id/tv_plates"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -143,53 +188,71 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="7dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_printing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="PRINTING"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_setsDone"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_printing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="PRINTING"
+                        android:layout_centerVertical="true"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_printingdone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/tv_printing"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:text="JobDone"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/tv_printing"
-                    android:layout_toRightOf="@id/tv_printing"
-                    android:gravity="center"
-                    android:text="SETS DONE"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="15sp" />
+                    android:layout_marginStart="10dp">
 
-                <TextView
-                    android:id="@+id/tv_setsDoneRatio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@+id/tv_setsDone"
-                    android:text="setsDoneRatio"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_setsDone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="SETS DONE"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tv_printingdone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/tv_printing"
-                    android:layout_marginEnd="10dp"
-                    android:text="JobDone"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_setsDoneRatio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/tv_setsDone"
+                        android:layout_weight="1"
+                        android:text="setsDoneRatio"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -208,10 +271,11 @@
                 <TextView
                     android:id="@+id/tv_lamination"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="LAMINATION"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -223,6 +287,7 @@
                     android:layout_alignTop="@+id/tv_lamination"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -243,10 +308,11 @@
                 <TextView
                     android:id="@+id/tv_creasing"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="CREASING"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -258,6 +324,7 @@
                     android:layout_alignTop="@+id/tv_creasing"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -278,10 +345,11 @@
                 <TextView
                     android:id="@+id/tv_binding"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="BINDING"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -293,6 +361,7 @@
                     android:layout_alignTop="@+id/tv_binding"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -313,10 +382,11 @@
                 <TextView
                     android:id="@+id/tv_packing"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="PACKING"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -328,6 +398,7 @@
                     android:layout_alignTop="@+id/tv_packing"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -348,10 +419,11 @@
                 <TextView
                     android:id="@+id/tv_dispatch"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="DISPATCH"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -363,6 +435,7 @@
                     android:layout_alignTop="@+id/tv_dispatch"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -383,10 +456,11 @@
                 <TextView
                     android:id="@+id/tv_challan"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="CHALLAN"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -398,6 +472,7 @@
                     android:layout_alignTop="@+id/tv_challan"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -418,10 +493,11 @@
                 <TextView
                     android:id="@+id/tv_bill"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:text="BILL"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
@@ -433,6 +509,7 @@
                     android:layout_alignTop="@+id/tv_bill"
                     android:layout_marginEnd="10dp"
                     android:text="JobDone"
+                    android:layout_centerVertical="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>

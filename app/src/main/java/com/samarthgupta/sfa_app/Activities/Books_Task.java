@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Books_Task extends AppCompatActivity {
     TextView jobName;
-
+    Button taskDetails ;
     TextView design, ferro, plates, printing, folding, gathering, perfect, sewing, centerPin, finishing, packing, dispatch, challan, bill;
     TextView designDone, ferroDone, platesDone, printingDone, foldingDone, gatheringDone, perfectDone, sewingDone, centerPinDone, finishingDone, packingDone, dispatchDone, challanDone, billDone;
 
@@ -42,6 +42,7 @@ public class Books_Task extends AppCompatActivity {
         Log.i("Book_task", bookProcesses + BookjobName);
 
         jobName = (TextView) findViewById(R.id.tv_jobname);
+        taskDetails = (Button) findViewById(R.id.cv_details) ;
         btUpdateProgress = (Button) findViewById(R.id.bt_book_update);
 
         design = (TextView) findViewById(R.id.tv_designing);

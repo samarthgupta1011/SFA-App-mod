@@ -20,11 +20,13 @@ public class Box_Task extends AppCompatActivity {
     TextView jobName ;
 
     TextView design, ferro, plates, printing, lamination,uv, embossing, foiling, dieCut ,  pasting, packing, dispatch, challan, bill ;
-    TextView designDone, ferroDone, platesDone, printingDone, laminationDone, uvDone, embossingDone, foilingDone, dieCutDone,  pastingDone, packingDone, dispatchDone, challanDone, billDone ;
+    TextView designDone, ferroDone, platesDone, printingDone, laminationDone, uvDone, embossingDone, foilingDone, dieCutDone,
+            pastingDone, packingDone, dispatchDone, challanDone, billDone ;
 
     TextView setsDoneRatio ;
     Button btUpdateProgress;
-    CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing, cv_foiling, cv_dieCut, cv_pasting, cv_packing, cv_dispatch, cv_challan, cv_bill ;
+    CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing,
+            cv_foiling, cv_dieCut, cv_pasting, cv_packing, cv_dispatch, cv_challan, cv_bill ;
     Processes processes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -40,10 +40,9 @@ public class TasksActivity extends AppCompatActivity {
 
         pb.setVisibility(View.VISIBLE);
 
-        Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
+        final Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
         Log.d("Tasks",emp.getDept());
         String url = baseUrl + "/task?emp="+emp.getDept();
-
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -51,7 +50,7 @@ public class TasksActivity extends AppCompatActivity {
 
                 Log.i("TASK", response);
                 Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
-                rv.setAdapter(new TasksAdapter(tasks));
+                rv.setAdapter(new TasksAdapter(tasks)) ;
                 pb.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
                 rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
@@ -69,7 +68,6 @@ public class TasksActivity extends AppCompatActivity {
     class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>{
 
         Task taskList[];
-
         public TasksAdapter(Task[] tasks){
             taskList = tasks;
         }
@@ -134,8 +132,7 @@ public class TasksActivity extends AppCompatActivity {
                     intent.putExtra("wt_id", taskList[pos].getWt());
                     startActivity(intent);
                 }
-//                List<Update> updates = process.get(0).getBook().getCentrePin().getUpdates();
-//                Update up = updates.get(updates.size()-1);
+
 
             }
         }

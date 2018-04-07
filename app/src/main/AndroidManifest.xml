@@ -55,7 +55,8 @@
         <activity android:name=".Activities.Books_Task" />
         <activity android:name=".Activities.Box_Task" />
         <activity android:name=".Activities.Cover_Task" />
-        <activity android:name=".Activities.UpdateActivity"></activity>
+        <activity android:name=".Activities.UpdateActivity" />
+        <activity android:name=".Activities.TaskDetailsActivity"></activity>
     </application>
 
 </manifest>
