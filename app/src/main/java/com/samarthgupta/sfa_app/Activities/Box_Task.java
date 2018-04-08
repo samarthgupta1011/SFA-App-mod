@@ -2,6 +2,7 @@ package com.samarthgupta.sfa_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -241,33 +242,33 @@ public class Box_Task extends AppCompatActivity {
         Log.i("Employee dept",employee.getDept());
 
         if (employee.getDept().equals("designing")){
-
+            cv_designing.setBackgroundColor(Color.GREEN);
         }else if (employee.getDept().equals("ferro")){
-
+            cv_ferro.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("plates")){
-
+            cv_plates.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("printing")){
-
+            cv_printing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("lamination")){
-
+            cv_lamination.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("uv")){
-
+            cv_uv.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("embossing")){
-
+            cv_embossing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("foiling")){
-
-        }else if(employee.getDept().equals("diecut")){
-
+            cv_foiling.setBackgroundColor(Color.GREEN);
+        }else if(employee.getDept().equals("dieCut")){
+            cv_dieCut.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("pasting")){
-
+            cv_pasting.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("packing")){
-
+            cv_packing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("dispatch")){
-
+            cv_dispatch.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("challan")){
-
+            cv_challan.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("bill")){
-
+            cv_bill.setBackgroundColor(Color.GREEN);
         }
 
         bt_taskDetails.setOnClickListener(new View.OnClickListener(){

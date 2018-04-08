@@ -2,6 +2,7 @@ package com.samarthgupta.sfa_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -252,33 +253,33 @@ public class Books_Task extends AppCompatActivity {
                 .getString("Data",null),Employee.class);
         Log.i("Employee dept",employee.getDept());
         if (employee.getDept().equals("designing")){
-
+            cv_designing.setBackgroundColor(Color.GREEN);
         }else if (employee.getDept().equals("ferro")){
-
+            cv_ferro.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("plates")){
-
+            cv_plates.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("printing")){
-
+            cv_printing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("folding")){
-
+            cv_folding.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("gathering")){
-
+            cv_gathering.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("sewing")){
-
+            cv_sewing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("perfect")){
-
+            cv_perfect.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("cpin")){
-
+            cv_centrepin.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("finishing")){
-
+            cv_finishing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("packing")){
-
+            cv_packing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("dispatch")){
-
+            cv_dispatch.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("challan")){
-
+            cv_challan.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("bill")){
-
+            cv_bill.setBackgroundColor(Color.GREEN);
         }
         bt_taskDetails.setOnClickListener(new View.OnClickListener(){
 
