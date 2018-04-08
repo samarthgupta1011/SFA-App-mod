@@ -4,7 +4,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 import com.samarthgupta.sfa_app.R;
@@ -32,16 +32,21 @@ public class TaskDetailsActivity extends AppCompatActivity {
     TextView papDetails, papLocation, paperBy, papQuality, papQuantity ;
     TextView PlateName, plateType, PlateQuantity ;
     JobTicket Taskdetails ;
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
-        String url = baseUrl + "/jobticket?wt_id=jfjdjdjd";
+
+        Log.i("Ticket", "IN");
+        String wt = getIntent().getStringExtra("wt_id") ;
+        String url = baseUrl + "/jobticket?wt="+wt;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.i("Ticket", response);
+                Log.i("Ticket", "Tick");
                 Taskdetails = new GsonBuilder()
                         .create()
                         .fromJson(response,JobTicket.class);
@@ -53,7 +58,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
             }
         }));
 
-        final String wt = getIntent().getStringExtra("wt_id") ;
+
 
 
 
@@ -88,9 +93,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
 
 
-        //setting Text to its place from response
-
-        JobName.setText(Taskdetails.getJob().getName());
+        Job taskJob = Taskdetails.getJob() ;
+          JobName.setText(taskJob.getName());
 
         DeliveryDate.setText(Taskdetails.getDeliveryDate());
         Priority.setText(Taskdetails.getPriority());
@@ -106,11 +110,14 @@ public class TaskDetailsActivity extends AppCompatActivity {
         wastage.setText(Taskdetails.getJob().getWastage());
 
         //mahcines required
-        StringJoiner joiner = new StringJoiner(",");
-        for (int i=0; i<Taskdetails.getMachine().getMachine().size(); i++){
-            joiner.add(Taskdetails.getMachine().getMachine().get(i)) ;
+//        StringJoiner joiner = new StringJoiner(",");
+        StringBuilder builder = new StringBuilder();
+
+        for(String machine : Taskdetails.getMachine().getMachine()){
+            builder.append(machine + ",");
         }
-        String allMachines=joiner.toString();
+        builder.deleteCharAt(builder.length()-1);
+        String allMachines=builder.toString();
         machinesRequired.setText(allMachines); //SM-72,KB-102,DOM-100
 
         papDetails.setText(Taskdetails.getPaper().getDetails());

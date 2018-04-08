@@ -43,7 +43,7 @@ public class Cover_Task extends AppCompatActivity {
         final String wt = getIntent().getStringExtra("wt_id");
 
         jobName = (TextView) findViewById(R.id.tv_jobname);
-        bt_taskDetails = (Button) findViewById(R.id.cv_details) ;
+        bt_taskDetails = (Button) findViewById(R.id.bt_task_details) ;
         btUpdateProgress = (Button) findViewById(R.id.bt_cover_update);
 
         design = (TextView) findViewById(R.id.tv_designing);

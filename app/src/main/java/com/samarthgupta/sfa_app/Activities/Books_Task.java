@@ -42,10 +42,10 @@ public class Books_Task extends AppCompatActivity {
         final String BookjobName = getIntent().getStringExtra("BookJobName");
         final String wt = getIntent().getStringExtra("wt_id");
 
-        Log.i("Book_task", bookProcesses + BookjobName);
+     //   Log.i("Book_task", bookProcesses + BookjobName);
 
         jobName = (TextView) findViewById(R.id.tv_jobname);
-        bt_taskDetails = (Button) findViewById(R.id.cv_details) ;
+        bt_taskDetails = (Button) findViewById(R.id.bt_task_details) ;
         btUpdateProgress = (Button) findViewById(R.id.bt_book_update);
 
         design = (TextView) findViewById(R.id.tv_designing);
@@ -246,7 +246,7 @@ public class Books_Task extends AppCompatActivity {
         String BillJobDone = updateBill.get(updateBill.size() - 1).getDone() + "/" + processes.getTotalNumber();
         billDone.setText(BillJobDone);
 
-//changing  the color for particular depatment worker
+//changing  the color for particular department worker
         final Employee employee = new GsonBuilder()
                 .create()
                 .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
