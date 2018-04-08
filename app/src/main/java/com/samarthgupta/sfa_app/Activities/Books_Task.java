@@ -1,5 +1,6 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Update;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.UpdatePF;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class Books_Task extends AppCompatActivity {
     TextView jobName;
-    Button taskDetails ;
+    Button bt_taskDetails ;
     TextView design, ferro, plates, printing, folding, gathering, perfect, sewing, centerPin, finishing, packing, dispatch, challan, bill;
     TextView designDone, ferroDone, platesDone, printingDone, foldingDone, gatheringDone, perfectDone, sewingDone, centerPinDone, finishingDone, packingDone, dispatchDone, challanDone, billDone;
 
@@ -36,13 +38,13 @@ public class Books_Task extends AppCompatActivity {
         setContentView(R.layout.activity_books__task);
 
         String bookProcesses = getIntent().getStringExtra("BookProcesses");
-        String BookjobName = getIntent().getStringExtra("BookJobName");
+        final String BookjobName = getIntent().getStringExtra("BookJobName");
         final String wt = getIntent().getStringExtra("wt_id");
 
         Log.i("Book_task", bookProcesses + BookjobName);
 
         jobName = (TextView) findViewById(R.id.tv_jobname);
-        taskDetails = (Button) findViewById(R.id.cv_details) ;
+        bt_taskDetails = (Button) findViewById(R.id.cv_details) ;
         btUpdateProgress = (Button) findViewById(R.id.bt_book_update);
 
         design = (TextView) findViewById(R.id.tv_designing);
@@ -243,6 +245,50 @@ public class Books_Task extends AppCompatActivity {
         String BillJobDone = updateBill.get(updateBill.size() - 1).getDone() + "/" + processes.getTotalNumber();
         billDone.setText(BillJobDone);
 
+//changing  the color for particular depatment worker
+        final Employee employee = new GsonBuilder()
+                .create()
+                .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
+                .getString("Data",null),Employee.class);
+        Log.i("Employee dept",employee.getDept());
+        if (employee.getDept().equals("designing")){
+
+        }else if (employee.getDept().equals("ferro")){
+
+        }else if(employee.getDept().equals("plates")){
+
+        }else if(employee.getDept().equals("printing")){
+
+        }else if(employee.getDept().equals("folding")){
+
+        }else if(employee.getDept().equals("gathering")){
+
+        }else if(employee.getDept().equals("sewing")){
+
+        }else if(employee.getDept().equals("perfect")){
+
+        }else if(employee.getDept().equals("cpin")){
+
+        }else if(employee.getDept().equals("finishing")){
+
+        }else if(employee.getDept().equals("packing")){
+
+        }else if(employee.getDept().equals("dispatch")){
+
+        }else if(employee.getDept().equals("challan")){
+
+        }else if(employee.getDept().equals("bill")){
+
+        }
+        bt_taskDetails.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Books_Task.this, TaskDetailsActivity.class) ;
+                intent.putExtra("wt_id", wt) ;
+                startActivity(intent);
+            }
+        });
         btUpdateProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

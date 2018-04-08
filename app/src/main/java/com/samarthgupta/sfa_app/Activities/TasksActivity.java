@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Update;
 import com.samarthgupta.sfa_app.R;
 import java.util.List;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
@@ -40,7 +39,10 @@ public class TasksActivity extends AppCompatActivity {
 
         pb.setVisibility(View.VISIBLE);
 
-        final Employee emp =  new GsonBuilder().create().fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE).getString                               ("Data",null), Employee.class);
+        final Employee emp =  new GsonBuilder()
+                .create()
+                .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
+                .getString("Data",null), Employee.class);
         Log.d("Tasks",emp.getDept());
         String url = baseUrl + "/task?emp="+emp.getDept();
 

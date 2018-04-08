@@ -26,36 +26,83 @@
         android:id="@+id/RL_basicDetails"
         android:layout_below="@id/tv_jobname">
         <TextView
+            android:id="@+id/delivery_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delivery Date : "
-            android:id="@+id/tv_delivery_date"
             android:layout_marginStart="5dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
         <TextView
-            android:id="@+id/tv_priority"
+            android:id="@+id/tv_delivery_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@id/delivery_date"
+            android:text="Delivery Date"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Priority : "
             android:layout_below="@id/tv_delivery_date"
             android:layout_marginStart="5dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        <TextView
+            android:id="@+id/tv_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Priority"
+            android:layout_below="@id/tv_delivery_date"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/priority"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date : "
-            android:id="@+id/tv_Date"
+            android:id="@+id/Date"
             android:layout_below="@id/tv_priority"
             android:layout_marginStart="5dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:id="@+id/tv_Date"
+            android:layout_below="@id/tv_priority"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/priority"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        <TextView
+            android:id="@+id/notes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notes : "
             android:layout_below="@id/tv_Date"
             android:layout_marginStart="5dp"
             android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            />
+        <TextView
+            android:id="@+id/tv_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            android:layout_below="@id/tv_Date"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/notes"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             />
     </RelativeLayout>
 
