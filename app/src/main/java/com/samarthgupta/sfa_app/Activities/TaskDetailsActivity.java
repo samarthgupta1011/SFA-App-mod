@@ -80,6 +80,45 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 Taskdetails = new GsonBuilder()
                         .create()
                         .fromJson(response,JobTicket.class);
+
+                Job taskJob = Taskdetails.getJob() ;
+                JobName.setText(taskJob.getName());
+
+                DeliveryDate.setText(Taskdetails.getDeliveryDate());
+                Priority.setText(Taskdetails.getPriority());
+                Date.setText(Taskdetails.getDate());
+                Notes.setText(Taskdetails.getNotes());
+
+                ClientName.setText(Taskdetails.getClient().getName());
+                ClientNumber.setText(Taskdetails.getClient().getContact());
+
+                JobType.setText(Taskdetails.getJob().getType());
+                NoOfCols.setText(Taskdetails.getJob().getNoOfCol());
+                printRun.setText(Taskdetails.getJob().getPrintRun());
+                Jobsize.setText(Taskdetails.getJob().getSize());
+                wastage.setText(Taskdetails.getJob().getWastage());
+
+                //mahcines required
+//        StringJoiner joiner = new StringJoiner(",");
+                StringBuilder builder = new StringBuilder();
+                for(String machine : Taskdetails.getMachine().getMachine()){
+                    builder.append(machine + ",");
+                }
+                builder.deleteCharAt(builder.length()-1);
+                String allMachines=builder.toString();
+                machinesRequired.setText(allMachines); //SM-72,KB-102,DOM-100
+
+                papDetails.setText(Taskdetails.getPaper().getDetails());
+                papLocation.setText(Taskdetails.getPaper().getLocation());
+                paperBy.setText(Taskdetails.getPaper().getPaperBy());
+                papQuality.setText(Taskdetails.getPaper().getQuality());
+                papQuantity.setText(Taskdetails.getPaper().getQuantity());
+
+                PlateName.setText(Taskdetails.getPlate().getName());
+                plateType.setText(Taskdetails.getPlate().getPlate());
+                PlateQuantity.setText(Taskdetails.getPlate().getQuantity());
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -88,42 +127,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
             }
         }));
 
-
-        Job taskJob = Taskdetails.getJob() ;
-        JobName.setText(taskJob.getName());
-
-        DeliveryDate.setText(Taskdetails.getDeliveryDate());
-        Priority.setText(Taskdetails.getPriority());
-        Date.setText(Taskdetails.getDate());
-        Notes.setText(Taskdetails.getNotes());
-
-        ClientName.setText(Taskdetails.getClient().getName());
-        ClientNumber.setText(Taskdetails.getClient().getContact());
-
-        JobType.setText(Taskdetails.getJob().getType());
-        NoOfCols.setText(Taskdetails.getJob().getNoOfCol());
-        printRun.setText(Taskdetails.getJob().getPrintRun());
-        wastage.setText(Taskdetails.getJob().getWastage());
-
-        //mahcines required
-//        StringJoiner joiner = new StringJoiner(",");
-        StringBuilder builder = new StringBuilder();
-        for(String machine : Taskdetails.getMachine().getMachine()){
-            builder.append(machine + ",");
-        }
-        builder.deleteCharAt(builder.length()-1);
-        String allMachines=builder.toString();
-        machinesRequired.setText(allMachines); //SM-72,KB-102,DOM-100
-
-        papDetails.setText(Taskdetails.getPaper().getDetails());
-        papLocation.setText(Taskdetails.getPaper().getLocation());
-        paperBy.setText(Taskdetails.getPaper().getPaperBy());
-        papQuality.setText(Taskdetails.getPaper().getQuality());
-        papQuantity.setText(Taskdetails.getPaper().getQuantity());
-
-        PlateName.setText(Taskdetails.getPlate().getName());
-        plateType.setText(Taskdetails.getPlate().getPlate());
-        PlateQuantity.setText(Taskdetails.getPlate().getQuantity());
 
     }
 
