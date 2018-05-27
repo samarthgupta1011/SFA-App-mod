@@ -38,30 +38,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
-        Log.i("Ticket", "IN");
-        String wt = getIntent().getStringExtra("wt_id") ;
-        String url = baseUrl + "/jobticket?wt="+wt;
-
-        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("Ticket", response);
-                Log.i("Ticket", "Tick");
-                Taskdetails = new GsonBuilder()
-                        .create()
-                        .fromJson(response,JobTicket.class);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }));
-
-
-
-
-
         JobName = (TextView)findViewById(R.id.tv_job_name) ;
 
         DeliveryDate = (TextView)findViewById(R.id.tv_delivery_date) ;
@@ -92,9 +68,29 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
 
 
+        Log.i("Ticket", "IN");
+        String wt = getIntent().getStringExtra("wt_id") ;
+        String url = baseUrl + "/jobticket?wt="+wt;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("Ticket", response);
+                Log.i("Ticket", "Tick");
+                Taskdetails = new GsonBuilder()
+                        .create()
+                        .fromJson(response,JobTicket.class);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }));
+
 
         Job taskJob = Taskdetails.getJob() ;
-          JobName.setText(taskJob.getName());
+        JobName.setText(taskJob.getName());
 
         DeliveryDate.setText(Taskdetails.getDeliveryDate());
         Priority.setText(Taskdetails.getPriority());
@@ -112,7 +108,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         //mahcines required
 //        StringJoiner joiner = new StringJoiner(",");
         StringBuilder builder = new StringBuilder();
-
         for(String machine : Taskdetails.getMachine().getMachine()){
             builder.append(machine + ",");
         }
@@ -130,6 +125,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         plateType.setText(Taskdetails.getPlate().getPlate());
         PlateQuantity.setText(Taskdetails.getPlate().getQuantity());
 
-
     }
+
+
 }

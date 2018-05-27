@@ -1,7 +1,10 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
@@ -11,9 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,7 +39,9 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
@@ -63,7 +70,11 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
     String papDetails, papQuan, papQuality, papBy, papLocation;
     RadioGroup rgPaperBy;
     RadioButton rbPaperClient, rbPaperSelf;
+    //date picker
+    private static final String TAG = "MainActivity";
 
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     Job job;
     Button btProceed;
@@ -97,6 +108,36 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         etMachOther = (EditText) findViewById(R.id.et_mach_other);
         machines = new ArrayList<>();
 
+        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        JobDetailsActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+
+                String date = month + "/" + day + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
         btProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +145,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
 
                 date = System.currentTimeMillis();
-                dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
                 jobTicket.setDate(dateFormat.format(date));
                 jobTicket.setNotes(((EditText) findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
