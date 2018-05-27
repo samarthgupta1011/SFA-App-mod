@@ -73,14 +73,18 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
     //date picker
     private static final String TAG = "MainActivity";
 
-    private TextView mDisplayDate;
+    private TextView mDeliveryDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    SimpleDateFormat dateFormat;
+    long date;
+    EditText deliveryDate ;
+
+
 
     Job job;
     Button btProceed;
 
-    SimpleDateFormat dateFormat;
-    long date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +112,9 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         etMachOther = (EditText) findViewById(R.id.et_mach_other);
         machines = new ArrayList<>();
 
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
-
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+        mDeliveryDate = (TextView) findViewById(R.id.tv_delivery_date);
+        deliveryDate = (EditText)findViewById(R.id.et_deliveryDate);
+        mDeliveryDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -134,8 +138,9 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 month = month + 1;
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
-                String date = month + "/" + day + "/" + year;
-                mDisplayDate.setText(date);
+                String date = day + "/" + month + "/" + year;
+
+                deliveryDate.setText(date);
             }
         };
         btProceed.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +150,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
 
                 date = System.currentTimeMillis();
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+                dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy hh:mm:ss");
                 jobTicket.setDate(dateFormat.format(date));
                 jobTicket.setNotes(((EditText) findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
@@ -173,8 +178,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
                     String wt = (job.getName() + dateFormat.format(date)).trim().replace(" ", "").replace(",", "").replace(":", "");
                     jobTicket.setWt(wt);
-                    //To be corrected
-                    jobTicket.setDeliveryDate(Long.toString(System.currentTimeMillis()));
+                    jobTicket.setDeliveryDate(deliveryDate.getText().toString());
                 }
 
 
