@@ -207,7 +207,7 @@ public class Books_Task extends AppCompatActivity {
         String foldingJobDone = updatefolding.get(updatefolding.size() - 1).getDone() + "/" + processes.getTotalNumber();
         foldingDone.setText(foldingJobDone);
         //setting the number of forms in folding
-        String foldingFormsDone = updatefolding.get(updatefolding.size() - 1).getDone() + "/" + processes.getTotalForms();
+        String foldingFormsDone = updatefolding.get(updatefolding.size() - 1).getSetsDone() + "/" + processes.getTotalForms();
         formsDoneRatio.setText(foldingFormsDone);
 
         List<Update> updateGathering = processes.getBook().getGathering().getUpdates();
