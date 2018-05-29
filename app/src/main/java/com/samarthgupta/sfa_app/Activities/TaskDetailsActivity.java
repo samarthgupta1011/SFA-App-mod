@@ -38,7 +38,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
-        JobName = (TextView)findViewById(R.id.tv_job_name) ;
+        JobName = (TextView)findViewById(R.id.tv_jobname) ;
 
         DeliveryDate = (TextView)findViewById(R.id.tv_delivery_date) ;
         Priority = (TextView)findViewById(R.id.tv_priority) ;
