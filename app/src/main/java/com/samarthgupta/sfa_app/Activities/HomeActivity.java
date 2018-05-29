@@ -99,6 +99,7 @@ public class HomeActivity extends AppCompatActivity
                 String emp = new GsonBuilder().create().toJson(data);
                 getSharedPreferences("Login", Context.MODE_PRIVATE).edit().putString("Data", emp).apply();
                 Toast.makeText(HomeActivity.this, "Employee dept changed to "+ dept, Toast.LENGTH_SHORT).show();
+                tvEmpDept.setText(dept.toUpperCase());
             }
         });
 
