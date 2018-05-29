@@ -2,16 +2,22 @@ package com.samarthgupta.sfa_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,10 +31,11 @@ import com.samarthgupta.sfa_app.R;
 import java.util.List;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
-public class TasksActivity extends AppCompatActivity {
+public class TasksActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     RecyclerView rv;
     ProgressBar pb;
+    String filterOption ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +45,29 @@ public class TasksActivity extends AppCompatActivity {
         pb = (ProgressBar) findViewById(R.id.pb_tasks);
 
         pb.setVisibility(View.VISIBLE);
+        VolleyRequest(null,null) ;
 
-        final Employee emp =  new GsonBuilder()
+    }
+
+    private void VolleyRequest( String clientName, String jobName ) {
+        final Employee emp = new GsonBuilder()
                 .create()
                 .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
-                .getString("Data",null), Employee.class);
-        Log.d("Tasks",emp.getDept());
-        String url = baseUrl + "/task?emp="+emp.getDept();
+                        .getString("Data", null), Employee.class);
+        Log.d("Tasks", emp.getDept());
+        String url = null;
+        if (clientName == null && jobName == null) {
+            //Simple Volley request
+            url = baseUrl + "/task?emp=" + emp.getDept();
+        } else if (clientName != null && jobName == null) {
+            // client name
+            url = baseUrl + "/task/client?emp="+emp.getDept()+"&reg="+clientName ;
+        } else if (clientName == null && jobName != null) {
+            //job name
+            url = baseUrl+ "/task/job?emp="+emp.getDept()+"&reg="+jobName ;
+            Log.d("response not found", url);
+        }
+
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -52,7 +75,7 @@ public class TasksActivity extends AppCompatActivity {
 
                 Log.i("TASK", response);
                 Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
-                rv.setAdapter(new TasksAdapter(tasks)) ;
+                rv.setAdapter(new TasksAdapter(tasks));
                 pb.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
                 rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
@@ -64,8 +87,67 @@ public class TasksActivity extends AppCompatActivity {
 
             }
         }));
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.task_menu_items,menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_searchByClientName) {
+            Toast.makeText(this, "Enter Client Name", Toast.LENGTH_SHORT).show();
+            filterOption = "ClientName" ;
+            return true;
+        }
+
+        if (id == R.id.action_searchByJobName) {
+            Toast.makeText(this, "Enter Job Name", Toast.LENGTH_SHORT).show();
+            filterOption="JobName";
+           return true ;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText.toLowerCase();
+        if (filterOption==null){
+            Toast.makeText(this, "Select Search By", Toast.LENGTH_SHORT).show();
+        }
+        else if (filterOption=="ClientName"){
+            VolleyRequest(newText,null);
+        }else if(filterOption=="JobName"){
+            VolleyRequest(null,newText);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    // RECYCLERVIEW ADAPTER BELOW
+
 
     class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>{
 
