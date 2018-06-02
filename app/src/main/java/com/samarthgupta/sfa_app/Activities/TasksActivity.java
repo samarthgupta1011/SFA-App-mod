@@ -64,7 +64,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             url = baseUrl + "/task/client?emp="+emp.getDept()+"&reg="+clientName ;
         } else if (clientName == null && jobName != null) {
             //job name
-            url = baseUrl+ "/task/job?emp="+emp.getDept()+"&reg="+jobName ;
+            url = baseUrl+ "/task/jobname?emp="+emp.getDept()+"&reg="+jobName ;
             Log.d("response not found", url);
         }
 
