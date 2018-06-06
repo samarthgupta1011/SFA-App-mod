@@ -10,8 +10,8 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="6dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="6dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -23,12 +23,12 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
                 android:layout_marginEnd="50sp"
+                android:layout_marginStart="50sp"
                 android:background="@drawable/jobd"
                 android:fitsSystemWindows="true"
                 android:scaleType="center"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -39,11 +39,11 @@
             android:clipToPadding="false">
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar"
-                app:title="Job Details"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Job Details" />
 
 
         </FrameLayout>
@@ -81,10 +81,10 @@
 
                         <EditText
                             android:id="@+id/et_job_name"
-                            android:textSize="25sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Job Name" />
+                            android:hint="Job Name"
+                            android:textSize="25sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -390,6 +390,15 @@
                     </android.support.design.widget.TextInputLayout>
 
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Paper By"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textStyle="bold" />
+
+
                     <RadioGroup
                         android:id="@+id/rg_paper_by"
                         android:layout_width="match_parent"
@@ -414,26 +423,20 @@
                     </RadioGroup>
 
                     <TextView
+                        android:id="@+id/tv_delivery_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_delivery_date"
+                        android:layout_marginTop="4dp"
                         android:text="Delivery Date (Pick Date) 📅"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textStyle="bold"
-                        android:layout_marginTop="4dp"
-                        />
-                    <android.support.design.widget.TextInputLayout
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/et_deliveryDate"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/et_deliveryDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:hint="Enter Date ex. date/mon/yr"/>
-
-                    </android.support.design.widget.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp" />
 
 
                     <LinearLayout
@@ -470,21 +473,19 @@
                 android:background="@color/black" />
 
             <Button
+                android:id="@+id/bt_proceed_job"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20sp"
-                android:id="@+id/bt_proceed_job"
+                android:background="@color/colorBackground"
                 android:text="Proceed"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textColor="@color/white"
-                android:background="@color/colorBackground"/>
-
+                android:textStyle="bold" />
 
 
         </LinearLayout>
-
 
 
     </android.support.v4.widget.NestedScrollView>

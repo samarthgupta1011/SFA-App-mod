@@ -27,6 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
@@ -70,6 +73,11 @@ public class UpdateActivity extends AppCompatActivity {
         tvCurrStatusTotal.setText(getIntent().getStringExtra("Total"));
         tvCurrStatusDone.setText(getIntent().getStringExtra("Done"));
 
+        SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+        Calendar calendar = Calendar.getInstance();
+        tvTime.setText(sdfPosted.format(calendar.getTime()));
+
+
         if (empDept.equals("printing") || empDept.equals("folding")) {
 
             llEnterProgress.setVisibility(View.VISIBLE);
@@ -109,6 +117,11 @@ public class UpdateActivity extends AppCompatActivity {
                     }
                 });
 
+
+                SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+                Calendar calendar = Calendar.getInstance();
+                updateObj.setTime(sdfPosted.format(calendar.getTime()));
+
                 AlertDialog dialog;
 
                 if (!(empDept.equals("designing") || empDept.equals("ferro") || empDept.equals("plates")
@@ -128,8 +141,6 @@ public class UpdateActivity extends AppCompatActivity {
                     updateObj.setDone(done);
                     updateObj.setSetsDone(setsDone);
 
-                    Time time = new Time(System.currentTimeMillis());
-                    updateObj.setTime(time.toString());
 
                     String url = baseUrl + "/update" + "?emp=" + empDept + "&wt=" + wtID;
 
