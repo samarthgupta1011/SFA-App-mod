@@ -31,7 +31,6 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Machine;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Paper;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Plate;
-import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONException;
@@ -77,7 +76,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     SimpleDateFormat dateFormat;
     long date;
-    EditText deliveryDate ;
+    TextView tvDeliveryDate;
 
 
 
@@ -113,7 +112,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         machines = new ArrayList<>();
 
         mDeliveryDate = (TextView) findViewById(R.id.tv_delivery_date);
-        deliveryDate = (EditText)findViewById(R.id.et_deliveryDate);
+        tvDeliveryDate = (TextView)findViewById(R.id.et_deliveryDate);
         mDeliveryDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,26 +134,58 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+//                month = month + 1;
+//                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
-                String date = day + "/" + month + "/" + year;
 
-                deliveryDate.setText(date);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, day);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+                String formattedDate = sdf.format(calendar.getTime());
+
+//                String date = day + "/" + month + "/" + year;
+
+                SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+                String datePosted = sdfPosted.format(calendar.getTime());
+                tvDeliveryDate.setText(formattedDate);
+                jobTicket.setDeliveryDate(datePosted);
+
+                Log.i("Date", formattedDate);
+                Log.i("Date", datePosted);
+
             }
         };
+
         btProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-
                 date = System.currentTimeMillis();
-                dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy hh:mm:ss");
-                jobTicket.setDate(dateFormat.format(date));
+                SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+                String currentDate = sdfPosted.format(date);
+
+                jobTicket.setDate(currentDate);
                 jobTicket.setNotes(((EditText) findViewById(R.id.et_notes)).getText().toString());
                 jobTicket.setImage("");
+                jobTicket.setDelivered(false);
                 jobTicket.setPriority("5");
+
+                if(jobTicket.getDeliveryDate() == null || jobTicket.getDeliveryDate().isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
+                    builder.setTitle("Enter job details");
+                    builder.setMessage("Please Select Delivery Date");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
 
                 job = new Job(etJobName.getText().toString(), jobType, etPrintRun.getText().toString(),
                         etWastage.getText().toString(), etJobSize.getText().toString(), etNumOfCol.getText().toString());
@@ -176,9 +207,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 } else {
                     jobTicket.setJob(job);
 
-                    String wt = (job.getName() + dateFormat.format(date)).trim().replace(" ", "").replace(",", "").replace(":", "");
+                    String wt = (job.getName() + currentDate.trim().replace(" ", "").replace(",", "").replace(":", "").replace("-",""));
                     jobTicket.setWt(wt);
-                    jobTicket.setDeliveryDate(deliveryDate.getText().toString());
                 }
 
 

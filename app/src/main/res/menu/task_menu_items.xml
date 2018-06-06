@@ -26,5 +26,12 @@
             android:title="Search By Job"
             app:showAsAction="never" />
 
+        <item
+            android:id="@+id/action_searchByDelDate"
+            android:orderInCategory="100"
+            android:title="Search By Delivery Date"
+            app:showAsAction="never" />
+
+
     </item>
 </menu>
