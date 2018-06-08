@@ -13,6 +13,7 @@ public class Update {
     private String done;
 
     public Update() {
+
         this.time = null;
         this.done = null;
     }

@@ -1,11 +1,13 @@
 
 package com.samarthgupta.sfa_app.POJO.WT_Processes;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class Folding {
 
@@ -22,8 +24,9 @@ public class Folding {
         UpdatePF zeroUpdate = new UpdatePF();
         zeroUpdate.setDone("0");
         zeroUpdate.setSetsDone("0");
-        Time time = new Time(System.currentTimeMillis());
-        zeroUpdate.setTime(time.toString());
+        SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+        String currentDateTime = sdfPosted.format(System.currentTimeMillis());
+        zeroUpdate.setTime(currentDateTime);
         this.updates.add(zeroUpdate);
     }
 
