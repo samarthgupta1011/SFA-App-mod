@@ -97,6 +97,16 @@ public class Books_Processes extends AppCompatActivity {
         final Challan challan = new Challan();
         final Bill bill = new Bill();
 
+        check_design.setChecked(true);
+        check_ferro.setChecked(true);
+        check_plates.setChecked(true);
+        check_printing.setChecked(true);
+
+        check_packing.setChecked(true);
+        check_dispatch.setChecked(true);
+        check_challan.setChecked(true);
+        check_bill.setChecked(true);
+
 
         check_design.setOnClickListener(
                 new View.OnClickListener() {
@@ -322,6 +332,36 @@ public class Books_Processes extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
+                    builder.setTitle("Enter printing details");
+                    builder.setMessage("Please enter number of SETS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
+                if (check_folding.isChecked() && et_noOfForms.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
+                    builder.setTitle("Enter folding details");
+                    builder.setMessage("Please enter number of FORMS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
 
                 bt_proceed_Books.setVisibility(View.INVISIBLE);
 
@@ -331,20 +371,6 @@ public class Books_Processes extends AppCompatActivity {
                 book.setFerro(ferro);
                 book.setPlates(plates);
                 book.setPrinting(printing);
-
-//                if (printing.equals(true) && et_noOfSets.getText().toString()==null ){
-//                    Log.i("error", et_noOfSets.getText().toString()) ;
-//                    bt_proceed_Books.setVisibility(View.VISIBLE);
-//                    AlertDialog dialog = new AlertDialog.Builder(Books_Processes.this).setTitle("Error").setMessage("Enter Number of Sets").setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            dialogInterface.dismiss();
-//                        }
-//                    }).create();
-//                    dialog.show();
-//
-//                }
-
                 book.setFolding(folding);
                 book.setGathering(gathering);
                 book.setSewing(sewing);
@@ -359,7 +385,7 @@ public class Books_Processes extends AppCompatActivity {
                 processes.setJobType("Book");
                 processes.setBook(book);
 
-                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                String wt_id = getIntent().getExtras().getString("wt_id");
                 String total_number = getIntent().getStringExtra("total_number");
 
                 processes.setWtId(wt_id);
@@ -381,17 +407,17 @@ public class Books_Processes extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
 
                             try {
-                                if(response.getBoolean("success")){
+                                if (response.getBoolean("success")) {
                                     Toast.makeText(Books_Processes.this, "Success", Toast.LENGTH_SHORT).show();
                                     bt_proceed_Books.setVisibility(View.VISIBLE);
-                                    Intent intent = new Intent(Books_Processes.this,HomeActivity.class) ;
+                                    Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
 
 
                         }

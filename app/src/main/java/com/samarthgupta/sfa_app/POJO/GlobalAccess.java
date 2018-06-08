@@ -10,5 +10,7 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 public class GlobalAccess {
 
     public static JobTicket jobTicket;
-    public static String baseUrl = "http://sfatest.herokuapp.com";
+    public static int recordsPerPage = 5;
+//        public static String baseUrl = "http://28b8c12a.ngrok.io";
+    public static String baseUrl = "https://sfatest.herokuapp.com";
 }

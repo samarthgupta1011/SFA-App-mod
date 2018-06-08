@@ -47,7 +47,18 @@ public class JobTicket {
     @SerializedName("processes")
     @Expose
     private Processes processes ;
+    @SerializedName("isDelivered")
+    @Expose
+    private boolean isDelivered ;
 
+
+    public boolean isDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        isDelivered = delivered;
+    }
 
     public String getId() {
         return id;

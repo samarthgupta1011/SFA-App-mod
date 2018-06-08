@@ -1,7 +1,9 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -90,6 +92,15 @@ public class Box_Processes extends AppCompatActivity {
         final Challan challan = new Challan();
         final Bill bill = new Bill();
 
+        check_design.setChecked(true);
+        check_ferro.setChecked(true);
+        check_plates.setChecked(true);
+        check_printing.setChecked(true);
+
+        check_packing.setChecked(true);
+        check_dispatch.setChecked(true);
+        check_challan.setChecked(true);
+        check_bill.setChecked(true);
 
         check_design.setOnClickListener(
                 new View.OnClickListener() {
@@ -305,6 +316,22 @@ public class Box_Processes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Box_Processes.this);
+                    builder.setTitle("Enter printing details");
+                    builder.setMessage("Please enter number of SETS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
+
                 bt_proceed_box.setVisibility(View.INVISIBLE);
 
                 final Box box = new Box();
@@ -350,6 +377,8 @@ public class Box_Processes extends AppCompatActivity {
                                     bt_proceed_box.setVisibility(View.VISIBLE);
                                     Intent intent = new Intent(Box_Processes.this, HomeActivity.class);
                                     startActivity(intent);
+                                    finish();
+
                                 }
 
                             } catch (JSONException e) {
