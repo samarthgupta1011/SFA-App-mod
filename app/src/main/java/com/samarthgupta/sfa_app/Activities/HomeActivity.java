@@ -94,6 +94,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+
                 String dept = et.getText().toString().trim();
                 data.setDept(dept);
                 String emp = new GsonBuilder().create().toJson(data);
