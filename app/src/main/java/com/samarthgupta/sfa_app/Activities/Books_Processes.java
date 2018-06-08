@@ -1,7 +1,9 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -330,6 +332,36 @@ public class Books_Processes extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
+                    builder.setTitle("Enter printing details");
+                    builder.setMessage("Please enter number of SETS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
+                if (check_folding.isChecked() && et_noOfForms.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
+                    builder.setTitle("Enter folding details");
+                    builder.setMessage("Please enter number of FORMS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
 
                 bt_proceed_Books.setVisibility(View.INVISIBLE);
 
@@ -339,20 +371,6 @@ public class Books_Processes extends AppCompatActivity {
                 book.setFerro(ferro);
                 book.setPlates(plates);
                 book.setPrinting(printing);
-
-//                if (printing.equals(true) && et_noOfSets.getText().toString()==null ){
-//                    Log.i("error", et_noOfSets.getText().toString()) ;
-//                    bt_proceed_Books.setVisibility(View.VISIBLE);
-//                    AlertDialog dialog = new AlertDialog.Builder(Books_Processes.this).setTitle("Error").setMessage("Enter Number of Sets").setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            dialogInterface.dismiss();
-//                        }
-//                    }).create();
-//                    dialog.show();
-//
-//                }
-
                 book.setFolding(folding);
                 book.setGathering(gathering);
                 book.setSewing(sewing);
@@ -394,6 +412,7 @@ public class Books_Processes extends AppCompatActivity {
                                     bt_proceed_Books.setVisibility(View.VISIBLE);
                                     Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                             } catch (JSONException e) {

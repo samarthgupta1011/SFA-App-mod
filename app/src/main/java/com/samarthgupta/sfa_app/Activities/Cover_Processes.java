@@ -1,7 +1,9 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -258,6 +260,22 @@ public class Cover_Processes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Cover_Processes.this);
+                    builder.setTitle("Enter printing details");
+                    builder.setMessage("Please enter number of SETS details");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
+
                 bt_proceed_cover.setVisibility(View.INVISIBLE);
                 final Cover cover = new Cover();
                 cover.setDesigning(designing);
@@ -302,6 +320,7 @@ public class Cover_Processes extends AppCompatActivity {
 
                                     Intent intent = new Intent(Cover_Processes.this, HomeActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                             } catch (JSONException e) {

@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -82,7 +83,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
     Job job;
     Button btProceed;
-
+    ProgressBar pb_task_progress ;
 
 
     @Override
@@ -92,6 +93,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
         Log.i("DET", jobTicket.getClient().getContact());
         btProceed = (Button) findViewById(R.id.bt_proceed_job);
+        pb_task_progress = (ProgressBar)findViewById(R.id.pb_progressBar);
 
         //Job class
         rgJobType = (RadioGroup) findViewById(R.id.rg_job_type);
@@ -207,8 +209,10 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 } else {
                     jobTicket.setJob(job);
 
-                    String wt = (job.getName() + currentDate.trim().replace(" ", "").replace(",", "").replace(":", "").replace("-",""));
-                    jobTicket.setWt(wt);
+                    String wt = (job.getName() + currentDate.trim().replace(" ", "").
+                            replace(",", "").replace(":", "").
+                            replace("-","").replace("+", ""));
+                    jobTicket.setWt(wt.trim());
                 }
 
 
@@ -277,11 +281,11 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
 
 
+
                 //Post ticket here
                 //start act in onResponse
                 //Get ticket id and success status in response
                 //Send to next act
-
 
                 final String res = new GsonBuilder().create().toJson(jobTicket);
                 try {
@@ -302,6 +306,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
                             JSONObject resp = null;
                             try {
+                                btProceed.setVisibility(View.INVISIBLE);
+                                pb_task_progress.setVisibility(View.VISIBLE);
                                 resp = new JSONObject(String.valueOf(response));
                                 boolean status = resp.getBoolean("success");
 
@@ -335,6 +341,8 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                                 } else {
 
                                     Toast.makeText(JobDetailsActivity.this, "Job ticket couldn't be created", Toast.LENGTH_SHORT).show();
+                                    pb_task_progress.setVisibility(View.INVISIBLE);
+                                    btProceed.setVisibility(View.VISIBLE);
                                     return;
 
                                 }
