@@ -11,6 +11,6 @@ public class GlobalAccess {
 
     public static JobTicket jobTicket;
     public static int recordsPerPage = 5;
-        public static String baseUrl = "http://28b8c12a.ngrok.io";
-//    public static String baseUrl = "https://sfatest.herokuapp.com";
+//        public static String baseUrl = "http://28b8c12a.ngrok.io";
+    public static String baseUrl = "https://sfatest.herokuapp.com";
 }

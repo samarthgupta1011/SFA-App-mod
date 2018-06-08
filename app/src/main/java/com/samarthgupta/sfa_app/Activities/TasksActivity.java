@@ -50,6 +50,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
     LinearLayout llDateSelect;
     TextView tvStartDate, tvEndDate, tvNextPg, tvPrevPg;
+    int pages = 1, perPage = 5;
 
 
 
@@ -88,21 +89,48 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
         String url = null;
         if (clientName == null && jobName == null) {
             //Simple Volley request
-            url = baseUrl + "/task?emp=" + emp.getDept();
+            url = baseUrl + "/task?page="+pages+ "&perPage="+perPage+"&emp=printing" + emp.getDept();
+            Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("TASK", response);
+                    Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
+                    if (tasks.length!=0){
+                        rv.setAdapter(new TasksAdapter(tasks));
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                        rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
+                        rv.setHasFixedSize(true);
+                    }else {
+                        Toast.makeText(TasksActivity.this, "No More Tasks", Toast.LENGTH_SHORT).show();
+                        pages-- ;
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }));
         } else if (clientName != null && jobName == null) {
             // client name
             url = baseUrl + "/task/client?emp=" + emp.getDept() + "&reg=" + clientName;
-        } else if (clientName == null && jobName != null) {
+            ClientAndJobQuery(url) ;
+        } else if (clientName == null && jobName.length()==0) {
             //job name
             url = baseUrl + "/task/jobname?emp=" + emp.getDept() + "&reg=" + jobName;
             Log.d("response not found", url);
+            ClientAndJobQuery(url) ;
         }
 
+    }
 
+    private void ClientAndJobQuery(String url) {
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 Log.i("TASK", response);
                 Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
                 rv.setAdapter(new TasksAdapter(tasks));
@@ -110,6 +138,9 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                 rv.setVisibility(View.VISIBLE);
                 rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
                 rv.setHasFixedSize(true);
+
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -118,6 +149,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             }
         }));
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -270,12 +302,18 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
 
         } else if(view == tvNextPg){
-
-
+            //on Click increase the increment the page number by one.
+            // by default number of task per pages displayed will be 5 now.
+            pages++ ;
+            VolleyRequest(null,null);
 
         } else if(view == tvPrevPg){
-
-
+            pages = pages-1;
+            if (pages<1){
+                pages = 1 ;
+                Toast.makeText(this, "Page 1", Toast.LENGTH_SHORT).show();
+            }
+            VolleyRequest(null, null);
 
         }
     }
