@@ -34,8 +34,12 @@ import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
@@ -367,7 +371,26 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
         public void onBindViewHolder(TasksAdapter.TasksHolder holder, int position) {
             holder.clientName.setText(taskList[position].getClient().getName());
             holder.priority.setText(taskList[position].getPriority());
-            holder.deliveryDate.setText(taskList[position].getDeliveryDate());
+
+            boolean isDateSet = false;
+            String delDate = taskList[position].getDeliveryDate();
+            SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+            try {
+                Date date = sdfPosted.parse(delDate);
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+                String del = sdf.format(date);
+                del = del.replace(",", ", ");
+                holder.deliveryDate.setText(del);
+                isDateSet = true;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(!isDateSet){
+                Log.e("Msg", "Not set");
+                holder.deliveryDate.setText(delDate);
+            }
+
             holder.tvJobType.setText(taskList[position].getJob().getType());
             holder.tvJobName.setText(taskList[position].getJob().getName());
         }

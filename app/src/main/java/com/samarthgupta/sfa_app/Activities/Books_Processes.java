@@ -1,9 +1,7 @@
 package com.samarthgupta.sfa_app.Activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -96,6 +94,16 @@ public class Books_Processes extends AppCompatActivity {
         final Dispatch dispatch = new Dispatch();
         final Challan challan = new Challan();
         final Bill bill = new Bill();
+
+        check_design.setChecked(true);
+        check_ferro.setChecked(true);
+        check_plates.setChecked(true);
+        check_printing.setChecked(true);
+
+        check_packing.setChecked(true);
+        check_dispatch.setChecked(true);
+        check_challan.setChecked(true);
+        check_bill.setChecked(true);
 
 
         check_design.setOnClickListener(
@@ -359,7 +367,7 @@ public class Books_Processes extends AppCompatActivity {
                 processes.setJobType("Book");
                 processes.setBook(book);
 
-                String wt_id = getIntent().getExtras().getString("wt_id") ;
+                String wt_id = getIntent().getExtras().getString("wt_id");
                 String total_number = getIntent().getStringExtra("total_number");
 
                 processes.setWtId(wt_id);
@@ -381,17 +389,16 @@ public class Books_Processes extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
 
                             try {
-                                if(response.getBoolean("success")){
+                                if (response.getBoolean("success")) {
                                     Toast.makeText(Books_Processes.this, "Success", Toast.LENGTH_SHORT).show();
                                     bt_proceed_Books.setVisibility(View.VISIBLE);
-                                    Intent intent = new Intent(Books_Processes.this,HomeActivity.class) ;
+                                    Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
                                     startActivity(intent);
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
 
 
                         }
