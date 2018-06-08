@@ -26,6 +26,10 @@ public class Job {
     @SerializedName("noOfCol")
     @Expose
     private String noOfCol;
+    @SerializedName("isDelivered")
+    @Expose
+    private boolean isDelivered ;
+
 
     public Job(String name, String type, String printRun, String wastage, String size, String noOfCol) {
         this.name = name;
@@ -34,6 +38,14 @@ public class Job {
         this.wastage = wastage;
         this.size = size;
         this.noOfCol = noOfCol;
+    }
+
+    public boolean isDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        isDelivered = delivered;
     }
 
     public String getName() {
