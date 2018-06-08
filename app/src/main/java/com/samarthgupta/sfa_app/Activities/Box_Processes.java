@@ -90,6 +90,15 @@ public class Box_Processes extends AppCompatActivity {
         final Challan challan = new Challan();
         final Bill bill = new Bill();
 
+        check_design.setChecked(true);
+        check_ferro.setChecked(true);
+        check_plates.setChecked(true);
+        check_printing.setChecked(true);
+
+        check_packing.setChecked(true);
+        check_dispatch.setChecked(true);
+        check_challan.setChecked(true);
+        check_bill.setChecked(true);
 
         check_design.setOnClickListener(
                 new View.OnClickListener() {

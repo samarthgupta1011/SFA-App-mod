@@ -187,6 +187,7 @@ public class Box_Task extends AppCompatActivity {
         }else if (!processes.getBox().getPlates().getIsDone()){
             platesDone.setText(R.string.NotDone);
         }
+
         List<UpdatePF> updateprinting = processes.getBox().getPrinting().getUpdates() ;
         //setting the total done in printing
         String printingJobDone = updateprinting.get(updateprinting.size()-1).getDone() + "/" + processes.getTotalNumber() ;
