@@ -93,14 +93,22 @@ public class Box_Processes extends AppCompatActivity {
         final Bill bill = new Bill();
 
         check_design.setChecked(true);
+        designing.setIsRequired(true);
         check_ferro.setChecked(true);
+        ferro.setIsRequired(true);
         check_plates.setChecked(true);
+        plates.setIsRequired(true);
         check_printing.setChecked(true);
+        printing.setIsRequired(true);;
 
         check_packing.setChecked(true);
+        packing.setIsRequired(true);
         check_dispatch.setChecked(true);
+        dispatch.setIsRequired(true);
         check_challan.setChecked(true);
+        challan.setIsRequired(true);
         check_bill.setChecked(true);
+        bill.setIsRequired(true);
 
         check_design.setOnClickListener(
                 new View.OnClickListener() {
