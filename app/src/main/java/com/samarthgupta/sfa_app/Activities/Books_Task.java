@@ -309,7 +309,7 @@ public class Books_Task extends AppCompatActivity {
             cv_sewing.setBackgroundColor(Color.GREEN);
         } else if (employee.getDept().equals("perfect")) {
             cv_perfect.setBackgroundColor(Color.GREEN);
-        } else if (employee.getDept().equals("cpin")) {
+        } else if (employee.getDept().equals("centre_pin")) {
             cv_centrepin.setBackgroundColor(Color.GREEN);
         } else if (employee.getDept().equals("finishing")) {
             cv_finishing.setBackgroundColor(Color.GREEN);
@@ -333,6 +333,72 @@ public class Books_Task extends AppCompatActivity {
             }
         });
 
+        cv_designing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
+                builder.setTitle("Designing Progress 📈");
+                if (processes.getBook().getDesigning().getIsDone()) {
+                    builder.setMessage("Designing Done 👍 ");
+                } else if (!processes.getBook().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠‍");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_ferro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
+                builder.setTitle("Ferro Progress 📈");
+                if (processes.getBook().getDesigning().getIsDone()) {
+                    builder.setMessage("Ferro Done 👍 ");
+                } else if (!processes.getBook().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_plates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
+                builder.setTitle("Plates Progress 📈");
+                if (processes.getBook().getDesigning().getIsDone()) {
+                    builder.setMessage("Plates Done 👍 ");
+                } else if (!processes.getBook().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
         cv_printing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
