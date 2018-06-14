@@ -99,10 +99,8 @@ public class Box_Processes extends AppCompatActivity {
         check_plates.setChecked(true);
         plates.setIsRequired(true);
         check_printing.setChecked(true);
-
-        printing.setIsRequired(true);;
-
         printing.setIsRequired(true);
+        et_noOfSets.setVisibility(View.VISIBLE);
 
 
         check_packing.setChecked(true);
@@ -119,10 +117,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DESIGN selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DESIGN selected", Toast.LENGTH_SHORT).show();
                             designing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DESIGN deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DESIGN deselected", Toast.LENGTH_SHORT).show();
                             designing.setIsRequired(false);
                         }
                     }
@@ -134,10 +132,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "FERRO selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "FERRO selected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "FERRO deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "FERRO deselected", Toast.LENGTH_SHORT).show();
                             ferro.setIsRequired(false);
                         }
                     }
@@ -149,10 +147,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PLATES selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PLATES selected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PLATES deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PLATES deselected", Toast.LENGTH_SHORT).show();
                             plates.setIsRequired(false);
                         }
                     }
@@ -164,12 +162,12 @@ public class Box_Processes extends AppCompatActivity {
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.VISIBLE);
-                            Toast.makeText(Box_Processes.this, "PRINTING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PRINTING selected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(true);
                             processes.setTotalSets(et_noOfSets.getText().toString());
                         } else if (!((CheckBox) v).isChecked()) {
                             et_noOfSets.setVisibility(View.GONE);
-                            Toast.makeText(Box_Processes.this, "PRINTING deselected", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Box_Processes.this, "PRINTING deselected", Toast.LENGTH_SHORT).show();
                             printing.setIsRequired(false);
                             processes.setTotalSets(null);
 
@@ -183,10 +181,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "LAMINATION selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "LAMINATION selected", Toast.LENGTH_SHORT).show();
                             lamination.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "LAMINATION deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "LAMINATION deselected", Toast.LENGTH_SHORT).show();
                             lamination.setIsRequired(false);
                         }
                     }
@@ -198,11 +196,11 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "U/V selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "U/V selected", Toast.LENGTH_SHORT).show();
                             uv.setIsRequired(true);
 
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "U/V deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "U/V deselected", Toast.LENGTH_SHORT).show();
                             uv.setIsRequired(false);
                         }
                     }
@@ -214,10 +212,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "EMBOSSING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "EMBOSSING selected", Toast.LENGTH_SHORT).show();
                             embossing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "EMBOSSING deselected", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(Box_Processes.this, "EMBOSSING deselected", Toast.LENGTH_SHORT).show();
                             embossing.setIsRequired(false);
                         }
                     }
@@ -229,10 +227,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "FOILING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "FOILING selected", Toast.LENGTH_SHORT).show();
                             foiling.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "FOILING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "FOILING deselected", Toast.LENGTH_SHORT).show();
                             foiling.setIsRequired(false);
                         }
                     }
@@ -243,10 +241,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DIE CUT selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DIE CUT selected", Toast.LENGTH_SHORT).show();
                             dieCut.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DIE CUT deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DIE CUT deselected", Toast.LENGTH_SHORT).show();
                             dieCut.setIsRequired(false);
                         }
                     }
@@ -257,10 +255,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PASTING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PASTING selected", Toast.LENGTH_SHORT).show();
                             pasting.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PASTING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PASTING deselected", Toast.LENGTH_SHORT).show();
                             pasting.setIsRequired(false);
                         }
                     }
@@ -271,10 +269,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PACKING selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PACKING selected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "PACKING deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "PACKING deselected", Toast.LENGTH_SHORT).show();
                             packing.setIsRequired(false);
                         }
                     }
@@ -285,10 +283,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DISPATCH selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DISPATCH selected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "DISPATCH deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "DISPATCH deselected", Toast.LENGTH_SHORT).show();
                             dispatch.setIsRequired(false);
                         }
                     }
@@ -300,10 +298,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "CHALLAN selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "CHALLAN selected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "CHALLAN deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "CHALLAN deselected", Toast.LENGTH_SHORT).show();
                             challan.setIsRequired(false);
                         }
                     }
@@ -315,10 +313,10 @@ public class Box_Processes extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "BILL selected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "BILL selected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(true);
                         } else if (!((CheckBox) v).isChecked()) {
-                            Toast.makeText(Box_Processes.this, "BILL deselected", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Box_Processes.this, "BILL deselected", Toast.LENGTH_SHORT).show();
                             bill.setIsRequired(false);
                         }
                     }

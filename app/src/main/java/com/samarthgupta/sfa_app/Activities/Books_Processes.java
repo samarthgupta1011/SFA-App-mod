@@ -97,6 +97,7 @@ public class Books_Processes extends AppCompatActivity {
         final Challan challan = new Challan();
         final Bill bill = new Bill();
 
+
         check_design.setChecked(true);
         designing.setIsRequired(true);
         check_ferro.setChecked(true);
@@ -105,6 +106,7 @@ public class Books_Processes extends AppCompatActivity {
         plates.setIsRequired(true);
         check_printing.setChecked(true);
         printing.setIsRequired(true);
+        et_noOfSets.setVisibility(View.VISIBLE);
 
         check_packing.setChecked(true);
         packing.setIsRequired(true);

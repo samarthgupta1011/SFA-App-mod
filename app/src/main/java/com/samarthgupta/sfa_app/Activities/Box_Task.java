@@ -203,50 +203,50 @@ public class Box_Task extends AppCompatActivity {
         final String printingSetsDone = updateprinting.get(updateprinting.size()-1).getSetsDone()+ "/" + processes.getTotalSets() ;
         setsDoneRatio.setText(printingSetsDone);
 
-        List<Update> updateLaminaiton = processes.getBox().getLamination().getUpdates() ;
-        String laminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        final List<Update> updateLaminaiton = processes.getBox().getLamination().getUpdates() ;
+        final String laminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
         laminationDone.setText(laminationJobDone);
         if (updateLaminaiton.size() >= 2) {
             lamination2ndLast = updateLaminaiton.get(updateLaminaiton.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updateUV = processes.getBox().getUv().getUpdates() ;
-        String uvJobDone = updateUV.get(updateUV.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        final List<Update> updateUV = processes.getBox().getUv().getUpdates() ;
+        final String uvJobDone = updateUV.get(updateUV.size()-1).getDone()+"/"+processes.getTotalNumber() ;
         uvDone.setText(uvJobDone);
         if (updateUV.size() >= 2) {
             uv2ndLast = updateUV.get(updateUV.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updateEmbossing = processes.getBox().getEmbossing().getUpdates() ;
-        String embossingJobDone = updateEmbossing.get(updateEmbossing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        final List<Update> updateEmbossing = processes.getBox().getEmbossing().getUpdates() ;
+        final String embossingJobDone = updateEmbossing.get(updateEmbossing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
         embossingDone.setText(embossingJobDone);
         if (updateEmbossing.size() >= 2) {
             embossing2ndLast = updateEmbossing.get(updateEmbossing.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updateFoiling = processes.getBox().getFoiling().getUpdates() ;
-        String foilingJobDone = updateFoiling.get(updateFoiling.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        final List<Update> updateFoiling = processes.getBox().getFoiling().getUpdates() ;
+        final String foilingJobDone = updateFoiling.get(updateFoiling.size()-1).getDone()+"/"+processes.getTotalNumber() ;
         foilingDone.setText(foilingJobDone);
         if (updateFoiling.size() >= 2) {
             foiling2ndLast = updateFoiling.get(updateFoiling.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updateDieCut = processes.getBox().getDieCut().getUpdates() ;
-        String dieCutJobDone = updateDieCut.get(updateDieCut.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        final List<Update> updateDieCut = processes.getBox().getDieCut().getUpdates() ;
+        final String dieCutJobDone = updateDieCut.get(updateDieCut.size()-1).getDone()+"/"+processes.getTotalNumber() ;
         dieCutDone.setText(dieCutJobDone);
         if (updateDieCut.size() >= 2) {
             diecut2ndLast = updateDieCut.get(updateDieCut.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updatePasting = processes.getBox().getPasting().getUpdates() ;
-        String pastingJobDone = updatePasting.get(updatePasting.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        final List<Update> updatePasting = processes.getBox().getPasting().getUpdates() ;
+        final String pastingJobDone = updatePasting.get(updatePasting.size()-1).getDone()+"/"+processes.getTotalNumber() ;
         pastingDone.setText(pastingJobDone);
         if (updatePasting.size() >= 2) {
             pasting2ndLast = updatePasting.get(updatePasting.size() - 2).getDone() + "/" + processes.getTotalNumber();
         }
 
-        List<Update> updatePacking = processes.getBox().getPacking().getUpdates() ;
-        String packingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        final List<Update> updatePacking = processes.getBox().getPacking().getUpdates() ;
+        final String packingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
         packingDone.setText(packingJobDone);
         if (updatePacking.size() >= 2) {
             packing2ndLast = updatePacking.get(updatePacking.size() - 2).getDone() + "/" + processes.getTotalNumber();
@@ -297,7 +297,7 @@ public class Box_Task extends AppCompatActivity {
             cv_embossing.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("foiling")){
             cv_foiling.setBackgroundColor(Color.GREEN);
-        }else if(employee.getDept().equals("dieCut")){
+        }else if(employee.getDept().equals("die_cut")){
             cv_dieCut.setBackgroundColor(Color.GREEN);
         }else if(employee.getDept().equals("pasting")){
             cv_pasting.setBackgroundColor(Color.GREEN);
@@ -321,6 +321,72 @@ public class Box_Task extends AppCompatActivity {
             }
         });
 
+        cv_designing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Designing Progress 📈");
+                if (processes.getBox().getDesigning().getIsDone()) {
+                    builder.setMessage("Designing Done 👍 ");
+                } else if (!processes.getBox().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠‍");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_ferro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Ferro Progress 📈");
+                if (processes.getBox().getDesigning().getIsDone()) {
+                    builder.setMessage("Ferro Done 👍 ");
+                } else if (!processes.getBox().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_plates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Plates Progress 📈");
+                if (processes.getBox().getDesigning().getIsDone()) {
+                    builder.setMessage("Plates Done 👍 ");
+                } else if (!processes.getBox().getDesigning().getIsDone()){
+                    builder.setMessage("Not Done 👷️ 🛠");
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
         cv_printing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -344,10 +410,160 @@ public class Box_Task extends AppCompatActivity {
                 return;
             }
         });
+
+        cv_lamination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Lamination Progress 📈");
+                if (updateLaminaiton.size() >= 2) {
+                    builder.setMessage("Lamination Done: " + lamination2ndLast + " to " + laminationJobDone + "\n\n -- Last Updated : " + updateLaminaiton.get(updateLaminaiton.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Lamination Done: " + laminationJobDone + "\n\n -- Last Updated: " + updateLaminaiton.get(updateLaminaiton.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
         cv_uv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("UV Progress 📈");
+                if (updateUV.size() >= 2) {
+                    builder.setMessage("UV Done: " + uv2ndLast + " to " + uvJobDone + "\n\n -- Last Updated : " + updateUV.get(updateUV.size() - 1).getTime());
+                } else {
+                    builder.setMessage("UV Done: " + uvJobDone + "\n\n -- Last Updated: " + updateUV.get(updateUV.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
 
+        cv_embossing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Embossing Progress 📈");
+                if (updateEmbossing.size() >= 2) {
+                    builder.setMessage("Embossing Done: " + embossing2ndLast + " to " + embossingJobDone + "\n\n -- Last Updated : " + updateEmbossing.get(updateEmbossing.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Embossing Done: " + embossingJobDone + "\n\n -- Last Updated: " + updateEmbossing.get(updateEmbossing.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_foiling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Foiling Progress 📈");
+                if (updateFoiling.size() >= 2) {
+                    builder.setMessage("Foiling Done: " + foiling2ndLast + " to " + foilingJobDone + "\n\n -- Last Updated : " + updateFoiling.get(updateFoiling.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Foiling Done: " + foilingJobDone + "\n\n -- Last Updated: " + updateFoiling.get(updateFoiling.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_pasting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Pasting Progress 📈");
+                if (updateFoiling.size() >= 2) {
+                    builder.setMessage("Pasting Done: " + pasting2ndLast + " to " + packingJobDone + "\n\n -- Last Updated : " + updatePasting.get(updatePasting.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Pasting Done: " + pastingJobDone + "\n\n -- Last Updated: " + updatePasting.get(updatePasting.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_dieCut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("DieCut Progress 📈");
+                if (updateFoiling.size() >= 2) {
+                    builder.setMessage("DieCut Done: " + diecut2ndLast + " to " + dieCutJobDone + "\n\n -- Last Updated : " + updateDieCut.get(updateDieCut.size() - 1).getTime());
+                } else {
+                    builder.setMessage("DieCut Done: " + dieCutJobDone + "\n\n -- Last Updated: " + updateDieCut.get(updateDieCut.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_packing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Packing Progress 📈");
+                if (updatePacking.size() >= 2) {
+                    builder.setMessage("Packing Done: " + packing2ndLast + " to " + packingJobDone + "\n\n -- Last Updated : " + updatePacking.get(updatePacking.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Packing Done: " + packingJobDone + "\n\n -- Last Updated: " + updatePacking.get(updatePacking.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
             }
         });
 
@@ -431,8 +647,4 @@ public class Box_Task extends AppCompatActivity {
         });
     }
 
-    private void dialogProgress() {
-
-
-    }
 }
