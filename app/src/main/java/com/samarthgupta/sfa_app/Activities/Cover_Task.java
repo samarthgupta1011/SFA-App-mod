@@ -246,7 +246,7 @@ public class Cover_Task extends AppCompatActivity {
                 Intent intent = new Intent(Cover_Task.this, UpdateActivity.class);
                 intent.putExtra("wt_id", wt);
                 startActivity(intent);
-
+                finish();
             }
         });
     }
