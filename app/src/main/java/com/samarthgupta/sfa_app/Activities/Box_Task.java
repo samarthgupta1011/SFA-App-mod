@@ -1,8 +1,11 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -26,7 +29,7 @@ public class Box_Task extends AppCompatActivity {
     TextView design, ferro, plates, printing, lamination,uv, embossing, foiling, dieCut ,  pasting, packing, dispatch, challan, bill ;
     TextView designDone, ferroDone, platesDone, printingDone, laminationDone, uvDone, embossingDone, foilingDone, dieCutDone,
             pastingDone, packingDone, dispatchDone, challanDone, billDone ;
-
+    String printing2ndLast, setDone, lamination2ndLast,uv2ndLast, embossing2ndLast, foiling2ndLast, diecut2ndLast, pasting2ndLast, packing2ndLast, dispatch2ndLast, challan2ndLast, bill2ndLast;
     TextView setsDoneRatio ;
     Button btUpdateProgress;
     CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing,
@@ -188,53 +191,89 @@ public class Box_Task extends AppCompatActivity {
             platesDone.setText(R.string.NotDone);
         }
 
-        List<UpdatePF> updateprinting = processes.getBox().getPrinting().getUpdates() ;
+        final List<UpdatePF> updateprinting = processes.getBox().getPrinting().getUpdates() ;
         //setting the total done in printing
-        String printingJobDone = updateprinting.get(updateprinting.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        final String printingJobDone = updateprinting.get(updateprinting.size()-1).getDone() + "/" + processes.getTotalNumber() ;
         printingDone.setText(printingJobDone) ;
+        if (updateprinting.size() >= 2) {
+            printing2ndLast = updateprinting.get(updateprinting.size() - 2).getDone() + "/" + processes.getTotalNumber();
+            setDone = updateprinting.get(updateprinting.size() - 2).getSetsDone() + "/" + processes.getTotalNumber();
+        }
         //setting the number of sets in printing
-        String printingSetsDone = updateprinting.get(updateprinting.size()-1).getSetsDone()+ "/" + processes.getTotalSets() ;
+        final String printingSetsDone = updateprinting.get(updateprinting.size()-1).getSetsDone()+ "/" + processes.getTotalSets() ;
         setsDoneRatio.setText(printingSetsDone);
 
         List<Update> updateLaminaiton = processes.getBox().getLamination().getUpdates() ;
-        String LaminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        laminationDone.setText(LaminationJobDone);
+        String laminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        laminationDone.setText(laminationJobDone);
+        if (updateLaminaiton.size() >= 2) {
+            lamination2ndLast = updateLaminaiton.get(updateLaminaiton.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updateUV = processes.getBox().getUv().getUpdates() ;
-        String UvJobDone = updateUV.get(updateUV.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        uvDone.setText(UvJobDone);
+        String uvJobDone = updateUV.get(updateUV.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        uvDone.setText(uvJobDone);
+        if (updateUV.size() >= 2) {
+            uv2ndLast = updateUV.get(updateUV.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updateEmbossing = processes.getBox().getEmbossing().getUpdates() ;
-        String EmbossingJobDone = updateEmbossing.get(updateEmbossing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        embossingDone.setText(EmbossingJobDone);
+        String embossingJobDone = updateEmbossing.get(updateEmbossing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        embossingDone.setText(embossingJobDone);
+        if (updateEmbossing.size() >= 2) {
+            embossing2ndLast = updateEmbossing.get(updateEmbossing.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updateFoiling = processes.getBox().getFoiling().getUpdates() ;
-        String FoilingJobDone = updateFoiling.get(updateFoiling.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        foilingDone.setText(FoilingJobDone);
+        String foilingJobDone = updateFoiling.get(updateFoiling.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        foilingDone.setText(foilingJobDone);
+        if (updateFoiling.size() >= 2) {
+            foiling2ndLast = updateFoiling.get(updateFoiling.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updateDieCut = processes.getBox().getDieCut().getUpdates() ;
-        String DieCutJobDone = updateDieCut.get(updateDieCut.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        dieCutDone.setText(DieCutJobDone);
+        String dieCutJobDone = updateDieCut.get(updateDieCut.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        dieCutDone.setText(dieCutJobDone);
+        if (updateDieCut.size() >= 2) {
+            diecut2ndLast = updateDieCut.get(updateDieCut.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updatePasting = processes.getBox().getPasting().getUpdates() ;
-        String PastingJobDone = updatePasting.get(updatePasting.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        pastingDone.setText(PastingJobDone);
+        String pastingJobDone = updatePasting.get(updatePasting.size()-1).getDone()+"/"+processes.getTotalNumber() ;
+        pastingDone.setText(pastingJobDone);
+        if (updatePasting.size() >= 2) {
+            pasting2ndLast = updatePasting.get(updatePasting.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
         List<Update> updatePacking = processes.getBox().getPacking().getUpdates() ;
-        String PackingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        packingDone.setText(PackingJobDone);
+        String packingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        packingDone.setText(packingJobDone);
+        if (updatePacking.size() >= 2) {
+            packing2ndLast = updatePacking.get(updatePacking.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
-        List<Update> updateDispatch = processes.getBox().getDispatch().getUpdates() ;
-        String DispatchJobDone = updateDispatch.get(updateDispatch.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        dispatchDone.setText(DispatchJobDone);
+        final List<Update> updateDispatch = processes.getBox().getDispatch().getUpdates() ;
+        final String dispatchJobDone = updateDispatch.get(updateDispatch.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        dispatchDone.setText(dispatchJobDone);
+        if (updateDispatch.size() >= 2) {
+            dispatch2ndLast = updateDispatch.get(updateDispatch.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
-        List<Update> updateChallan = processes.getBox().getChallan().getUpdates() ;
-        String ChallanJobDone = updateChallan.get(updateChallan.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        challanDone.setText(ChallanJobDone);
+        final List<Update> updateChallan = processes.getBox().getChallan().getUpdates() ;
+        final String challanJobDone = updateChallan.get(updateChallan.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        challanDone.setText(challanJobDone);
+        if (updateChallan.size() >= 2) {
+            challan2ndLast = updateChallan.get(updateChallan.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
 
-        List<Update> updateBill = processes.getBox().getBill().getUpdates() ;
-        String BillJobDone = updateBill.get(updateBill.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        billDone.setText(BillJobDone);
+
+        final List<Update> updateBill = processes.getBox().getBill().getUpdates() ;
+        final String billJobDone = updateBill.get(updateBill.size()-1).getDone() + "/" + processes.getTotalNumber() ;
+        billDone.setText(billJobDone);
+        if (updateBill.size() >= 2) {
+            bill2ndLast = updateBill.get(updateBill.size() - 2).getDone() + "/" + processes.getTotalNumber();
+        }
+
         //changing  the color for particular depatment worker
         final Employee employee = new GsonBuilder()
                 .create()
@@ -282,6 +321,103 @@ public class Box_Task extends AppCompatActivity {
             }
         });
 
+        cv_printing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Printing Progress 📈");
+                if (updateprinting.size() >= 2) {
+                    builder.setMessage("Printing Done: " + printing2ndLast + " to " + printingJobDone + "\nSets Done: " + setDone + " to " + printingSetsDone + "\n\n-- Last Updated : " + updateprinting.get(updateprinting.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Printing Done: " + printingJobDone + "\nSets Done: " + printingSetsDone + "\n\n -- Last Updated: " + updateprinting.get(updateprinting.size() - 1).getTime());
+                }
+
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_uv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        cv_dispatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Dispatching Progress 📈");
+                if (updateDispatch.size() >= 2) {
+                    builder.setMessage("Dispatching Done: " + dispatch2ndLast + " to " + dispatchJobDone + "\n\n -- Last Updated : " + updateDispatch.get(updateDispatch.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Dispatching Done: " + dispatchJobDone + "\n\n -- Last Updated: " + updateDispatch.get(updateDispatch.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_challan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Challan Progress 📈");
+                if (updateChallan.size() >= 2) {
+                    builder.setMessage("Challan Done: " + dispatch2ndLast + " to " + challanJobDone + "\n\n -- Last Updated : " + updateChallan.get(updateChallan.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Challan Done: " + challanJobDone + "\n\n -- Last Updated: " + updateChallan.get(updateChallan.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        cv_bill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
+                builder.setTitle("Billing Progress 📈");
+                if (updateBill.size() >= 2) {
+                    builder.setMessage("Bill Done: " + bill2ndLast + " to " + billJobDone + "\n\n -- Last Updated : " + updateBill.get(updateBill.size() - 1).getTime());
+                } else {
+                    builder.setMessage("Bill Done: " + billJobDone + "\n\n -- Last Updated: " + updateBill.get(updateBill.size() - 1).getTime());
+                }
+                builder.setCancelable(true);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        });
+        
         btUpdateProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -290,8 +426,13 @@ public class Box_Task extends AppCompatActivity {
                 intent.putExtra("wt_id", wt);
                 //Send the status of the job according to the employee
                 startActivity(intent);
-
+                finish();
             }
         });
+    }
+
+    private void dialogProgress() {
+
+
     }
 }
