@@ -208,11 +208,9 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                     return;
                 } else {
                     jobTicket.setJob(job);
-
-                    String wt = (job.getName() + currentDate.trim().replace(" ", "").
-                            replace(",", "").replace(":", "").
-                            replace("-","").replace("+", ""));
-                    jobTicket.setWt(wt.trim());
+                    String wt = (job.getName() + currentDate).replaceAll("[^a-zA-Z0-9]", "");
+                    wt = wt.trim();
+                    jobTicket.setWt(wt);
                 }
 
 

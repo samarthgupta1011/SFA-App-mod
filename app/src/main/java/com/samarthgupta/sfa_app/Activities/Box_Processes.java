@@ -99,7 +99,11 @@ public class Box_Processes extends AppCompatActivity {
         check_plates.setChecked(true);
         plates.setIsRequired(true);
         check_printing.setChecked(true);
+
         printing.setIsRequired(true);;
+
+        printing.setIsRequired(true);
+
 
         check_packing.setChecked(true);
         packing.setIsRequired(true);
