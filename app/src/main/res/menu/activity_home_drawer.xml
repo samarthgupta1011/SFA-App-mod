@@ -12,11 +12,6 @@
             android:title="Tasks" />
 
         <item
-            android:id="@+id/nav_update_progress"
-            android:icon="@drawable/progress_icon"
-            android:title="Update progress" />
-
-        <item
             android:id="@+id/nav_notices"
             android:icon="@drawable/tasks_icon"
             android:title="Notices" />

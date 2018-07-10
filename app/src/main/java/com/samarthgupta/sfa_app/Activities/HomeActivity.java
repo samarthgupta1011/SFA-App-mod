@@ -182,8 +182,6 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this, ClientDetailsActivity.class));
         } else if (id == R.id.nav_tasks) {
             startActivity(new Intent(HomeActivity.this, TasksActivity.class));
-        } else if (id == R.id.nav_update_progress) {
-
         } else if (id == R.id.nav_report_issue) {
 
         } else if(id == R.id.nav_notices){
