@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SettingsActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Settings"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Email"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_current_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="example.name@example.com"
+            android:layout_marginStart="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginTop="5sp"
+            android:background="#808080" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Phone"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_current_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9812982332"
+            android:layout_marginStart="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginTop="5sp"
+            android:background="#808080" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_pswd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="************"
+            android:layout_marginStart="10dp"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Help"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Query"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Query? Get instant support for any query you have"
+            android:layout_marginStart="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginTop="5sp"
+            android:background="#808080" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Change Phone"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_current_phone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="9812982332"-->
+            <!--android:layout_marginStart="10dp"/>-->
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginBottom="5sp"-->
+            <!--android:layout_marginTop="5sp"-->
+            <!--android:background="#808080" />-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Change Password"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_pswd"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="************"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:visibility="invisible"/>-->
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

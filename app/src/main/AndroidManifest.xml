@@ -15,19 +15,15 @@
             android:name=".Activities.HomeActivity"
             android:label="SFA"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activities.SignInActivity"
-            android:label="Sign in">
-
-        </activity>
+            android:label="Sign in" />
         <activity
             android:name=".Activities.RegisterActivity"
             android:label="Register"
@@ -59,7 +55,10 @@
         <activity android:name=".Activities.Box_Task" />
         <activity android:name=".Activities.Cover_Task" />
         <activity android:name=".Activities.UpdateActivity" />
-        <activity android:name=".Activities.TaskDetailsActivity"></activity>
+        <activity android:name=".Activities.TaskDetailsActivity" />
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.ReportActivity"
+            android:label="Report Issue"></activity>
     </application>
 
 </manifest>

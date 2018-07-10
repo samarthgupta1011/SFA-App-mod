@@ -183,7 +183,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_tasks) {
             startActivity(new Intent(HomeActivity.this, TasksActivity.class));
         } else if (id == R.id.nav_report_issue) {
-
+            startActivity(new Intent(HomeActivity.this, ReportActivity.class));
         } else if(id == R.id.nav_notices){
 
             //Compare with admin, if it matches admin - provide access, otherwise, goodbye biro
