@@ -3,6 +3,7 @@ package com.samarthgupta.sfa_app.Activities;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -54,7 +55,8 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
     LinearLayout llDateSelect;
     TextView tvStartDate, tvEndDate, tvNextPg, tvPrevPg;
-    int pages = 1, perPage = 5;
+    int pages = 1;
+    String perPage ;// default;
 
 
 
@@ -90,8 +92,16 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                 .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
                         .getString("Data", null), Employee.class);
         Log.d("Tasks", emp.getDept());
+
         String url = null;
         if (clientName == null && jobName == null) {
+            SharedPreferences prefs = getSharedPreferences("JOB_PER_PAGE", MODE_PRIVATE);
+            String restoredText = prefs.getString("per_page", null);
+            if (restoredText != null) {
+                perPage = prefs.getString("per_page", "0");
+
+            }
+            Log.i("perPage", perPage);
             //Simple Volley request
             url = baseUrl + "/task?page="+pages+ "&perPage="+perPage+"&emp=printing" + emp.getDept();
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

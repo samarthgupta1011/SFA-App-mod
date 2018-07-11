@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_create_wt"
             android:icon="@drawable/black_plus"
@@ -10,20 +11,18 @@
             android:id="@+id/nav_tasks"
             android:icon="@drawable/tasks_icon"
             android:title="Tasks" />
-
+        <item
+            android:id="@+id/nav_perPage"
+            android:title="Jobs Per Page"
+            android:icon="@drawable/icon_list"/>
         <item
             android:id="@+id/nav_notices"
-            android:icon="@drawable/tasks_icon"
+            android:icon="@drawable/notice_icon"
             android:title="Notices" />
 
         <item
             android:id="@+id/nav_report_issue"
             android:icon="@drawable/issue_icon"
             android:title="Report an issue" />
-
-
     </group>
-
-
-
 </menu>

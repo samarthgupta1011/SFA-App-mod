@@ -3,12 +3,14 @@ package com.samarthgupta.sfa_app.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,8 +18,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
@@ -50,6 +57,8 @@ public class HomeActivity extends AppCompatActivity
     SimpleDateFormat dateFormat;
     long date;
     TextView tvNoticeBody, tvNoticeDate;
+
+    private int[] ss = {5, 6, 7, 8, 9, 10, 11, 12};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +107,7 @@ public class HomeActivity extends AppCompatActivity
                 data.setDept(dept);
                 String emp = new GsonBuilder().create().toJson(data);
                 getSharedPreferences("Login", Context.MODE_PRIVATE).edit().putString("Data", emp).apply();
-                Toast.makeText(HomeActivity.this, "Employee dept changed to "+ dept, Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Employee dept changed to " + dept, Toast.LENGTH_SHORT).show();
                 tvEmpDept.setText(dept.toUpperCase());
             }
         });
@@ -106,15 +115,15 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    void getLatestNotice(){
+    void getLatestNotice() {
         Volley.newRequestQueue(HomeActivity.this).add(new JsonArrayRequest(Request.Method.GET, baseUrl + "/admindata", new JSONArray(), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                Log.d("Notice",response.toString());
+                Log.d("Notice", response.toString());
                 int size = response.length();
                 try {
-                    JSONObject latestNotice = response.getJSONObject(size-1);
+                    JSONObject latestNotice = response.getJSONObject(size - 1);
                     tvNoticeBody = (TextView) findViewById(R.id.tv_notice);
                     tvNoticeDate = (TextView) findViewById(R.id.tv_notice_resp_date);
                     tvNoticeBody.setText(latestNotice.getString("notice"));
@@ -183,15 +192,17 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this, ClientDetailsActivity.class));
         } else if (id == R.id.nav_tasks) {
             startActivity(new Intent(HomeActivity.this, TasksActivity.class));
+        } else if (id == R.id.nav_perPage) {
+            setperPage();
         } else if (id == R.id.nav_report_issue) {
             startActivity(new Intent(HomeActivity.this, ReportActivity.class));
-        } else if(id == R.id.nav_notices){
+        } else if (id == R.id.nav_notices) {
 
             //Compare with admin, if it matches admin - provide access, otherwise, goodbye biro
             String empName = data.getName();
             String empDept = data.getDept();
 
-            if(empName.equals("Lalit Sayal")||empDept.equals("Admin")||empDept.equals("admin")){
+            if (empName.equals("Lalit Sayal") || empDept.equals("Admin") || empDept.equals("admin")) {
                 //Show dialogue
                 final Dialog dialog = new Dialog(HomeActivity.this);
                 dialog.setContentView(R.layout.layout_add_notice);
@@ -213,21 +224,19 @@ public class HomeActivity extends AppCompatActivity
                         String noticeBody = etNoticeBody.getText().toString();
                         JSONObject obj = new JSONObject();
                         try {
-                            obj.put("notice",noticeBody);
-                            obj.put("dated",dateFormat.format(date));
-                            obj.put("by",data.getName());
+                            obj.put("notice", noticeBody);
+                            obj.put("dated", dateFormat.format(date));
+                            obj.put("by", data.getName());
 
                             Volley.newRequestQueue(HomeActivity.this).add(new JsonObjectRequest(Request.Method.POST, baseUrl + "/admindata", obj, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    Log.d("Notice",response.toString());
+                                    Log.d("Notice", response.toString());
                                     try {
-                                        if(response.getBoolean("success")){
+                                        if (response.getBoolean("success")) {
                                             Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
-                                        }
-
-                                        else {
+                                        } else {
                                             Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
                                         }
 
@@ -239,10 +248,9 @@ public class HomeActivity extends AppCompatActivity
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
-                                    Log.d("Notice",error.toString());
+                                    Log.d("Notice", error.toString());
                                 }
                             }));
-
 
 
                         } catch (JSONException e) {
@@ -250,14 +258,11 @@ public class HomeActivity extends AppCompatActivity
                         }
 
 
-
                     }
                 });
 
 
-            }
-
-            else {
+            } else {
                 Toast.makeText(this, "Access for admin only", Toast.LENGTH_SHORT).show();
             }
 
@@ -268,5 +273,29 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
+    private void setperPage() {
+        final ArrayAdapter<String> adp = new ArrayAdapter<String>(HomeActivity.this,
+                android.R.layout.simple_spinner_item, Arrays.toString(ss).split("[\\[\\]]")[1].split(", "));
+        final Spinner sp = new Spinner(HomeActivity.this);
+        sp.setLayoutParams(new LinearLayout.LayoutParams(DrawerLayout.LayoutParams.WRAP_CONTENT, DrawerLayout.LayoutParams.MATCH_PARENT));
+        sp.setAdapter(adp);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setMessage(" Change Jobs per page to : ");
+        builder.setView(sp);
+        builder.create().show();
+
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                Log.i("selected", item.toString());
+                SharedPreferences.Editor editor = getSharedPreferences("JOB_PER_PAGE", MODE_PRIVATE).edit();
+                editor.putString("per_page", item.toString());
+                editor.apply();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
 
 }
