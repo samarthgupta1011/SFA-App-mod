@@ -1,4 +1,4 @@
-package com.samarthgupta.sfa_app.Activities;
+package com.samarthgupta.sfa_app.Activities.SignIn_Register;
 
 import android.content.Intent;
 import android.os.Bundle;

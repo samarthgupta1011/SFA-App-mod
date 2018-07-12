@@ -1,4 +1,4 @@
-package com.samarthgupta.sfa_app.Activities;
+package com.samarthgupta.sfa_app.Activities.SignIn_Register;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.Activities.HomeActivity;
 import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.R;

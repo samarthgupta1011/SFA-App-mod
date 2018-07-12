@@ -1,4 +1,4 @@
-package com.samarthgupta.sfa_app.Activities;
+package com.samarthgupta.sfa_app.Activities.Tasks;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.Activities.TaskDetailsActivity;
+import com.samarthgupta.sfa_app.Activities.UpdateActivity;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Update;

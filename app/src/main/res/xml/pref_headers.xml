@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Account Settings"
+        android:key="key_account">
+
+        <EditTextPreference
+            android:title="Change Phone"
+            android:hint="(e.g. +9180X010001X)"
+            android:positiveButtonText="CHANGE"
+            android:inputType="phone"
+            android:textSize="16sp"
+            android:dialogTitle="My Mobile Number"
+            android:key="phone"/>
+        <Preference
+            android:title="Change Password"
+            android:key="password"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Help"
+        android:key="key_help">
+
+        <Preference
+            android:title="Query"
+            android:summary="Query? Get instant support for any query you have"
+            android:key="query" />
+        <Preference
+            android:title="FAQs"
+            android:summary="Have a look at some common queries"
+            android:key="faq" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

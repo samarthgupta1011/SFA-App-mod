@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.samarthgupta.sfa_app.Activities.SignIn_Register.SignInActivity;
 import com.samarthgupta.sfa_app.R;
 
 public class SplashScreenActivity extends AppCompatActivity {

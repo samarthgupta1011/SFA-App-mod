@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -32,11 +31,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.ClientDetailsActivity;
+import com.samarthgupta.sfa_app.Activities.Settings.SettingsActivity;
+import com.samarthgupta.sfa_app.Activities.SignIn_Register.SignInActivity;
 import com.samarthgupta.sfa_app.POJO.Employee;
-import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONArray;
@@ -47,7 +47,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
-import static com.samarthgupta.sfa_app.POJO.GlobalAccess.jobTicket;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
