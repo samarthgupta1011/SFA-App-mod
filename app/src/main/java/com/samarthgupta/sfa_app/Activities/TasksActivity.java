@@ -437,24 +437,31 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
                 String ConvertTostring = new GsonBuilder().create().toJson(process.get(0));
 
-                if (jobType.equals("Book")) {
-                    Intent intent = new Intent(TasksActivity.this, Books_Task.class);
-                    intent.putExtra("BookProcesses", ConvertTostring);
-                    intent.putExtra("BookJobName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
-                } else if (jobType.equals("Box")) {
-                    Intent intent = new Intent(TasksActivity.this, Box_Task.class);
-                    intent.putExtra("BoxProcesses", ConvertTostring);
-                    intent.putExtra("BoxJobName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
-                } else if (jobType.equals("Cover")) {
-                    Intent intent = new Intent(TasksActivity.this, Cover_Task.class);
-                    intent.putExtra("CoverProcesses", ConvertTostring);
-                    intent.putExtra("CoverJbName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
+                switch (jobType) {
+                    case "Book": {
+                        Intent intent = new Intent(TasksActivity.this, Books_Task.class);
+                        intent.putExtra("BookProcesses", ConvertTostring);
+                        intent.putExtra("BookJobName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Box": {
+                        Intent intent = new Intent(TasksActivity.this, Box_Task.class);
+                        intent.putExtra("BoxProcesses", ConvertTostring);
+                        intent.putExtra("BoxJobName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Cover": {
+                        Intent intent = new Intent(TasksActivity.this, Cover_Task.class);
+                        intent.putExtra("CoverProcesses", ConvertTostring);
+                        intent.putExtra("CoverJbName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
                 }
 
 
