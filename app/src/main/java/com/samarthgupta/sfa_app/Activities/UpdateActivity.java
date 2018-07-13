@@ -159,10 +159,10 @@ public class UpdateActivity extends AppCompatActivity {
                                     Boolean status = response.getBoolean("success");
 
                                     if(status){
-
+                                        Intent intent = new Intent(UpdateActivity.this, HomeActivity.class) ;
                                         Toast.makeText(UpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
-                                        finish();
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
 
                                     } else {
                                         Toast.makeText(UpdateActivity.this, "Please enter a valid value", Toast.LENGTH_LONG).show();
