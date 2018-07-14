@@ -15,6 +15,7 @@
             android:id="@+id/nav_perPage"
             android:title="Jobs Per Page"
             android:icon="@drawable/icon_list"/>
+
         <item
             android:id="@+id/nav_notices"
             android:icon="@drawable/notice_icon"

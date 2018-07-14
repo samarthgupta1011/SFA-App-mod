@@ -12,6 +12,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +34,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.ClientDetailsActivity;
 import com.samarthgupta.sfa_app.Activities.Settings.SettingsActivity;
 import com.samarthgupta.sfa_app.Activities.SignIn_Register.SignInActivity;
 import com.samarthgupta.sfa_app.POJO.Employee;
+import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONArray;
@@ -45,17 +50,20 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Locale;
 
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    RecyclerView rv;
+    ProgressBar pb;
     TextView tvEmpDept;
     Employee data;
     SimpleDateFormat dateFormat;
     long date;
-    TextView tvNoticeBody, tvNoticeDate;
+
 
     private int[] ss = {5, 6, 7, 8, 9, 10, 11, 12};
 
@@ -63,6 +71,9 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        rv = (RecyclerView)findViewById(R.id.rv_notice);
+        pb = (ProgressBar) findViewById(R.id.pb_notice);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -111,26 +122,29 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
+        pb.setVisibility(View.VISIBLE);
+        getLatestNotice();
 
     }
 
     void getLatestNotice() {
-        Volley.newRequestQueue(HomeActivity.this).add(new JsonArrayRequest(Request.Method.GET, baseUrl + "/admindata", new JSONArray(), new Response.Listener<JSONArray>() {
+        String url = baseUrl + "/notice";
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(String response) {
+                Log.i("NOTICE", response);
+                Notice notices[] = new GsonBuilder().create().fromJson(response, Notice[].class);
+                if (notices.length!=0){
+                    rv.setAdapter(new Home_NoticeAdapter(notices));
+                    pb.setVisibility(View.GONE);
+                    rv.setVisibility(View.VISIBLE);
+                    rv.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+                    rv.setHasFixedSize(true);
+                }else {
+                    Toast.makeText(HomeActivity.this, "No Notice", Toast.LENGTH_SHORT).show();
 
-                Log.d("Notice", response.toString());
-                int size = response.length();
-                try {
-                    JSONObject latestNotice = response.getJSONObject(size - 1);
-                    tvNoticeBody = (TextView) findViewById(R.id.tv_notice);
-                    tvNoticeDate = (TextView) findViewById(R.id.tv_notice_resp_date);
-                    tvNoticeBody.setText(latestNotice.getString("notice"));
-                    tvNoticeDate.setText(latestNotice.getString("dated"));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
 
             }
         }, new Response.ErrorListener() {
@@ -196,74 +210,82 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_report_issue) {
             startActivity(new Intent(HomeActivity.this, ReportActivity.class));
         } else if (id == R.id.nav_notices) {
+            String[] adminNum = new String[]{"9582184794", "7982884321", "9582857833", "9999999999"};
+            for (String anAdminNum : adminNum) {
+                if (anAdminNum.equals(data.getMobile())) {
+                    //Show dialogue
+                    final Dialog dialog = new Dialog(HomeActivity.this);
+                    dialog.setContentView(R.layout.layout_add_notice);
 
-            //Compare with admin, if it matches admin - provide access, otherwise, goodbye biro
-            String empName = data.getName();
-            String empDept = data.getDept();
+                    TextView tvNoticeDate = (TextView) dialog.findViewById(R.id.tv_notice_date);
+                    Button btSubmit = (Button) dialog.findViewById(R.id.bt_post_notice);
+                    final EditText etNoticeBody = (EditText) dialog.findViewById(R.id.et_notice_body);
+                    final EditText etNoticeTitle = (EditText) dialog.findViewById(R.id.et_notice_title);
+                    date = System.currentTimeMillis();
 
-            if (empName.equals("Lalit Sayal") || empDept.equals("Admin") || empDept.equals("admin")) {
-                //Show dialogue
-                final Dialog dialog = new Dialog(HomeActivity.this);
-                dialog.setContentView(R.layout.layout_add_notice);
+                    //for showing on the dialog
+                    dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+                    tvNoticeDate.setText(dateFormat.format(date));
+                    // for sending to backend: format changes
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
 
-                TextView tvNoticeDate = (TextView) dialog.findViewById(R.id.tv_notice_date);
-                Button btSubmit = (Button) dialog.findViewById(R.id.bt_post_notice);
-                final EditText etNoticeBody = (EditText) dialog.findViewById(R.id.et_notice_body);
 
-                date = System.currentTimeMillis();
-                dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
-                tvNoticeDate.setText(dateFormat.format(date));
+                    dialog.setCancelable(true);
+                    dialog.show();
+                    btSubmit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                dialog.setCancelable(true);
-                dialog.show();
-                btSubmit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                            String noticeBody = etNoticeBody.getText().toString();
+                            String noticeTitle = etNoticeTitle.getText().toString();
+                            JSONObject obj = new JSONObject();
+                            try {
+                                obj.put("title", noticeTitle);
+                                obj.put("date", dateFormat.format(date));
+                                obj.put("body", noticeBody);
+                                obj.put("noticeBy", data.getMobile());
 
-                        String noticeBody = etNoticeBody.getText().toString();
-                        JSONObject obj = new JSONObject();
-                        try {
-                            obj.put("notice", noticeBody);
-                            obj.put("dated", dateFormat.format(date));
-                            obj.put("by", data.getName());
+                                Volley.newRequestQueue(HomeActivity.this).add(new JsonObjectRequest(Request.Method.POST, baseUrl + "/notice", obj, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        Log.d("Notice", response.toString());
+                                        try {
+                                            if (response.getBoolean("success")) {
+                                                Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            } else {
+                                                Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
+                                            }
 
-                            Volley.newRequestQueue(HomeActivity.this).add(new JsonObjectRequest(Request.Method.POST, baseUrl + "/admindata", obj, new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    Log.d("Notice", response.toString());
-                                    try {
-                                        if (response.getBoolean("success")) {
-                                            Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                        } else {
-                                            Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
                                         }
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
                                     }
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
-                                    Log.d("Notice", error.toString());
-                                }
-                            }));
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
+                                        Log.d("Notice", error.toString());
+                                    }
+                                }));
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
                         }
+                    });
 
+                    break;
 
-                    }
-                });
+                } else if (adminNum[adminNum.length - 1].equals(anAdminNum)) {
+                    Toast.makeText(this, "Access for admin only", Toast.LENGTH_SHORT).show();
+                }
 
-
-            } else {
-                Toast.makeText(this, "Access for admin only", Toast.LENGTH_SHORT).show();
             }
+
 
         }
 

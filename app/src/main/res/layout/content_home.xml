@@ -46,67 +46,6 @@
         android:layout_marginEnd="10sp"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="30sp"
-            app:cardCornerRadius="10sp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/lightGreen"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp"
-                    android:layout_margin="5sp"
-                    android:background="@color/black" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="NOTICE"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp"
-                    android:layout_margin="5sp"
-                    android:background="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
-                    android:id="@+id/tv_notice_resp_date"
-                    android:text="13th Nov, 2017"
-                    android:gravity="start"
-                    android:layout_marginStart="10sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_notice"
-                    android:gravity="center"
-                    android:text="Sample text Sample text Sample text Sample text Sample text Sample text Sample text Sample text Sample text Sample "
-                    android:layout_marginStart="10sp"
-                    android:layout_marginEnd="10sp"
-                    android:layout_marginBottom="10sp"
-                    android:layout_marginTop="5sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
-
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,5 +69,18 @@
 
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </android.support.v7.widget.RecyclerView>
+    <ProgressBar
+        android:id="@+id/pb_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>
