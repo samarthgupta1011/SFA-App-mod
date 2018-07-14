@@ -253,6 +253,9 @@ public class HomeActivity extends AppCompatActivity
                                             if (response.getBoolean("success")) {
                                                 Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss();
+                                                Intent intent = getIntent();
+                                                finish();
+                                                startActivity(intent);
                                             } else {
                                                 Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
                                             }
