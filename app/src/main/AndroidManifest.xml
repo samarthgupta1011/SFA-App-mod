@@ -14,9 +14,7 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:label="SFA"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SignIn_Register.SignInActivity"
             android:label="Sign in">
@@ -69,6 +67,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.samarthgupta.sfa_app.Activities.HomeActivity" />
         </activity>
+        <activity android:name=".Activities.Settings.ChangePassword" />
+        <activity android:name=".Activities.Settings.QueryActivity" />
+        <activity android:name=".Activities.Settings.FaqActivity"></activity>
     </application>
 
 </manifest>

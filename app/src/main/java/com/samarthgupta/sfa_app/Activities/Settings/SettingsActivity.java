@@ -1,5 +1,6 @@
 package com.samarthgupta.sfa_app.Activities.Settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -18,7 +19,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-
+        private Preference change_password, query, faq;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,11 +27,27 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             addPreferencesFromResource(R.xml.pref_headers);
 
+            change_password = findPreference("password");
+            query = findPreference("query");
+            faq = findPreference("faq");
 
+            change_password.setOnPreferenceClickListener(this);
+            query.setOnPreferenceClickListener(this);
+            faq.setOnPreferenceClickListener(this);
         }
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
+            if (preference == change_password) {
+                startActivity(new Intent(getActivity().getApplicationContext(), ChangePassword.class));
+                return true;
+            }else if (preference == query){
+                startActivity(new Intent(getActivity().getApplicationContext(), QueryActivity.class));
+                return true;
+            }else if (preference == faq){
+                startActivity(new Intent(getActivity().getApplicationContext(), FaqActivity.class));
+                return true;
+            }
             return false;
         }
     }
