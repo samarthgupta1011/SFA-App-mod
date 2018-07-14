@@ -44,7 +44,8 @@
             android:layout_marginTop="5sp"
             android:gravity="start"
             android:text="13th Nov, 2017"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_notice_body"
@@ -72,7 +73,8 @@
                 android:id="@+id/tv_notice_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="9090909090" />
+                android:text="9090909090"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
 
