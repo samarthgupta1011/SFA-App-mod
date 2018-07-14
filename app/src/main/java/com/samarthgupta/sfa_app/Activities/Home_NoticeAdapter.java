@@ -32,10 +32,10 @@ public class Home_NoticeAdapter extends RecyclerView.Adapter<Home_NoticeAdapter.
     public void onBindViewHolder(NoticeHolder holder, int position) {
 
 
-        holder.tv_date.setText(notices[position].getDate());
-        holder.tv_title.setText(notices[position].getTitle());
-        holder.tv_body.setText(notices[position].getBody());
-        holder.tv_num.setText(notices[position].getnoticeBy());
+        holder.tv_date.setText(notices[notices.length-position-1].getDate());
+        holder.tv_title.setText(notices[notices.length-position-1].getTitle());
+        holder.tv_body.setText(notices[notices.length-position-1].getBody());
+        holder.tv_num.setText(notices[notices.length-position-1].getnoticeBy());
     }
 
     @Override
