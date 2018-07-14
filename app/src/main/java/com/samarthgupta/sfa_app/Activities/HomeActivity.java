@@ -32,7 +32,6 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -44,7 +43,6 @@ import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -135,7 +133,7 @@ public class HomeActivity extends AppCompatActivity
                 Log.i("NOTICE", response);
                 Notice notices[] = new GsonBuilder().create().fromJson(response, Notice[].class);
                 if (notices.length!=0){
-                    rv.setAdapter(new Home_NoticeAdapter(notices));
+                    rv.setAdapter(new HomeNoticeAdapter(notices));
                     pb.setVisibility(View.GONE);
                     rv.setVisibility(View.VISIBLE);
                     rv.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
@@ -208,7 +206,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_perPage) {
             setperPage();
         } else if (id == R.id.nav_report_issue) {
-            startActivity(new Intent(HomeActivity.this, ReportActivity.class));
+            startActivity(new Intent(HomeActivity.this, ReportTypeListActivity.class));
         } else if (id == R.id.nav_notices) {
             String[] adminNum = new String[]{"9582184794", "7982884321", "9582857833", "9999999999"};
             for (String anAdminNum : adminNum) {

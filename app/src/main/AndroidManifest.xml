@@ -58,7 +58,7 @@
         <activity android:name=".Activities.TaskDetailsActivity" />
         <activity
             android:name=".Activities.ReportActivity"
-            android:label="Report Issue" />
+            android:label="Report a Problem" />
         <activity
             android:name=".Activities.Settings.SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -69,7 +69,8 @@
         </activity>
         <activity android:name=".Activities.Settings.ChangePassword" />
         <activity android:name=".Activities.Settings.QueryActivity" />
-        <activity android:name=".Activities.Settings.FaqActivity"></activity>
+        <activity android:name=".Activities.Settings.FaqActivity" />
+        <activity android:name=".Activities.ReportTypeListActivity"></activity>
     </application>
 
 </manifest>

@@ -9,17 +9,11 @@ import android.widget.TextView;
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
-public class Home_NoticeAdapter extends RecyclerView.Adapter<Home_NoticeAdapter.NoticeHolder> {
+public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.NoticeHolder> {
     private Notice notices[];
 
 
-    public Home_NoticeAdapter(Notice[] notices) {
+    public HomeNoticeAdapter(Notice[] notices) {
         this.notices = notices;
     }
 

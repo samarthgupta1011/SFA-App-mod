@@ -15,15 +15,23 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_details"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:hint="Mention the problem here"/>
     <Button
+        android:id="@+id/bt_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:textAllCaps="false"/>
+        android:text="REPORT"
+        android:textAllCaps="false"
+        android:layout_margin="10sp"
+        android:layout_marginBottom="5sp"
+        android:background="@color/colorBackground"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 </LinearLayout>
