@@ -270,7 +270,7 @@ public class Cover_Processes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Cover_Processes.this);
                     builder.setTitle("Enter printing details");
                     builder.setMessage("Please enter number of SETS details");
@@ -328,9 +328,11 @@ public class Cover_Processes extends AppCompatActivity {
                                     Toast.makeText(Cover_Processes.this, "Success", Toast.LENGTH_SHORT).show();
                                     bt_proceed_cover.setVisibility(View.VISIBLE);
 
-                                    Intent intent = new Intent(Cover_Processes.this, HomeActivity.class);
-                                    startActivity(intent);
                                     finish();
+                                    Intent intent = new Intent(Cover_Processes.this, HomeActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+
                                 }
 
                             } catch (JSONException e) {

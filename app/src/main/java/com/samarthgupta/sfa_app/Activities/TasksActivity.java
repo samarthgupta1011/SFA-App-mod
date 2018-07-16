@@ -59,7 +59,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
     LinearLayout llDateSelect;
     TextView tvStartDate, tvEndDate, tvNextPg, tvPrevPg;
     int pages = 1;
-    String perPage ;// default;
+    String perPage = "5" ;// default;
 
 
 
@@ -101,7 +101,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             SharedPreferences prefs = getSharedPreferences("JOB_PER_PAGE", MODE_PRIVATE);
             String restoredText = prefs.getString("per_page", null);
             if (restoredText != null) {
-                perPage = prefs.getString("per_page", "0");
+                perPage = prefs.getString("per_page", "5");
 
             }
             Log.i("perPage", perPage);

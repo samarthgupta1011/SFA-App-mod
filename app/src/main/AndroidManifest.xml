@@ -17,7 +17,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SignIn_Register.SignInActivity"
-            android:label="Sign in">
+            android:label="SFA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,8 +69,7 @@
         </activity>
         <activity android:name=".Activities.Settings.ChangePassword" />
         <activity android:name=".Activities.Settings.QueryActivity" />
-        <activity android:name=".Activities.Settings.FaqActivity" />
-        <activity android:name=".Activities.ReportTypeListActivity"></activity>
+        <activity android:name=".Activities.ReportTypeListActivity" />
     </application>
 
 </manifest>

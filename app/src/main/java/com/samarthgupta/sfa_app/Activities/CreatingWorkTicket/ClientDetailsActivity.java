@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Client;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.R;
@@ -23,6 +25,9 @@ public class ClientDetailsActivity extends AppCompatActivity {
     String clContact;
     Button btProceed;
 
+    JobTicket clientClone;
+    String responseToClone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +36,11 @@ public class ClientDetailsActivity extends AppCompatActivity {
         clientName = (EditText) findViewById(R.id.et_cl_name);
         clientContact = (EditText) findViewById(R.id.et_cl_contact);
         btProceed = (Button) findViewById(R.id.bt_proceed_client);
-
-
+        if (getIntent().getStringExtra("task_response") != null) {
+            responseToClone = getIntent().getStringExtra("task_response");
+            setDataToClone();
+            Log.i("response_", responseToClone);
+        }
 
 
         btProceed.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +49,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
                 clName = clientName.getText().toString().trim();
                 clContact = clientContact.getText().toString().trim();
-
+                Log.d("client", clName + clContact);
                 if (TextUtils.isEmpty(clName) || TextUtils.isEmpty(clContact) || clContact.length() != 10) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(ClientDetailsActivity.this);
@@ -60,7 +68,11 @@ public class ClientDetailsActivity extends AppCompatActivity {
                     jobTicket = new JobTicket();
                     Client client = new Client(clName, clContact);
                     jobTicket.setClient(client);
-                    startActivity(new Intent(ClientDetailsActivity.this,JobDetailsActivity.class));
+                    Intent intent = new Intent(ClientDetailsActivity.this, JobDetailsActivity.class);
+                    intent.putExtra("task_response", responseToClone);
+                    intent.putExtra("clName", clName);
+                    intent.putExtra("clContact", clContact);
+                    startActivity(intent);
 //                    finish();
                 }
 
@@ -68,5 +80,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setDataToClone() {
+        clientClone = new GsonBuilder()
+                .create()
+                .fromJson(responseToClone, JobTicket.class);
+        clientName.setText(clientClone.getClient().getName());
+        clientContact.setText(clientClone.getClient().getContact());
+        Log.d("debug 1", clientClone.getClient().getName() + "-" + clientClone.getClient().getContact());
     }
 }

@@ -8,12 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ProgressBar
             android:id="@+id/pb_task_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"/>
+            android:layout_marginTop="200dp"
+            android:visibility="gone" />
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,109 +23,125 @@
             android:id="@+id/rl_task_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical"
-            tools:context=".Activities.TaskDetailsActivity"
-            android:visibility="gone"
-            android:layout_marginBottom="20dp">
+            android:visibility="visible"
+            tools:context=".Activities.TaskDetailsActivity">
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_jobname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:text="JOB NAME"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/RL_basicDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jobname">
+                android:layout_below="@id/tv_jobname"
+                android:orientation="vertical"
+                android:layout_marginEnd="4dp">
 
-                <TextView
-                    android:id="@+id/delivery_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Delivery Date : "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_delivery_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_toRightOf="@id/delivery_date"
-                    android:text="Delivery Date"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/delivery_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Delivery Date : "
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/priority"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_delivery_date"
-                    android:layout_marginStart="5dp"
-                    android:text="Priority : "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/tv_delivery_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:text="Delivery Date"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_priority"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_delivery_date"
-                    android:layout_toRightOf="@id/priority"
-                    android:text="Priority"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/Date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_priority"
-                    android:layout_marginStart="5dp"
-                    android:text="Date : "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/priority"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Priority : "
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_Date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_priority"
-                    android:layout_toRightOf="@id/priority"
-                    android:text="Date"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/tv_priority"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Priority"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/notes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_Date"
-                    android:layout_marginStart="5dp"
-                    android:text="Notes : "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_notes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_Date"
-                    android:layout_toRightOf="@id/notes"
-                    android:text="Notes"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Date : "
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/tv_Date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/notes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Notes : "
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/tv_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Notes"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -175,17 +193,15 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_client_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="3sp"
                         android:text="Client Name"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -201,7 +217,7 @@
                         android:text="Contact"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_client_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -209,7 +225,7 @@
                         android:gravity="center"
                         android:text="Number"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
 
@@ -270,17 +286,15 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_job_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="3sp"
-                        android:text="jobType"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:text="Job Type"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
 
                 </LinearLayout>
@@ -298,7 +312,7 @@
                         android:text="No. Of Columns"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_noOfCol"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -324,7 +338,7 @@
                         android:text="Print Run"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_print_run"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -350,7 +364,7 @@
                         android:text="Size"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_size"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -376,7 +390,7 @@
                         android:text="Wastage"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_wastage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -443,7 +457,7 @@
                         android:text="Machines Required"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_machinesRequired"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -510,7 +524,7 @@
                         android:text="Details"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_paperDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -536,7 +550,7 @@
                         android:text="Location"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_paperLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -561,7 +575,7 @@
                         android:text="Paper By"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_paperBy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -586,7 +600,7 @@
                         android:text="Quality"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_quality"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -611,7 +625,7 @@
                         android:text="Quantity"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_quantity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -680,15 +694,13 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_plate_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="3sp"
                         android:text="Plate Name"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -706,13 +718,13 @@
                         android:text="Plate"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_plate_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="plate type"
+                        android:text="Plate type"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -731,7 +743,7 @@
                         android:text="Quantity"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_plate_quantity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -754,8 +766,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_plates"
                 android:layout_alignParentBottom="true"
+                android:layout_below="@id/ll_plates"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
@@ -770,7 +782,7 @@
                     android:background="?attr/selectableItemBackground"
                     android:focusable="true"
                     android:padding="8dp"
-                    android:text="CLONE TICKET"
+                    android:text="Proceed"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>

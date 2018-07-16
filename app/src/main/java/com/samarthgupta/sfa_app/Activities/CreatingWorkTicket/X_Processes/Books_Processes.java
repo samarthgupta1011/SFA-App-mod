@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.Activities.HomeActivity;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Bill;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Book;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.CentrePin;
@@ -45,6 +46,7 @@ public class Books_Processes extends AppCompatActivity {
     private CheckBox check_printing, check_folding, check_design, check_ferro, check_plates, check_gathering, check_sewing, check_perfect, check_cpin, check_finishing, check_packing, check_dispatch, check_challan, check_bill;
     private EditText et_noOfSets, et_noOfForms;
     Button bt_proceed_Books;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -343,7 +345,7 @@ public class Books_Processes extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (check_printing.isChecked() && et_noOfSets.getText().toString().length()==0){
+                if (check_printing.isChecked() && et_noOfSets.getText().toString().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
                     builder.setTitle("Enter printing details");
                     builder.setMessage("Please enter number of SETS details");
@@ -358,7 +360,7 @@ public class Books_Processes extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
-                if (check_folding.isChecked() && et_noOfForms.getText().toString().length()==0){
+                if (check_folding.isChecked() && et_noOfForms.getText().toString().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Books_Processes.this);
                     builder.setTitle("Enter folding details");
                     builder.setMessage("Please enter number of FORMS details");
@@ -421,9 +423,11 @@ public class Books_Processes extends AppCompatActivity {
                                 if (response.getBoolean("success")) {
                                     Toast.makeText(Books_Processes.this, "Success", Toast.LENGTH_SHORT).show();
                                     bt_proceed_Books.setVisibility(View.VISIBLE);
-                                    Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
-                                    startActivity(intent);
                                     finish();
+                                    Intent intent = new Intent(Books_Processes.this, HomeActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+
                                 }
 
                             } catch (JSONException e) {

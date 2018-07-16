@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Junk.Fragments.TryAct">
+    tools:context=".Activities.CreatingWorkTicket.JobDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -433,7 +433,7 @@
 
 
                     <TextView
-                        android:id="@+id/et_deliveryDate"
+                        android:id="@+id/tv_deliveryDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp" />

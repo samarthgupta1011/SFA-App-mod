@@ -19,7 +19,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-        private Preference change_password, query, faq;
+        private Preference change_password, query ;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,11 +29,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             change_password = findPreference("password");
             query = findPreference("query");
-            faq = findPreference("faq");
+
 
             change_password.setOnPreferenceClickListener(this);
             query.setOnPreferenceClickListener(this);
-            faq.setOnPreferenceClickListener(this);
+
         }
 
         @Override
@@ -43,9 +43,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return true;
             }else if (preference == query){
                 startActivity(new Intent(getActivity().getApplicationContext(), QueryActivity.class));
-                return true;
-            }else if (preference == faq){
-                startActivity(new Intent(getActivity().getApplicationContext(), FaqActivity.class));
                 return true;
             }
             return false;

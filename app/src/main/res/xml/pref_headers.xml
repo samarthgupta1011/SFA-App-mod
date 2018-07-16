@@ -18,10 +18,6 @@
             android:title="Query"
             android:summary="Query? Get instant support for any query you have"
             android:key="query" />
-        <Preference
-            android:title="FAQs"
-            android:summary="Have a look at some common queries"
-            android:key="faq" />
 
     </PreferenceCategory>
 
