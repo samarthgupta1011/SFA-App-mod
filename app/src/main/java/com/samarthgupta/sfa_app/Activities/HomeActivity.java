@@ -63,8 +63,6 @@ public class HomeActivity extends AppCompatActivity
     long date;
 
 
-    private int[] ss = {5, 6, 7, 8, 9, 10, 11, 12};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,7 +182,6 @@ public class HomeActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_logout) {
-
             getSharedPreferences("Login", Context.MODE_PRIVATE).edit().remove("Data").apply();
             startActivity(new Intent(HomeActivity.this, SignInActivity.class));
             finish();
@@ -203,8 +200,6 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this, ClientDetailsActivity.class));
         } else if (id == R.id.nav_tasks) {
             startActivity(new Intent(HomeActivity.this, TasksActivity.class));
-        } else if (id == R.id.nav_perPage) {
-            setperPage();
         } else if (id == R.id.nav_report_issue) {
             startActivity(new Intent(HomeActivity.this, ReportTypeListActivity.class));
         } else if (id == R.id.nav_notices) {
@@ -295,29 +290,5 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    private void setperPage() {
-        final ArrayAdapter<String> adp = new ArrayAdapter<String>(HomeActivity.this,
-                android.R.layout.simple_spinner_item, Arrays.toString(ss).split("[\\[\\]]")[1].split(", "));
-        final Spinner sp = new Spinner(HomeActivity.this);
-        sp.setLayoutParams(new LinearLayout.LayoutParams(DrawerLayout.LayoutParams.WRAP_CONTENT, DrawerLayout.LayoutParams.MATCH_PARENT));
-        sp.setAdapter(adp);
-        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-        builder.setMessage(" Change Jobs per page to : ");
-        builder.setView(sp);
-        builder.create().show();
-
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                Log.i("selected", item.toString());
-                SharedPreferences.Editor editor = getSharedPreferences("JOB_PER_PAGE", MODE_PRIVATE).edit();
-                editor.putString("per_page", item.toString());
-                editor.apply();
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
 
 }
