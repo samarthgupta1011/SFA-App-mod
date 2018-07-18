@@ -88,7 +88,7 @@ public class Cover_Task extends AppCompatActivity {
 
         setsDoneRatio = (TextView) findViewById(R.id.tv_setsDoneRatio);
         processes = (Processes) new GsonBuilder().create().fromJson(coverProcesses, Processes.class);
-
+        Log.d("process", coverProcesses);
         if (processes.getCover().getDesigning().getIsRequired()) {
             cv_designing.setVisibility(View.VISIBLE);
         } else if (!processes.getCover().getDesigning().getIsRequired()) {
@@ -295,9 +295,9 @@ public class Cover_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Cover_Task.this);
                 builder.setTitle("Ferro Progress 📈");
-                if (processes.getCover().getDesigning().getIsDone()) {
+                if (processes.getCover().getFerro().getIsDone()) {
                     builder.setMessage("Ferro Done 👍 ");
-                } else if (!processes.getCover().getDesigning().getIsDone()){
+                } else if (!processes.getCover().getFerro().getIsDone()){
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -317,9 +317,9 @@ public class Cover_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Cover_Task.this);
                 builder.setTitle("Plates Progress 📈");
-                if (processes.getCover().getDesigning().getIsDone()) {
-                    builder.setMessage("Plates Done 👍 ");
-                } else if (!processes.getCover().getDesigning().getIsDone()){
+                if (processes.getCover().getPlates().getIsDone()) {
+                    builder.setMessage("Plates Done 👍");
+                } else if (!processes.getCover().getPlates().getIsDone()){
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
