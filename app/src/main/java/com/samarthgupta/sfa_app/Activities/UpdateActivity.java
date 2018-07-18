@@ -41,7 +41,7 @@ public class UpdateActivity extends AppCompatActivity {
     LinearLayout llSets, llEnterProgress;
     TextView tvCurrStatusDone, tvCurrStatusTotal;
     String wtID;
-
+    TextView tvTaskDone ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,7 @@ public class UpdateActivity extends AppCompatActivity {
         llEnterProgress.setVisibility(View.GONE);
         tvCurrStatusDone = (TextView) findViewById(R.id.tv_curr_status_done);
         tvCurrStatusTotal = (TextView) findViewById(R.id.tv_curr_status_total);
+        tvTaskDone = (TextView)findViewById(R.id.tv_task_done_update);
         wtID = getIntent().getStringExtra("wt_id");
 
         Toast.makeText(this, wtID, Toast.LENGTH_SHORT).show();
@@ -78,20 +79,32 @@ public class UpdateActivity extends AppCompatActivity {
         tvTime.setText(sdfPosted.format(calendar.getTime()));
 
 
-        if (empDept.equals("printing") || empDept.equals("folding")) {
+        if (empDept.equals("designing")){
+            // TODO set done or not done before visible
+            tvTaskDone.setVisibility(View.VISIBLE);
+        }else if (empDept.equals("ferro")){
 
-            llEnterProgress.setVisibility(View.VISIBLE);
-            llSets.setVisibility(View.VISIBLE);
+        }else if (empDept.equals("plates")){
 
-            //Post update PF
+        }else if (empDept.equals("printing")){
 
+        }else if (empDept.equals("folding")){
 
-        } else if (empDept.equals("designing") || empDept.equals("ferro") || empDept.equals("plates")) {
+        }else if (empDept.equals("gathering")){
 
+        }else if (empDept.equals("perfect")){
 
-        } else {
-            //Post update object
-            llEnterProgress.setVisibility(View.VISIBLE);
+        }else if (empDept.equals("ferro")){
+
+        }else if (empDept.equals("centre_pin")){
+
+        }else if (empDept.equals("packing")){
+
+        }else if (empDept.equals("dispatch")){
+
+        }else if (empDept.equals("challan")){
+
+        }else if (empDept.equals("bill")){
 
         }
 
