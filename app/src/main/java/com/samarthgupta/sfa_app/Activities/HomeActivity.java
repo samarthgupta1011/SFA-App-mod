@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +55,7 @@ import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    SwipeRefreshLayout homeRefresh;
     RecyclerView rv;
     ProgressBar pb;
     TextView tvEmpDept;
@@ -67,8 +68,8 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        rv = (RecyclerView)findViewById(R.id.rv_notice);
+        homeRefresh = (SwipeRefreshLayout) findViewById(R.id.pullRefreshHome);
+        rv = (RecyclerView) findViewById(R.id.rv_notice);
         pb = (ProgressBar) findViewById(R.id.pb_notice);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,6 +122,18 @@ public class HomeActivity extends AppCompatActivity
         pb.setVisibility(View.VISIBLE);
         getLatestNotice();
 
+        homeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData(); // your code
+                homeRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    private void refreshData() {
+        homeRefresh.setRefreshing(true);
+        getLatestNotice();
     }
 
     void getLatestNotice() {
@@ -130,13 +143,13 @@ public class HomeActivity extends AppCompatActivity
             public void onResponse(String response) {
                 Log.i("NOTICE", response);
                 Notice notices[] = new GsonBuilder().create().fromJson(response, Notice[].class);
-                if (notices.length!=0){
+                if (notices.length != 0) {
                     rv.setAdapter(new HomeNoticeAdapter(notices));
                     pb.setVisibility(View.GONE);
                     rv.setVisibility(View.VISIBLE);
                     rv.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
                     rv.setHasFixedSize(true);
-                }else {
+                } else {
                     Toast.makeText(HomeActivity.this, "No Notice", Toast.LENGTH_SHORT).show();
 
                 }

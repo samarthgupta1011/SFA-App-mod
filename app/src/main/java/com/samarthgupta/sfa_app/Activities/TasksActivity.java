@@ -49,7 +49,7 @@ import java.util.Locale;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class TasksActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
-    SwipeRefreshLayout taskRefresh ;
+    SwipeRefreshLayout taskRefresh;
     RecyclerView rv;
     ProgressBar pb;
     String filterOption;
@@ -99,6 +99,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
     }
 
     private void refreshData() {
+        taskRefresh.setRefreshing(true);
         VolleyRequest(null, null);
     }
 
@@ -153,8 +154,8 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             url = baseUrl + "/task/jobname?emp=" + emp.getDept() + "&reg=" + jobName;
             Log.d("response not found", url);
             ClientAndJobQuery(url);
-        } else if (clientName!=null && jobName !=null){
-            url = baseUrl + "/task/delivered?reg="+clientName;
+        } else if (clientName != null && jobName != null) {
+            url = baseUrl + "/task/delivered?reg=" + clientName;
             ClientAndJobQuery(url);
         }
 
@@ -240,7 +241,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             VolleyRequest(newText, null);
         } else if (filterOption == "JobName") {
             VolleyRequest(null, newText);
-        }else if (filterOption == "DeliveredTickets"){
+        } else if (filterOption == "DeliveredTickets") {
             VolleyRequest(newText, newText);
         }
         return false;
