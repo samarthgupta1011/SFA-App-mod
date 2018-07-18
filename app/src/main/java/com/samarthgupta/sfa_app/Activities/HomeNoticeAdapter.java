@@ -12,7 +12,6 @@ import com.samarthgupta.sfa_app.R;
 public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.NoticeHolder> {
     private Notice notices[];
 
-
     public HomeNoticeAdapter(Notice[] notices) {
         this.notices = notices;
     }
@@ -24,8 +23,6 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.No
 
     @Override
     public void onBindViewHolder(NoticeHolder holder, int position) {
-
-
         holder.tv_date.setText(notices[notices.length-position-1].getDate());
         holder.tv_title.setText(notices[notices.length-position-1].getTitle());
         holder.tv_body.setText(notices[notices.length-position-1].getBody());

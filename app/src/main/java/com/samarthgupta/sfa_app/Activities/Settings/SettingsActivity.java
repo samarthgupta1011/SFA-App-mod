@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
+import android.view.MenuItem;
 
 import com.samarthgupta.sfa_app.Activities.Settings.AppCompatPreferenceActivity;
 import com.samarthgupta.sfa_app.R;
@@ -18,8 +19,21 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public static class MyPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-        private Preference change_password, query ;
+        private Preference change_password, query;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +55,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             if (preference == change_password) {
                 startActivity(new Intent(getActivity().getApplicationContext(), ChangePassword.class));
                 return true;
-            }else if (preference == query){
+            } else if (preference == query) {
                 startActivity(new Intent(getActivity().getApplicationContext(), QueryActivity.class));
                 return true;
             }
