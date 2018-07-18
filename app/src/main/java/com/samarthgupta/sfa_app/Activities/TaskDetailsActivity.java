@@ -146,7 +146,12 @@ public class TaskDetailsActivity extends AppCompatActivity {
 //        StringJoiner joiner = new StringJoiner(",");
                 StringBuilder builder = new StringBuilder();
                 for (String machine : taskDetails.getMachine().getMachine()) {
-                    builder.append(machine + ",");
+                    if (machine.length() > 0) {
+                        builder.append(machine + ",");
+                    } else {
+                        builder.append(taskDetails.getMachine().getName()+",");
+                    }
+
                 }
                 builder.deleteCharAt(builder.length() - 1);
                 String allMachines = builder.toString();

@@ -184,6 +184,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             }
         });
 
+
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -206,6 +207,59 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
             }
         };
+
+        cbMachDome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbMachDome.isChecked()) {
+                    machines.add(cbMachDome.getText().toString());
+                } else {
+                    machines.remove(cbMachDome.getText().toString());
+                }
+            }
+        });
+
+        cbMachKba.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbMachKba.isChecked()) {
+                    machines.add(cbMachKba.getText().toString());
+                } else {
+                    machines.remove(cbMachKba.getText().toString());
+                }
+            }
+        });
+
+        cbMachSm72.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbMachSm72.isChecked()) {
+                    machines.add(cbMachSm72.getText().toString());
+                } else {
+                    machines.remove(cbMachSm72.getText().toString());
+                }
+            }
+        });
+
+        cbMachSm102.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbMachSm102.isChecked()) {
+                    machines.add(cbMachSm102.getText().toString());
+                } else {
+                    machines.remove(cbMachSm102.getText().toString());
+                }
+            }
+        });
+
+        cbMachOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbMachOther.isChecked()) {
+                    machines.add(etMachOther.getText().toString());
+                } //else statement not added ?
+            }
+        });
 
         btProceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,59 +317,6 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                     jobTicket.setWt(wt);
                 }
 
-
-                cbMachDome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (cbMachDome.isChecked()) {
-                            machines.add(cbMachDome.getText().toString());
-                        } else {
-                            machines.remove(cbMachDome.getText().toString());
-                        }
-                    }
-                });
-
-                cbMachKba.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (cbMachKba.isChecked()) {
-                            machines.add(cbMachKba.getText().toString());
-                        } else {
-                            machines.remove(cbMachKba.getText().toString());
-                        }
-                    }
-                });
-
-                cbMachSm72.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (cbMachSm72.isChecked()) {
-                            machines.add(cbMachSm72.getText().toString());
-                        } else {
-                            machines.remove(cbMachSm72.getText().toString());
-                        }
-                    }
-                });
-
-                cbMachSm102.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (cbMachSm102.isChecked()) {
-                            machines.add(cbMachSm102.getText().toString());
-                        } else {
-                            machines.remove(cbMachSm102.getText().toString());
-                        }
-                    }
-                });
-
-                cbMachOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (cbMachOther.isChecked()) {
-                            machines.add(etMachOther.getText().toString());
-                        } //else statement not added ?
-                    }
-                });
                 if (cloningTicket) {
                     setMachines();
                     String clName = getIntent().getStringExtra("clName");
