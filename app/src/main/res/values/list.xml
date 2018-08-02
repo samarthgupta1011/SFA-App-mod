@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dept_list">
+        <item>---</item>
+        <item>Designing</item>
+        <item>Ferro</item>
+        <item>Plates</item>
+        <item>Printing</item>
+        <item>Lamination</item>
+        <item>Creasing</item>
+        <item>Binding</item>
+        <item>Packing</item>
+        <item>Dispatch</item>
+        <item>Challan</item>
+        <item>Folding</item>
+        <item>Gathering</item>
+        <item>Perfect</item>
+        <item>Sewing</item>
+        <item>Centre_pin</item>
+        <item>Finishing</item>
+        <item>Bill</item>
+        <item>UV</item>
+        <item>Embossing</item>
+        <item>Foiling</item>
+        <item>Die_cut</item>
+        <item>Pasting</item>
+
+    </string-array>
+
+
+
+</resources>

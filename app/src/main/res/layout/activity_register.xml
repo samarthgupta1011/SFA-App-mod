@@ -11,15 +11,15 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/et_reg_name"
-            android:hint="Enter name"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -30,11 +30,11 @@
         android:layout_marginRight="30dp">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/et_reg_mob"
-            android:inputType="number"
-            android:hint="Enter mobile number"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter mobile number"
+            android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -45,11 +45,11 @@
         android:layout_marginRight="30dp">
 
         <EditText
+            android:id="@+id/et_reg_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_reg_email"
-            android:inputType="textEmailAddress"
-            android:hint="Enter email"/>
+            android:hint="Enter email"
+            android:inputType="textEmailAddress" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -61,51 +61,59 @@
         app:passwordToggleEnabled="true">
 
         <EditText
+            android:id="@+id/et_reg_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_reg_pass"
-            android:inputType="textPassword"
-            android:hint="Enter password"/>
+            android:hint="Enter password"
+            android:inputType="textPassword" />
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+
+    <TextView
+        android:id="@+id/tv_select_dept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Select Department"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        app:passwordToggleEnabled="false">
+        android:id="@+id/sp_select_dept">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_reg_dept"
-            android:hint="Enter department"/>
-
-    </android.support.design.widget.TextInputLayout>
+    </Spinner>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
 
         <Button
+            android:id="@+id/bt_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
-            android:id="@+id/bt_reg"
+            android:background="@color/colorBackground"
             android:text="Proceed"
             android:textAllCaps="true"
-            android:textStyle="bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/white"
-            android:background="@color/colorBackground"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <ProgressBar
+            android:id="@+id/pb_reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/pb_reg"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
     </RelativeLayout>
 
 

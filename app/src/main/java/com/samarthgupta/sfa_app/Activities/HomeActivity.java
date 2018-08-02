@@ -151,7 +151,8 @@ public class HomeActivity extends AppCompatActivity
                     rv.setHasFixedSize(true);
                 } else {
                     Toast.makeText(HomeActivity.this, "No Notice", Toast.LENGTH_SHORT).show();
-
+                    rv.setVisibility(View.GONE);
+                    pb.setVisibility(View.GONE);
                 }
 
 
@@ -216,9 +217,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_report_issue) {
             startActivity(new Intent(HomeActivity.this, ReportTypeListActivity.class));
         } else if (id == R.id.nav_notices) {
-            String[] adminNum = new String[]{"9582184794", "7982884321", "9582857833", "9999999999"};
-            for (String anAdminNum : adminNum) {
-                if (anAdminNum.equals(data.getMobile())) {
+
                     //Show dialogue
                     final Dialog dialog = new Dialog(HomeActivity.this);
                     dialog.setContentView(R.layout.layout_add_notice);
@@ -263,7 +262,9 @@ public class HomeActivity extends AppCompatActivity
                                                 finish();
                                                 startActivity(intent);
                                             } else {
-                                                Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
+                                                //Not authorised
+                                                Toast.makeText(HomeActivity.this, "Not authorised to post notice", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
                                             }
 
                                         } catch (JSONException e) {
@@ -274,7 +275,7 @@ public class HomeActivity extends AppCompatActivity
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
-                                        Log.d("Notice", error.toString());
+//                                        Log.d("Notice", error.toString());
                                     }
                                 }));
 
@@ -286,15 +287,6 @@ public class HomeActivity extends AppCompatActivity
 
                         }
                     });
-
-                    break;
-
-                } else if (adminNum[adminNum.length - 1].equals(anAdminNum)) {
-                    Toast.makeText(this, "Access for admin only", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
 
         }
 

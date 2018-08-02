@@ -9,6 +9,10 @@ import android.widget.TextView;
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.NoticeHolder> {
     private Notice notices[];
 
@@ -23,7 +27,20 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.No
 
     @Override
     public void onBindViewHolder(NoticeHolder holder, int position) {
-        holder.tv_date.setText(notices[notices.length-position-1].getDate());
+
+        String delDate = notices[notices.length-position-1].getDate();
+        SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+
+        try {
+            java.util.Date date = sdfPosted.parse(delDate);
+            delDate = sdf.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        holder.tv_date.setText(delDate);
         holder.tv_title.setText(notices[notices.length-position-1].getTitle());
         holder.tv_body.setText(notices[notices.length-position-1].getBody());
         holder.tv_num.setText(notices[notices.length-position-1].getnoticeBy());
