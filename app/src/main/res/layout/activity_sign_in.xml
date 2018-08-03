@@ -20,7 +20,9 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:id="@+id/et_login_email"
-            android:hint="Enter email"/>
+            android:hint="Enter email"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -37,7 +39,9 @@
             android:inputType="textPassword"
             app:passwordToggleEnabled="false"
             android:id="@+id/et_login_password"
-            android:hint="Enter password"/>
+            android:hint="Enter password"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 

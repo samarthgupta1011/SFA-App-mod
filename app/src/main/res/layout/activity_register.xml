@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_reg_name"
-            android:hint="Enter name"/>
+            android:hint="Enter name"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -34,7 +36,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_reg_mob"
             android:inputType="number"
-            android:hint="Enter mobile number"/>
+            android:hint="Enter mobile number"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -49,7 +53,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_reg_email"
             android:inputType="textEmailAddress"
-            android:hint="Enter email"/>
+            android:hint="Enter email"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -65,7 +71,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_reg_pass"
             android:inputType="textPassword"
-            android:hint="Enter password"/>
+            android:hint="Enter password"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +88,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_reg_dept"
-            android:hint="Enter department"/>
+            android:hint="Enter department"
+            android:drawableStart="@drawable/ic_employee"
+            android:drawablePadding="3dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
