@@ -3,10 +3,12 @@ package com.samarthgupta.sfa_app.Activities;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +31,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.Activities.Tasks.Books_Task;
+import com.samarthgupta.sfa_app.Activities.Tasks.Box_Task;
+import com.samarthgupta.sfa_app.Activities.Tasks.Cover_Task;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.Processes;
@@ -44,7 +49,7 @@ import java.util.Locale;
 import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class TasksActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
-
+    SwipeRefreshLayout taskRefresh;
     RecyclerView rv;
     ProgressBar pb;
     String filterOption;
@@ -54,14 +59,15 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
     LinearLayout llDateSelect;
     TextView tvStartDate, tvEndDate, tvNextPg, tvPrevPg;
-    int pages = 1, perPage = 5;
-
+    int pages = 1;
+    String perPage = "5";// default;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
+        taskRefresh = (SwipeRefreshLayout) findViewById(R.id.pullRefreshTask);
         rv = (RecyclerView) findViewById(R.id.rv_job_tickets);
         pb = (ProgressBar) findViewById(R.id.pb_tasks);
 
@@ -82,6 +88,19 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
         pb.setVisibility(View.VISIBLE);
         VolleyRequest(null, null);
 
+        taskRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData(); // your code
+                taskRefresh.setRefreshing(false);
+            }
+        });
+
+    }
+
+    private void refreshData() {
+        taskRefresh.setRefreshing(true);
+        VolleyRequest(null, null);
     }
 
     private void VolleyRequest(String clientName, String jobName) {
@@ -90,24 +109,32 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                 .fromJson(getSharedPreferences("Login", Context.MODE_PRIVATE)
                         .getString("Data", null), Employee.class);
         Log.d("Tasks", emp.getDept());
+
         String url = null;
         if (clientName == null && jobName == null) {
+            SharedPreferences prefs = getSharedPreferences("JOB_PER_PAGE", MODE_PRIVATE);
+            String restoredText = prefs.getString("per_page", null);
+            if (restoredText != null) {
+                perPage = prefs.getString("per_page", "5");
+
+            }
+            Log.i("perPage", perPage);
             //Simple Volley request
-            url = baseUrl + "/task?page="+pages+ "&perPage="+perPage+"&emp=printing" + emp.getDept();
+            url = baseUrl + "/task?page=" + pages + "&perPage=" + perPage + "&emp=printing" + emp.getDept();
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Log.i("TASK", response);
                     Task tasks[] = new GsonBuilder().create().fromJson(response, Task[].class);
-                    if (tasks.length!=0){
+                    if (tasks.length != 0) {
                         rv.setAdapter(new TasksAdapter(tasks));
                         pb.setVisibility(View.GONE);
                         rv.setVisibility(View.VISIBLE);
                         rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
                         rv.setHasFixedSize(true);
-                    }else {
+                    } else {
                         Toast.makeText(TasksActivity.this, "No More Tasks", Toast.LENGTH_SHORT).show();
-                        pages-- ;
+                        pages--;
                     }
 
 
@@ -121,12 +148,15 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
         } else if (clientName != null && jobName == null) {
             // client name
             url = baseUrl + "/task/client?emp=" + emp.getDept() + "&reg=" + clientName;
-            ClientAndJobQuery(url) ;
-        } else if (clientName == null && jobName.length()==0) {
+            ClientAndJobQuery(url);
+        } else if (clientName == null && jobName != null) {
             //job name
             url = baseUrl + "/task/jobname?emp=" + emp.getDept() + "&reg=" + jobName;
             Log.d("response not found", url);
-            ClientAndJobQuery(url) ;
+            ClientAndJobQuery(url);
+        } else if (clientName != null && jobName != null) {
+            url = baseUrl + "/task/delivered?reg=" + clientName;
+            ClientAndJobQuery(url);
         }
 
     }
@@ -142,7 +172,6 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                 rv.setVisibility(View.VISIBLE);
                 rv.setLayoutManager(new LinearLayoutManager(TasksActivity.this));
                 rv.setHasFixedSize(true);
-
 
 
             }
@@ -175,21 +204,27 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
         if (id == R.id.action_searchByClientName) {
             Toast.makeText(this, "Enter Client Name", Toast.LENGTH_SHORT).show();
             filterOption = "ClientName";
+            llDateSelect.setVisibility(View.GONE);
             return true;
         }
 
         if (id == R.id.action_searchByJobName) {
             Toast.makeText(this, "Enter Job Name", Toast.LENGTH_SHORT).show();
             filterOption = "JobName";
+            llDateSelect.setVisibility(View.GONE);
             return true;
         }
 
         if (id == R.id.action_searchByDelDate) {
-
-
             llDateSelect.setVisibility(View.VISIBLE);
             Toast.makeText(this, "Please select start and end dates", Toast.LENGTH_SHORT).show();
-
+            return true;
+        }
+        if (id == R.id.action_delivered) {
+            Toast.makeText(this, "Enter job or client name", Toast.LENGTH_SHORT).show();
+            filterOption = "DeliveredTickets";
+            llDateSelect.setVisibility(View.GONE);
+            return true;
         }
 
 
@@ -206,6 +241,8 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             VolleyRequest(newText, null);
         } else if (filterOption == "JobName") {
             VolleyRequest(null, newText);
+        } else if (filterOption == "DeliveredTickets") {
+            VolleyRequest(newText, newText);
         }
         return false;
     }
@@ -305,16 +342,16 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             }
 
 
-        } else if(view == tvNextPg){
+        } else if (view == tvNextPg) {
             //on Click increase the increment the page number by one.
             // by default number of task per pages displayed will be 5 now.
-            pages++ ;
-            VolleyRequest(null,null);
+            pages++;
+            VolleyRequest(null, null);
 
-        } else if(view == tvPrevPg){
-            pages = pages-1;
-            if (pages<1){
-                pages = 1 ;
+        } else if (view == tvPrevPg) {
+            pages = pages - 1;
+            if (pages < 1) {
+                pages = 1;
                 Toast.makeText(this, "Page 1", Toast.LENGTH_SHORT).show();
             }
             VolleyRequest(null, null);
@@ -386,7 +423,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                 e.printStackTrace();
             }
 
-            if(!isDateSet){
+            if (!isDateSet) {
                 Log.e("Msg", "Not set");
                 holder.deliveryDate.setText(delDate);
             }
@@ -424,24 +461,31 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
 
                 String ConvertTostring = new GsonBuilder().create().toJson(process.get(0));
 
-                if (jobType.equals("Book")) {
-                    Intent intent = new Intent(TasksActivity.this, Books_Task.class);
-                    intent.putExtra("BookProcesses", ConvertTostring);
-                    intent.putExtra("BookJobName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
-                } else if (jobType.equals("Box")) {
-                    Intent intent = new Intent(TasksActivity.this, Box_Task.class);
-                    intent.putExtra("BoxProcesses", ConvertTostring);
-                    intent.putExtra("BoxJobName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
-                } else if (jobType.equals("Cover")) {
-                    Intent intent = new Intent(TasksActivity.this, Cover_Task.class);
-                    intent.putExtra("CoverProcesses", ConvertTostring);
-                    intent.putExtra("CoverJbName", jobName);
-                    intent.putExtra("wt_id", taskList[pos].getWt());
-                    startActivity(intent);
+                switch (jobType) {
+                    case "Book": {
+                        Intent intent = new Intent(TasksActivity.this, Books_Task.class);
+                        intent.putExtra("BookProcesses", ConvertTostring);
+                        intent.putExtra("BookJobName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Box": {
+                        Intent intent = new Intent(TasksActivity.this, Box_Task.class);
+                        intent.putExtra("BoxProcesses", ConvertTostring);
+                        intent.putExtra("BoxJobName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
+                    case "Cover": {
+                        Intent intent = new Intent(TasksActivity.this, Cover_Task.class);
+                        intent.putExtra("CoverProcesses", ConvertTostring);
+                        intent.putExtra("CoverJbName", jobName);
+                        intent.putExtra("wt_id", taskList[pos].getWt());
+                        startActivity(intent);
+                        break;
+                    }
                 }
 
 

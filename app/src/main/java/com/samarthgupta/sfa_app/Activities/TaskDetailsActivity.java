@@ -1,10 +1,14 @@
 package com.samarthgupta.sfa_app.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -13,6 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
+import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.ClientDetailsActivity;
+import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.JobDetailsActivity;
+import com.samarthgupta.sfa_app.POJO.Progress;
+import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Client;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Task;
@@ -33,11 +41,18 @@ public class TaskDetailsActivity extends AppCompatActivity {
     TextView papDetails, papLocation, paperBy, papQuality, papQuantity;
     TextView PlateName, plateType, PlateQuantity;
     JobTicket taskDetails;
+    ProgressBar pb;
+    RelativeLayout task_det;
+    Button btClone;
+    String responseToClone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
+
+        pb = (ProgressBar) findViewById(R.id.pb_task_details);
+        task_det = (RelativeLayout) findViewById(R.id.rl_task_details);
 
         JobName = (TextView) findViewById(R.id.tv_jobname);
 
@@ -67,6 +82,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
         plateType = (TextView) findViewById(R.id.tv_plate_type);
         PlateQuantity = (TextView) findViewById(R.id.tv_plate_quantity);
 
+        btClone = (Button) findViewById(R.id.bt_clone);
+        pb.setVisibility(View.VISIBLE);
+        task_det.setVisibility(View.GONE);
 
         Log.i("Ticket", "IN");
         String wt = getIntent().getStringExtra("wt_id");
@@ -77,6 +95,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i("Ticket", response);
                 Log.i("Ticket", "Tick");
+                responseToClone = response;
                 taskDetails = new GsonBuilder()
                         .create()
                         .fromJson(response, JobTicket.class);
@@ -88,6 +107,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
                 try {
+
+                    pb.setVisibility(View.GONE);
+                    task_det.setVisibility(View.VISIBLE);
                     java.util.Date date = sdfPosted.parse(delDate);
                     String del = sdf.format(date);
                     delDate = del.replace(",", ", ");
@@ -148,7 +170,14 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
             }
         }));
-
+        btClone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TaskDetailsActivity.this, ClientDetailsActivity.class);
+                intent.putExtra("task_response", responseToClone);
+                startActivity(intent);
+            }
+        });
 
     }
 

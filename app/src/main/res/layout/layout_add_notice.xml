@@ -1,75 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="50sp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_margin="10sp"
+            android:gravity="center"
+            android:padding="5sp"
             android:text="Add notice"
             android:textAllCaps="true"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_margin="10sp"
-            android:padding="5sp" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dated - "
-                android:layout_weight="1.8"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="end"
+                android:text="Dated - "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tv_notice_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
                 android:maxLines="1"
                 android:text="23rd Nov, 2017"
-                android:id="@+id/tv_notice_date"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
 
-
         <EditText
+            android:id="@+id/et_notice_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
-            android:padding="15sp"
-            android:id="@+id/et_notice_body"
-            android:minLines="1"
             android:gravity="center"
-            android:hint="Enter notice body" />
+            android:hint="Enter notice Title"
+            android:inputType="textMultiLine"
+            android:minLines="1"
+            android:padding="15sp" />
+
+        <EditText
+            android:id="@+id/et_notice_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:hint="Enter notice body"
+            android:inputType="textMultiLine"
+            android:minLines="1"
+            android:padding="15sp" />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/bt_post_notice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/bt_post_notice"
         android:layout_gravity="center"
-        android:padding="15sp"
-        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimaryDark"
+        android:padding="15sp"
         android:text="Submit notice"
-        android:textStyle="bold"
         android:textAllCaps="true"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

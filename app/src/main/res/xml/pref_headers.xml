@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="key_account"
+        android:title="Account Settings">
+
+        <Preference
+            android:key="password"
+            android:title="Change Password" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_app"
+        android:title="Application Settings">
+        <Preference
+            android:key="per_page"
+            android:title="Change Per Page" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="key_help"
+        android:title="Help">
+        <Preference
+            android:key="query"
+            android:summary="Query? Get instant support for any query you have"
+            android:title="Query" />
+    </PreferenceCategory>
+</PreferenceScreen>

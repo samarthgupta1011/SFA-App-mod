@@ -46,10 +46,10 @@ public class JobTicket {
     private Plate plate;
     @SerializedName("processes")
     @Expose
-    private Processes processes ;
+    private Processes processes;
     @SerializedName("isDelivered")
     @Expose
-    private boolean isDelivered ;
+    private boolean isDelivered;
 
 
     public boolean isDelivered() {
@@ -156,6 +156,11 @@ public class JobTicket {
         this.plate = plate;
     }
 
-    public void setProcesses(Processes processes) {  this.processes = processes;
+    public void setProcesses(Processes processes) {
+        this.processes = processes;
+    }
+
+    public Processes getProcesses() {
+        return processes;
     }
 }

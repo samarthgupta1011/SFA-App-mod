@@ -31,7 +31,10 @@
             android:orderInCategory="100"
             android:title="Search By Delivery Date"
             app:showAsAction="never" />
-
-
+        <item
+            android:id="@+id/action_delivered"
+            android:orderInCategory="100"
+            android:title="Search Delivered Tickets"
+            app:showAsAction="never" />
     </item>
 </menu>

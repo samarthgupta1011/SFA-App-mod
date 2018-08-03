@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.ReportActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please provide your feedback in as much detail as possible:"
+        android:layout_margin="6dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/et_details"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="Mention the problem here"/>
+    <Button
+        android:id="@+id/bt_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REPORT"
+        android:textAllCaps="false"
+        android:layout_margin="10sp"
+        android:layout_marginBottom="5sp"
+        android:background="@color/colorBackground"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+</LinearLayout>

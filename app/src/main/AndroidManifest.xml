@@ -14,30 +14,26 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:label="SFA"
-            android:theme="@style/AppTheme.NoActionBar">
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.SignIn_Register.SignInActivity"
+            android:label="SFA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".Activities.SignInActivity"
-            android:label="Sign in">
-
-        </activity>
-        <activity
-            android:name=".Activities.RegisterActivity"
+            android:name=".Activities.SignIn_Register.RegisterActivity"
             android:label="Register"
-            android:parentActivityName=".Activities.SignInActivity" />
+            android:parentActivityName=".Activities.SignIn_Register.SignInActivity" />
         <activity
-            android:name=".Activities.ClientDetailsActivity"
+            android:name=".Activities.CreatingWorkTicket.ClientDetailsActivity"
             android:label="Client Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.JobDetailsActivity"
+            android:name=".Activities.CreatingWorkTicket.JobDetailsActivity"
             android:label="Job Details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -47,19 +43,33 @@
             android:name=".Activities.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Books_Processes"
+            android:name=".Activities.CreatingWorkTicket.X_Processes.Books_Processes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Box_Processes"
+            android:name=".Activities.CreatingWorkTicket.X_Processes.Box_Processes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Cover_Processes"
+            android:name=".Activities.CreatingWorkTicket.X_Processes.Cover_Processes"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Books_Task" />
-        <activity android:name=".Activities.Box_Task" />
-        <activity android:name=".Activities.Cover_Task" />
+        <activity android:name=".Activities.Tasks.Books_Task" />
+        <activity android:name=".Activities.Tasks.Box_Task" />
+        <activity android:name=".Activities.Tasks.Cover_Task" />
         <activity android:name=".Activities.UpdateActivity" />
-        <activity android:name=".Activities.TaskDetailsActivity"></activity>
+        <activity android:name=".Activities.TaskDetailsActivity" />
+        <activity
+            android:name=".Activities.ReportActivity"
+            android:label="Report a Problem" />
+        <activity
+            android:name=".Activities.Settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".Activities.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.samarthgupta.sfa_app.Activities.HomeActivity" />
+        </activity>
+        <activity android:name=".Activities.Settings.ChangePassword" />
+        <activity android:name=".Activities.Settings.QueryActivity" />
+        <activity android:name=".Activities.ReportTypeListActivity" />
     </application>
 
 </manifest>
