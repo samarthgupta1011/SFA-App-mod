@@ -6,15 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samarthgupta.sfa_app.DataInterface;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.R;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,11 +33,14 @@ import static com.samarthgupta.sfa_app.POJO.GlobalAccess.baseUrl;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText etName, etEmail, etPass, etMobile, etDept;
+    EditText etName, etEmail, etPass, etMobile;
+    TextView tvDept;
     ProgressBar pb;
     Button btRegister;
 
     String name, email, pass, mob, dept;
+    Spinner spSelectDept;
+    String deptSelected = "---";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +52,38 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.et_reg_email);
         etMobile = (EditText) findViewById(R.id.et_reg_mob);
         pb = (ProgressBar) findViewById(R.id.pb_reg);
-        etDept = (EditText) findViewById(R.id.et_reg_dept);
+        tvDept = (TextView) findViewById(R.id.tv_select_dept);
         btRegister = (Button) findViewById(R.id.bt_reg);
         pb.setVisibility(View.INVISIBLE);
+
+        spSelectDept = (Spinner) findViewById(R.id.sp_select_dept);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.dept_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSelectDept.setAdapter(adapter);
+
+        final List<String> options = Arrays.asList(getResources().getStringArray(R.array.dept_list));
+
+
+
+
+        spSelectDept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                deptSelected = options.get(position);
+                if (position != 0) {
+                    btRegister.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +93,13 @@ public class RegisterActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 pass = etPass.getText().toString();
                 mob = etMobile.getText().toString();
-                dept = etDept.getText().toString();
+
+                if(deptSelected.equals("---")){
+                    Toast.makeText(RegisterActivity.this, "Select your department", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    deptSelected = deptSelected.toLowerCase();
+                }
 
                 if (TextUtils.isEmpty(name)) { //personName
                     Toast.makeText(RegisterActivity.this, "Enter your name", Toast.LENGTH_SHORT).show();
@@ -76,15 +120,12 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Enter your mobile number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(dept)) {
-                    Toast.makeText(RegisterActivity.this, "Enter your department", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
 
                 btRegister.setVisibility(View.GONE);
                 pb.setVisibility(View.VISIBLE);
 
-                Employee emp = new Employee(name, mob, email, pass, dept);
+                Employee emp = new Employee(name, mob, email, pass, deptSelected);
 
                 Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
                 DataInterface client = retrofit.create(DataInterface.class);
@@ -130,68 +171,9 @@ public class RegisterActivity extends AppCompatActivity {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+
 }
 
 
-//    String url = "http://ec2-13-126-93-101.ap-south-1.compute.amazonaws.com/login.php";
-//                Volley.newRequestQueue(RegisterActivity.this).add(new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//@Override
-//public void onResponse(String response) {
-//        Log.e("Register", response);
-//        btRegister.setVisibility(View.VISIBLE);
-//        pb.setVisibility(View.GONE);
-//        if (response.equals("true")) {
-//        Toast.makeText(RegisterActivity.this, "Login to conitnue!", Toast.LENGTH_SHORT).show();
-//        startActivity(new Intent(RegisterActivity.this, SignInActivity.class));
-//        finish();
-//        } else {
-//        Toast.makeText(RegisterActivity.this, "Email address already registered", Toast.LENGTH_LONG).show();
-//        }
-//        }
-//        }, new Response.ErrorListener() {
-//@Override
-//public void onErrorResponse(VolleyError error) {
-//        Log.e("Register", "Err");
-//        btRegister.setVisibility(View.VISIBLE);
-//        pb.setVisibility(View.GONE);
-//        AlertDialog dial = new AlertDialog.Builder(RegisterActivity.this).
-//        setTitle("Error").setMessage("Network error").setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-//@Override
-//public void onClick(DialogInterface dialogInterface, int i) {
-//        dialogInterface.dismiss();
-//        }
-//        }).create();
-//        dial.show();
-//        }
-//        }) {
-//@Override
-//protected Map<String, String> getParams() throws AuthFailureError {
-//        Map<String, String> map = new HashMap<String, String>();
-//        map.put("personname", name);
-//        map.put("contact", mob);
-//        map.put("mob", mob);
-//        map.put("pass", pass);
-//        //Department
-//        map.put("name", dept);
-//
-//        return map;
-//        }
-//        }
-//        ).setRetryPolicy(new RetryPolicy() {
-//@Override
-//public int getCurrentTimeout() {
-//        return 0;
-//        }
-//
-//@Override
-//public int getCurrentRetryCount() {
-//        return 0;
-//        }
-//
-//@Override
-//public void retry(VolleyError error) throws VolleyError {
-//
-//        }
-//        });
-//
-//        }
+
