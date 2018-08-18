@@ -47,6 +47,7 @@ import com.samarthgupta.sfa_app.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Locale;
@@ -230,6 +231,7 @@ public class HomeActivity extends AppCompatActivity
 
                     //for showing on the dialog
                     dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+
                     tvNoticeDate.setText(dateFormat.format(date));
                     // for sending to backend: format changes
                     dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);

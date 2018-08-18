@@ -1,17 +1,26 @@
 package com.samarthgupta.sfa_app.Activities;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
+
+import static com.samarthgupta.sfa_app.POJO.GlobalAccess.convertDateFromUTC;
 
 public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.NoticeHolder> {
     private Notice notices[];
@@ -28,27 +37,26 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.No
     @Override
     public void onBindViewHolder(NoticeHolder holder, int position) {
 
-        String delDate = notices[notices.length-position-1].getDate();
-        SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+        String noticeDate = notices[notices.length-position-1].getDate();
 
-        try {
-            java.util.Date date = sdfPosted.parse(delDate);
-            delDate = sdf.format(date);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        holder.tv_date.setText(delDate);
+        holder.tv_date.setText(convertDateFromUTC(noticeDate, "EEE, d MMM yyyy HH:mm:ss"));
         holder.tv_title.setText(notices[notices.length-position-1].getTitle());
         holder.tv_body.setText(notices[notices.length-position-1].getBody());
         holder.tv_num.setText(notices[notices.length-position-1].getnoticeBy());
     }
 
+
     @Override
     public int getItemCount() {
-        return this.notices.length;
+
+        //Only show max 5 latest notices
+        int len = this.notices.length;
+        if (len <= 5) {
+            return len;
+        } else {
+            return 5;
+        }
+
     }
 
     public class NoticeHolder extends RecyclerView.ViewHolder {

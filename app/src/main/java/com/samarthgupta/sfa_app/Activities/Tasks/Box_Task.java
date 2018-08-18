@@ -24,13 +24,15 @@ import com.samarthgupta.sfa_app.R;
 
 import java.util.List;
 
+import static com.samarthgupta.sfa_app.POJO.GlobalAccess.convertDateFromUTC;
+
 public class Box_Task extends AppCompatActivity {
     TextView jobName ;
     Button bt_taskDetails ;
     TextView design, ferro, plates, printing, lamination,uv, embossing, foiling, dieCut ,  pasting, packing, dispatch, challan, bill ;
     TextView designDone, ferroDone, platesDone, printingDone, laminationDone, uvDone, embossingDone, foilingDone, dieCutDone,
             pastingDone, packingDone, dispatchDone, challanDone, billDone ;
-    String printing2ndLast, setDone, lamination2ndLast,uv2ndLast, embossing2ndLast, foiling2ndLast, diecut2ndLast, pasting2ndLast, packing2ndLast, dispatch2ndLast, challan2ndLast, bill2ndLast;
+    String printing2ndLast, setDone;
     TextView setsDoneRatio ;
     Button btUpdateProgress;
     CardView cv_designing, cv_ferro, cv_plates, cv_printing, cv_lamination, cv_uv, cv_embossing,
@@ -193,87 +195,36 @@ public class Box_Task extends AppCompatActivity {
         }
 
         final List<UpdatePF> updateprinting = processes.getBox().getPrinting().getUpdates() ;
-        //setting the total done in printing
-        final String printingJobDone = updateprinting.get(updateprinting.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        printingDone.setText(printingJobDone) ;
+        final String printingJobDone = updateprinting.get(updateprinting.size() - 1).getDone() + "/" + processes.getTotalNumber();
+        printingDone.setText(printingJobDone);
         if (updateprinting.size() >= 2) {
             printing2ndLast = updateprinting.get(updateprinting.size() - 2).getDone() + "/" + processes.getTotalNumber();
             setDone = updateprinting.get(updateprinting.size() - 2).getSetsDone() + "/" + processes.getTotalNumber();
         }
         //setting the number of sets in printing
-        final String printingSetsDone = updateprinting.get(updateprinting.size()-1).getSetsDone()+ "/" + processes.getTotalSets() ;
+        final String printingSetsDone = updateprinting.get(updateprinting.size() - 1).getSetsDone() + "/" + processes.getTotalSets();
         setsDoneRatio.setText(printingSetsDone);
 
-        final List<Update> updateLaminaiton = processes.getBox().getLamination().getUpdates() ;
-        final String laminationJobDone = updateLaminaiton.get(updateLaminaiton.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        laminationDone.setText(laminationJobDone);
-        if (updateLaminaiton.size() >= 2) {
-            lamination2ndLast = updateLaminaiton.get(updateLaminaiton.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        final List<Update> updateLamination = processes.getBox().getLamination().getUpdates() ;
+        setTextOfDoneByTotal(laminationDone, updateLamination, processes);
         final List<Update> updateUV = processes.getBox().getUv().getUpdates() ;
-        final String uvJobDone = updateUV.get(updateUV.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        uvDone.setText(uvJobDone);
-        if (updateUV.size() >= 2) {
-            uv2ndLast = updateUV.get(updateUV.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(uvDone, updateUV, processes);
         final List<Update> updateEmbossing = processes.getBox().getEmbossing().getUpdates() ;
-        final String embossingJobDone = updateEmbossing.get(updateEmbossing.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        embossingDone.setText(embossingJobDone);
-        if (updateEmbossing.size() >= 2) {
-            embossing2ndLast = updateEmbossing.get(updateEmbossing.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(embossingDone, updateEmbossing, processes);
         final List<Update> updateFoiling = processes.getBox().getFoiling().getUpdates() ;
-        final String foilingJobDone = updateFoiling.get(updateFoiling.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        foilingDone.setText(foilingJobDone);
-        if (updateFoiling.size() >= 2) {
-            foiling2ndLast = updateFoiling.get(updateFoiling.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(foilingDone, updateFoiling, processes);
         final List<Update> updateDieCut = processes.getBox().getDieCut().getUpdates() ;
-        final String dieCutJobDone = updateDieCut.get(updateDieCut.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        dieCutDone.setText(dieCutJobDone);
-        if (updateDieCut.size() >= 2) {
-            diecut2ndLast = updateDieCut.get(updateDieCut.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(dieCutDone, updateDieCut, processes);
         final List<Update> updatePasting = processes.getBox().getPasting().getUpdates() ;
-        final String pastingJobDone = updatePasting.get(updatePasting.size()-1).getDone()+"/"+processes.getTotalNumber() ;
-        pastingDone.setText(pastingJobDone);
-        if (updatePasting.size() >= 2) {
-            pasting2ndLast = updatePasting.get(updatePasting.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(pastingDone, updatePasting, processes);
         final List<Update> updatePacking = processes.getBox().getPacking().getUpdates() ;
-        final String packingJobDone = updatePacking.get(updatePacking.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        packingDone.setText(packingJobDone);
-        if (updatePacking.size() >= 2) {
-            packing2ndLast = updatePacking.get(updatePacking.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(packingDone, updatePacking, processes);
         final List<Update> updateDispatch = processes.getBox().getDispatch().getUpdates() ;
-        final String dispatchJobDone = updateDispatch.get(updateDispatch.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        dispatchDone.setText(dispatchJobDone);
-        if (updateDispatch.size() >= 2) {
-            dispatch2ndLast = updateDispatch.get(updateDispatch.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
+        setTextOfDoneByTotal(dispatchDone, updateDispatch, processes);
         final List<Update> updateChallan = processes.getBox().getChallan().getUpdates() ;
-        final String challanJobDone = updateChallan.get(updateChallan.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        challanDone.setText(challanJobDone);
-        if (updateChallan.size() >= 2) {
-            challan2ndLast = updateChallan.get(updateChallan.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
-
+        setTextOfDoneByTotal(challanDone, updateChallan, processes);
         final List<Update> updateBill = processes.getBox().getBill().getUpdates() ;
-        final String billJobDone = updateBill.get(updateBill.size()-1).getDone() + "/" + processes.getTotalNumber() ;
-        billDone.setText(billJobDone);
-        if (updateBill.size() >= 2) {
-            bill2ndLast = updateBill.get(updateBill.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
+        setTextOfDoneByTotal(billDone, updateBill, processes);
 
         //changing  the color for particular depatment worker
         final Employee employee = new GsonBuilder()
@@ -344,6 +295,7 @@ public class Box_Task extends AppCompatActivity {
                 return;
             }
         });
+
         cv_ferro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -366,6 +318,7 @@ public class Box_Task extends AppCompatActivity {
                 return;
             }
         });
+
         cv_plates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -388,250 +341,81 @@ public class Box_Task extends AppCompatActivity {
                 return;
             }
         });
+
         cv_printing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Printing Progress 📈");
-                if (updateprinting.size() >= 2) {
-                    builder.setMessage("Printing Done: " + printing2ndLast + " to " + printingJobDone + "\nSets Done: " + setDone + " to " + printingSetsDone + "\n\n-- Last Updated : " + updateprinting.get(updateprinting.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Printing Done: " + printingJobDone + "\nSets Done: " + printingSetsDone + "\n\n -- Last Updated: " + updateprinting.get(updateprinting.size() - 1).getTime());
-                }
-
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlertPF("Printing", updateprinting, processes, Box_Task.this);
             }
         });
 
         cv_lamination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Lamination Progress 📈");
-                if (updateLaminaiton.size() >= 2) {
-                    builder.setMessage("Lamination Done: " + lamination2ndLast + " to " + laminationJobDone + "\n\n -- Last Updated : " + updateLaminaiton.get(updateLaminaiton.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Lamination Done: " + laminationJobDone + "\n\n -- Last Updated: " + updateLaminaiton.get(updateLaminaiton.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Lamination", updateLamination, processes, Box_Task.this);
             }
         });
+
         cv_uv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("UV Progress 📈");
-                if (updateUV.size() >= 2) {
-                    builder.setMessage("UV Done: " + uv2ndLast + " to " + uvJobDone + "\n\n -- Last Updated : " + updateUV.get(updateUV.size() - 1).getTime());
-                } else {
-                    builder.setMessage("UV Done: " + uvJobDone + "\n\n -- Last Updated: " + updateUV.get(updateUV.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("UV", updateUV, processes, Box_Task.this);
             }
         });
 
         cv_embossing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Embossing Progress 📈");
-                if (updateEmbossing.size() >= 2) {
-                    builder.setMessage("Embossing Done: " + embossing2ndLast + " to " + embossingJobDone + "\n\n -- Last Updated : " + updateEmbossing.get(updateEmbossing.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Embossing Done: " + embossingJobDone + "\n\n -- Last Updated: " + updateEmbossing.get(updateEmbossing.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Embossing", updateEmbossing, processes, Box_Task.this);
             }
         });
+
         cv_foiling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Foiling Progress 📈");
-                if (updateFoiling.size() >= 2) {
-                    builder.setMessage("Foiling Done: " + foiling2ndLast + " to " + foilingJobDone + "\n\n -- Last Updated : " + updateFoiling.get(updateFoiling.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Foiling Done: " + foilingJobDone + "\n\n -- Last Updated: " + updateFoiling.get(updateFoiling.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Foiling", updateFoiling, processes, Box_Task.this);
             }
         });
+
         cv_pasting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Pasting Progress 📈");
-                if (updateFoiling.size() >= 2) {
-                    builder.setMessage("Pasting Done: " + pasting2ndLast + " to " + packingJobDone + "\n\n -- Last Updated : " + updatePasting.get(updatePasting.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Pasting Done: " + pastingJobDone + "\n\n -- Last Updated: " + updatePasting.get(updatePasting.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Pasting", updatePasting, processes, Box_Task.this);
             }
         });
+
         cv_dieCut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("DieCut Progress 📈");
-                if (updateFoiling.size() >= 2) {
-                    builder.setMessage("DieCut Done: " + diecut2ndLast + " to " + dieCutJobDone + "\n\n -- Last Updated : " + updateDieCut.get(updateDieCut.size() - 1).getTime());
-                } else {
-                    builder.setMessage("DieCut Done: " + dieCutJobDone + "\n\n -- Last Updated: " + updateDieCut.get(updateDieCut.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Die Cut", updateDieCut, processes, Box_Task.this);
             }
         });
+
         cv_packing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Packing Progress 📈");
-                if (updatePacking.size() >= 2) {
-                    builder.setMessage("Packing Done: " + packing2ndLast + " to " + packingJobDone + "\n\n -- Last Updated : " + updatePacking.get(updatePacking.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Packing Done: " + packingJobDone + "\n\n -- Last Updated: " + updatePacking.get(updatePacking.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Packing", updatePacking, processes, Box_Task.this);
             }
         });
 
         cv_dispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Dispatching Progress 📈");
-                if (updateDispatch.size() >= 2) {
-                    builder.setMessage("Dispatching Done: " + dispatch2ndLast + " to " + dispatchJobDone + "\n\n -- Last Updated : " + updateDispatch.get(updateDispatch.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Dispatching Done: " + dispatchJobDone + "\n\n -- Last Updated: " + updateDispatch.get(updateDispatch.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Dispatch", updateDispatch, processes,Box_Task.this);
             }
         });
+
         cv_challan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Challan Progress 📈");
-                if (updateChallan.size() >= 2) {
-                    builder.setMessage("Challan Done: " + dispatch2ndLast + " to " + challanJobDone + "\n\n -- Last Updated : " + updateChallan.get(updateChallan.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Challan Done: " + challanJobDone + "\n\n -- Last Updated: " + updateChallan.get(updateChallan.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Challan", updateChallan, processes,Box_Task.this);
             }
         });
+
         cv_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
-                builder.setTitle("Billing Progress 📈");
-                if (updateBill.size() >= 2) {
-                    builder.setMessage("Bill Done: " + bill2ndLast + " to " + billJobDone + "\n\n -- Last Updated : " + updateBill.get(updateBill.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Bill Done: " + billJobDone + "\n\n -- Last Updated: " + updateBill.get(updateBill.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Bill", updateBill, processes, Box_Task.this);
             }
         });
         
@@ -646,6 +430,101 @@ public class Box_Task extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private static void setTextOfDoneByTotal(TextView tv, List<Update> updates, Processes processes){
+        int sizeOfList = updates.size();
+        String totalNumber = processes.getTotalNumber();
+
+        String totalByDone = "";
+
+        if(sizeOfList >= 2){
+            totalByDone = updates.get(sizeOfList - 1).getDone() + "/" + totalNumber;
+        } else {
+            totalByDone = "0/"+totalNumber;
+        }
+
+        tv.setText(totalByDone);
+    }
+
+    //For folding and printing
+    private static void showProgressAlertPF(String jobName, List<UpdatePF> updates, Processes processes, Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(jobName + " Progress 📈");
+
+        int sizeOfList = updates.size();
+
+        String totalNumber = processes.getTotalNumber();
+        String totalForms = processes.getTotalForms();
+
+        String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
+                updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
+
+        String doneByTotalAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getDone() + " / " + totalNumber :
+                null;
+
+        String doneByTotalFormsBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getSetsDone() + " / " + totalForms :
+                updates.get(sizeOfList - 1).getSetsDone() + " / " + totalForms;
+        String doneByTotalFormsAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getSetsDone() + " / " + totalForms :
+                null;
+
+        String lastUpdate = convertDateFromUTC(updates.get(sizeOfList - 1).getTime(), "dd-MM-yyyy HH:mm:ss");
+
+        if (sizeOfList >= 2) {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter + "\nSets Done: " + doneByTotalFormsBefore + " to " + doneByTotalFormsAfter + "\n\n -- Last Updated : \n" + lastUpdate);
+        } else {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + "\nSets Done: " + doneByTotalFormsBefore + "\n\n -- Last Updated: " + lastUpdate);
+        }
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return;
+
+    }
+
+    //For other jobs
+    private static void showProgressAlert(String jobName, List<Update> updates, Processes processes, Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(jobName + " Progress 📈");
+
+        int sizeOfList = updates.size();
+
+        String totalNumber = processes.getTotalNumber();
+        String totalForms = processes.getTotalForms();
+
+        String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
+                updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
+
+        String doneByTotalAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getDone() + " / " + totalNumber :
+                null;
+
+        String lastUpdate = convertDateFromUTC(updates.get(sizeOfList - 1).getTime(), "dd-MM-yyyy HH:mm:ss");
+
+        if (sizeOfList >= 2) {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter +"\n\n -- Last Updated : \n" + lastUpdate);
+        } else {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + "\n\n -- Last Updated: " + lastUpdate);
+        }
+
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return;
+
     }
 
 }

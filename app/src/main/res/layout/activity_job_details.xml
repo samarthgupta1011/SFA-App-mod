@@ -141,6 +141,16 @@
 
                     </RadioGroup>
 
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginEnd="10sp"
+                        android:hint="Number of pages"
+                        android:id="@+id/et_number_of_pages"
+                        android:inputType="number"/>
+
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

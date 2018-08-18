@@ -60,8 +60,11 @@ public class UpdateActivity extends AppCompatActivity {
         llEnterProgress = (LinearLayout) findViewById(R.id.ll_progress);
         llSets.setVisibility(View.GONE);
         llEnterProgress.setVisibility(View.GONE);
-        tvCurrStatusDone = (TextView) findViewById(R.id.tv_curr_status_done);
-        tvCurrStatusTotal = (TextView) findViewById(R.id.tv_curr_status_total);
+
+        //View removed
+
+//        tvCurrStatusDone = (TextView) findViewById(R.id.tv_curr_status_done);
+//        tvCurrStatusTotal = (TextView) findViewById(R.id.tv_curr_status_total);
         wtID = getIntent().getStringExtra("wt_id");
 
         Toast.makeText(this, wtID, Toast.LENGTH_SHORT).show();
@@ -70,8 +73,9 @@ public class UpdateActivity extends AppCompatActivity {
 
 
         //Send values for other jobs and boolean for the 4 jobs
-        tvCurrStatusTotal.setText(getIntent().getStringExtra("Total"));
-        tvCurrStatusDone.setText(getIntent().getStringExtra("Done"));
+
+//        tvCurrStatusTotal.setText(getIntent().getStringExtra("Total"));
+//        tvCurrStatusDone.setText(getIntent().getStringExtra("Done"));
 
         SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
         Calendar calendar = Calendar.getInstance();

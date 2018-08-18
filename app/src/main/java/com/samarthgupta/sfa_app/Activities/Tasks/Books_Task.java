@@ -24,12 +24,14 @@ import com.samarthgupta.sfa_app.R;
 
 import java.util.List;
 
+import static com.samarthgupta.sfa_app.POJO.GlobalAccess.convertDateFromUTC;
+
 public class Books_Task extends AppCompatActivity {
     TextView jobName;
     Button bt_taskDetails;
     TextView design, ferro, plates, printing, folding, gathering, perfect, sewing, centerPin, finishing, packing, dispatch, challan, bill;
     TextView designDone, ferroDone, platesDone, printingDone, foldingDone, gatheringDone, perfectDone, sewingDone, centerPinDone, finishingDone, packingDone, dispatchDone, challanDone, billDone;
-    String printing2ndLast, setDone, folding2ndLast, formsDone, gathering2ndLast, perfect2ndLast, sewing2ndLast, centrePin2ndLast, finishing2ndLast, packing2ndLast, dispatch2ndLast, challan2ndLast, bill2ndLast;
+    String printing2ndLast, setDone, folding2ndLast, formsDone;
 
     TextView setsDoneRatio, formsDoneRatio;
 
@@ -225,69 +227,25 @@ public class Books_Task extends AppCompatActivity {
 
 
         final List<Update> updateGathering = processes.getBook().getGathering().getUpdates();
-        final String gatheringJobDone = updateGathering.get(updateGathering.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        gatheringDone.setText(gatheringJobDone);
-        if (updateGathering.size() >= 2) {
-            gathering2ndLast = updateGathering.get(updateGathering.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updatePerfect = processes.getBook().getPerfect().getUpdates();
-        final String perfectJobDone = updatePerfect.get(updatePerfect.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        perfectDone.setText(perfectJobDone);
-        if (updatePerfect.size() >= 2) {
-            perfect2ndLast = updatePerfect.get(updatePerfect.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updateSewing = processes.getBook().getSewing().getUpdates();
-        final String sewingJobDone = updateSewing.get(updateSewing.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        sewingDone.setText(sewingJobDone);
-        if (updateSewing.size() >= 2) {
-            sewing2ndLast = updateSewing.get(updateSewing.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updateCentrepin = processes.getBook().getCentrePin().getUpdates();
-        final String centrePinJobDone = updateCentrepin.get(updateCentrepin.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        centerPinDone.setText(centrePinJobDone);
-        if (updateCentrepin.size() >= 2) {
-            centrePin2ndLast = updateCentrepin.get(updateCentrepin.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updateFinishing = processes.getBook().getFinishing().getUpdates();
-        final String finishingJobDone = updateFinishing.get(updateFinishing.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        finishingDone.setText(finishingJobDone);
-        if (updateFinishing.size() >= 2) {
-            finishing2ndLast = updateFinishing.get(updateFinishing.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updatePacking = processes.getBook().getPacking().getUpdates();
-        final String packingJobDone = updatePacking.get(updatePacking.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        packingDone.setText(packingJobDone);
-        if (updatePacking.size() >= 2) {
-            packing2ndLast = updatePacking.get(updatePacking.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updateDispatch = processes.getBook().getDispatch().getUpdates();
-        final String dispatchJobDone = updateDispatch.get(updateDispatch.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        dispatchDone.setText(dispatchJobDone);
-        if (updateDispatch.size() >= 2) {
-            dispatch2ndLast = updateDispatch.get(updateDispatch.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
         final List<Update> updateChallan = processes.getBook().getChallan().getUpdates();
-        final String challanJobDone = updateChallan.get(updateChallan.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        challanDone.setText(challanJobDone);
-        if (updateChallan.size() >= 2) {
-            challan2ndLast = updateChallan.get(updateChallan.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
-
-
         final List<Update> updateBill = processes.getBook().getBill().getUpdates();
-        final String billJobDone = updateBill.get(updateBill.size() - 1).getDone() + "/" + processes.getTotalNumber();
-        billDone.setText(billJobDone);
-        if (updateBill.size() >= 2) {
-            bill2ndLast = updateBill.get(updateBill.size() - 2).getDone() + "/" + processes.getTotalNumber();
-        }
 
+
+        setTextOfDoneByTotal(gatheringDone, updateGathering, processes);
+        setTextOfDoneByTotal(perfectDone, updatePerfect, processes);
+        setTextOfDoneByTotal(sewingDone, updateSewing, processes);
+        setTextOfDoneByTotal(centerPinDone, updateCentrepin, processes);
+        setTextOfDoneByTotal(finishingDone, updateFinishing, processes);
+        setTextOfDoneByTotal(packingDone, updatePacking, processes);
+        setTextOfDoneByTotal(dispatchDone, updateDispatch, processes);
+        setTextOfDoneByTotal(challanDone, updateChallan, processes);
+        setTextOfDoneByTotal(billDone, updateBill, processes);
 
 //changing  the color for particular department worker
         final Employee employee = new GsonBuilder()
@@ -342,7 +300,7 @@ public class Books_Task extends AppCompatActivity {
                 builder.setTitle("Designing Progress 📈");
                 if (processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Designing Done 👍 ");
-                } else if (!processes.getBook().getDesigning().getIsDone()){
+                } else if (!processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠‍");
                 }
                 builder.setCancelable(true);
@@ -364,7 +322,7 @@ public class Books_Task extends AppCompatActivity {
                 builder.setTitle("Ferro Progress 📈");
                 if (processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Ferro Done 👍 ");
-                } else if (!processes.getBook().getDesigning().getIsDone()){
+                } else if (!processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -379,6 +337,7 @@ public class Books_Task extends AppCompatActivity {
                 return;
             }
         });
+
         cv_plates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -386,7 +345,7 @@ public class Books_Task extends AppCompatActivity {
                 builder.setTitle("Plates Progress 📈");
                 if (processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Plates Done 👍 ");
-                } else if (!processes.getBook().getDesigning().getIsDone()){
+                } else if (!processes.getBook().getDesigning().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -401,248 +360,81 @@ public class Books_Task extends AppCompatActivity {
                 return;
             }
         });
+
         cv_printing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Printing Progress 📈");
-                if (updateprinting.size() >= 2) {
-                    builder.setMessage("Printing Done: " + printing2ndLast + " to " + printingJobDone + "\nSets Done: " + setDone + " to " + printingSetsDone + "\n\n-- Last Updated : " + updateprinting.get(updateprinting.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Printing Done: " + printingJobDone + "\nSets Done: " + printingSetsDone + "\n\n -- Last Updated: " + updateprinting.get(updateprinting.size() - 1).getTime());
-                }
-
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlertPF("Printing", updateprinting, processes, Books_Task.this);
             }
         });
+
         cv_folding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Folding Progress 📈");
-                if (updatefolding.size() >= 2) {
-                    builder.setMessage("Folding Done: " + folding2ndLast + " to " + foldingJobDone + "\nForms Done: " + formsDone + " to " + foldingFormsDone + "\n\n-- Last Updated : " + updatefolding.get(updatefolding.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Folding Done: " + foldingJobDone + "\nForms Done: " + foldingFormsDone + "\n\n -- Last Updated: " + updatefolding.get(updatefolding.size() - 1).getTime());
-                }
-
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlertPF("Folding", updatefolding, processes, Books_Task.this);
             }
         });
+
         cv_gathering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Gathering Progress 📈");
-                if (updateGathering.size() >= 2) {
-                    builder.setMessage("Gathering Done: " + gathering2ndLast + " to " + gatheringJobDone + "\n\n -- Last Updated : " + updateGathering.get(updateGathering.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Gathering Done: " + gatheringJobDone + "\n\n -- Last Updated: " + updateGathering.get(updateGathering.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Gathering", updateGathering, processes, Books_Task.this);
             }
         });
+
         cv_perfect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Perfect Progress 📈");
-                if (updatePerfect.size() >= 2) {
-                    builder.setMessage("Perfect Done: " + perfect2ndLast + " to " + perfectJobDone + "\n\n -- Last Updated : " + updatePerfect.get(updatePerfect.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Perfect Done: " + perfectJobDone + "\n\n -- Last Updated: " + updatePerfect.get(updatePerfect.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Perfect", updatePerfect, processes, Books_Task.this);
             }
         });
+
         cv_sewing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Sewing Progress 📈");
-                if (updateSewing.size() >= 2) {
-                    builder.setMessage("Sewing Done: " + sewing2ndLast + " to " + sewingJobDone + "\n\n -- Last Updated : " + updateSewing.get(updateSewing.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Sewing Done: " + sewingJobDone + "\n\n -- Last Updated: " + updateSewing.get(updateSewing.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Sewing", updateSewing, processes, Books_Task.this);
             }
         });
+
         cv_centrepin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Centre Pin Progress 📈");
-                if (updateCentrepin.size() >= 2) {
-                    builder.setMessage("CentrePin Done: " + centrePin2ndLast + " to " + centrePinJobDone + "\n\n -- Last Updated : " + updateCentrepin.get(updateCentrepin.size() - 1).getTime());
-                } else {
-                    builder.setMessage("CentrePin Done: " + centrePinJobDone + "\n\n -- Last Updated: " + updateCentrepin.get(updateCentrepin.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Centre Pin", updateCentrepin, processes, Books_Task.this);
             }
         });
+
         cv_finishing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Finishing Progress 📈");
-                if (updateFinishing.size() >= 2) {
-                    builder.setMessage("Finishing Done: " + finishing2ndLast + " to " + finishingJobDone + "\n\n -- Last Updated : " + updateFinishing.get(updateFinishing.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Finishing Done: " + finishingJobDone + "\n\n -- Last Updated: " + updateFinishing.get(updateFinishing.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Finishing", updateFinishing, processes, Books_Task.this);
             }
         });
+
         cv_packing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Packing Progress 📈");
-                if (updatePacking.size() >= 2) {
-                    builder.setMessage("Packing Done: " + packing2ndLast + " to " + packingJobDone + "\n\n -- Last Updated : " + updatePacking.get(updatePacking.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Packing Done: " + packingJobDone + "\n\n -- Last Updated: " + updatePacking.get(updatePacking.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Packing", updatePacking, processes, Books_Task.this);
             }
         });
+
         cv_dispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Dispatching Progress 📈");
-                if (updateDispatch.size() >= 2) {
-                    builder.setMessage("Dispatching Done: " + dispatch2ndLast + " to " + dispatchJobDone + "\n\n -- Last Updated : " + updateDispatch.get(updateDispatch.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Dispatching Done: " + dispatchJobDone + "\n\n -- Last Updated: " + updateDispatch.get(updateDispatch.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Dispatch", updateDispatch, processes, Books_Task.this);
             }
         });
+
         cv_challan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Challan Progress 📈");
-                if (updateChallan.size() >= 2) {
-                    builder.setMessage("Challan Done: " + dispatch2ndLast + " to " + challanJobDone + "\n\n -- Last Updated : " + updateChallan.get(updateChallan.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Challan Done: " + challanJobDone + "\n\n -- Last Updated: " + updateChallan.get(updateChallan.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Challan", updateChallan, processes, Books_Task.this);
             }
         });
+
         cv_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
-                builder.setTitle("Billing Progress 📈");
-                if (updateBill.size() >= 2) {
-                    builder.setMessage("Bill Done: " + bill2ndLast + " to " + billJobDone + "\n\n -- Last Updated : " + updateBill.get(updateBill.size() - 1).getTime());
-                } else {
-                    builder.setMessage("Bill Done: " + billJobDone + "\n\n -- Last Updated: " + updateBill.get(updateBill.size() - 1).getTime());
-                }
-                builder.setCancelable(true);
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return;
+                showProgressAlert("Bill", updateBill, processes, Books_Task.this);
             }
         });
 
@@ -657,5 +449,103 @@ public class Books_Task extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+
+    private static void setTextOfDoneByTotal(TextView tv, List<Update> updates, Processes processes){
+        int sizeOfList = updates.size();
+        String totalNumber = processes.getTotalNumber();
+
+        String totalByDone = "";
+
+        if(sizeOfList >= 2){
+            totalByDone = updates.get(sizeOfList - 1).getDone() + "/" + totalNumber;
+        } else {
+            totalByDone = "0/"+totalNumber;
+        }
+
+        tv.setText(totalByDone);
+    }
+
+    //For folding and printing
+    private static void showProgressAlertPF(String jobName, List<UpdatePF> updates, Processes processes, Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(jobName + " Progress 📈");
+
+        int sizeOfList = updates.size();
+
+        String totalNumber = processes.getTotalNumber();
+        String totalForms = processes.getTotalForms();
+
+        String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
+                updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
+
+        String doneByTotalAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getDone() + " / " + totalNumber :
+                null;
+
+        String doneByTotalFormsBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getSetsDone() + " / " + totalForms :
+                updates.get(sizeOfList - 1).getSetsDone() + " / " + totalForms;
+        String doneByTotalFormsAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getSetsDone() + " / " + totalForms :
+                null;
+
+        String lastUpdate = convertDateFromUTC(updates.get(sizeOfList - 1).getTime(), "dd-MM-yyyy HH:mm:ss");
+
+        if (sizeOfList >= 2) {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter + "\nSets Done: " + doneByTotalFormsBefore + " to " + doneByTotalFormsAfter + "\n\n -- Last Updated : \n" + lastUpdate);
+        } else {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + "\nSets Done: " + doneByTotalFormsBefore + "\n\n -- Last Updated: " + lastUpdate);
+        }
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return;
+
+    }
+
+    //For other jobs
+    private static void showProgressAlert(String jobName, List<Update> updates, Processes processes, Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(jobName + " Progress 📈");
+
+        int sizeOfList = updates.size();
+
+        String totalNumber = processes.getTotalNumber();
+        String totalForms = processes.getTotalForms();
+
+        String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
+                updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
+
+        String doneByTotalAfter = sizeOfList >= 2 ? updates.get(sizeOfList - 1).getDone() + " / " + totalNumber :
+                null;
+
+        String lastUpdate = convertDateFromUTC(updates.get(sizeOfList - 1).getTime(), "dd-MM-yyyy HH:mm:ss");
+
+        if (sizeOfList >= 2) {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter + "\n\n -- Last Updated : \n" + lastUpdate);
+        } else {
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + "\n\n -- Last Updated: " + lastUpdate);
+        }
+
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return;
+
     }
 }
