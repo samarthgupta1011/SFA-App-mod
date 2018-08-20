@@ -121,7 +121,7 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
             }
             Log.i("perPage", perPage);
             //Simple Volley request
-            url = baseUrl + "/task?page=" + pages + "&perPage=" + perPage + "&emp=printing" + emp.getDept();
+            url = baseUrl + "/task?page=" + pages + "&perPage=" + perPage + "&emp=" + emp.getDept();
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

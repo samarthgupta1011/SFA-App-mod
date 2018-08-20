@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity
         String empDep = data.getDept().toUpperCase();
         tvEmpDept.setText(empDep);
 
+
 //        getLatestNotice();
 
 
