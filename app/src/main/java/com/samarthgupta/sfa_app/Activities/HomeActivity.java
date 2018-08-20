@@ -40,6 +40,7 @@ import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.ClientDetailsActivity;
 import com.samarthgupta.sfa_app.Activities.Settings.SettingsActivity;
 import com.samarthgupta.sfa_app.Activities.SignIn_Register.SignInActivity;
+import com.samarthgupta.sfa_app.NotificationService.MyService;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
@@ -69,6 +70,11 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //TODO : Notification service
+        //Starting notif service
+        startService(new Intent(HomeActivity.this, MyService.class));
+
         homeRefresh = (SwipeRefreshLayout) findViewById(R.id.pullRefreshHome);
         rv = (RecyclerView) findViewById(R.id.rv_notice);
         pb = (ProgressBar) findViewById(R.id.pb_notice);

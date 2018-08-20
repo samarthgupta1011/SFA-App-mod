@@ -18,6 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.UpdatePF;
@@ -26,6 +28,7 @@ import com.samarthgupta.sfa_app.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,14 +45,33 @@ public class UpdateActivity extends AppCompatActivity {
     TextView tvCurrStatusDone, tvCurrStatusTotal;
     String wtID;
 
+    //Socket object
+    private Socket mSocket;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        {
+            try {
+                mSocket = IO.socket(baseUrl);
+
+                //Connect socket
+                mSocket.connect();
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
         //Set current status and total number to be done
         //Get intent from previous activity
-
 
         updateProgress = (Button) findViewById(R.id.bt_update_progress);
         tvTime = (TextView) findViewById(R.id.tv_time);
@@ -163,6 +185,8 @@ public class UpdateActivity extends AppCompatActivity {
                                     Boolean status = response.getBoolean("success");
 
                                     if (status) {
+                                        emitProgress("X", empDept);
+
                                         Intent intent = new Intent(UpdateActivity.this, HomeActivity.class);
                                         Toast.makeText(UpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -198,6 +222,23 @@ public class UpdateActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void emitProgress(String client, String job){
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("client", client);
+            obj.put("job", job);
+
+            Log.e("Sending obj", obj.toString());
+            mSocket.emit("update", obj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
