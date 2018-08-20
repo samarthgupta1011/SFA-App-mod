@@ -135,6 +135,10 @@ public class TasksActivity extends AppCompatActivity implements SearchView.OnQue
                         rv.setHasFixedSize(true);
                     } else {
                         Toast.makeText(TasksActivity.this, "No More Tasks", Toast.LENGTH_SHORT).show();
+                        if (pb.getVisibility() == View.VISIBLE) {
+                            pb.setVisibility(View.GONE);
+                        }
+
                         pages--;
                     }
 

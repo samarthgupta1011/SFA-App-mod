@@ -301,9 +301,9 @@ public class Box_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
                 builder.setTitle("Ferro Progress 📈");
-                if (processes.getBox().getDesigning().getIsDone()) {
+                if (processes.getBox().getFerro().getIsDone()) {
                     builder.setMessage("Ferro Done 👍 ");
-                } else if (!processes.getBox().getDesigning().getIsDone()){
+                } else if (!processes.getBox().getFerro().getIsDone()){
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -324,9 +324,9 @@ public class Box_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Box_Task.this);
                 builder.setTitle("Plates Progress 📈");
-                if (processes.getBox().getDesigning().getIsDone()) {
+                if (processes.getBox().getPlates().getIsDone()) {
                     builder.setMessage("Plates Done 👍 ");
-                } else if (!processes.getBox().getDesigning().getIsDone()){
+                } else if (!processes.getBox().getPlates().getIsDone()){
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);

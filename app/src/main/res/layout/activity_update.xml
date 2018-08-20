@@ -38,7 +38,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,11 +51,11 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:id="@+id/tv_curr_status_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15sp"
                 android:layout_weight="1"
-                android:id="@+id/tv_curr_status_total"
                 android:text="500"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="bold" />
@@ -65,7 +66,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,12 +76,13 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:text="Done until now"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height= "wrap_content"
                 android:id="@+id/tv_curr_status_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="15sp"
                 android:layout_weight="1"
                 android:text="150"
@@ -87,6 +90,18 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_task_done_update"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Not Done"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -162,9 +177,9 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_progress"
                 android:orientation="horizontal">
 
                 <TextView

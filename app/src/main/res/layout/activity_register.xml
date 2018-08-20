@@ -16,10 +16,15 @@
         android:layout_marginTop="30dp">
 
         <EditText
-            android:id="@+id/et_reg_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/et_reg_name"
+            android:hint="Enter name"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="3dp"/>
+
             android:hint="Enter name" />
+
 
     </android.support.design.widget.TextInputLayout>
 
@@ -30,11 +35,16 @@
         android:layout_marginRight="30dp">
 
         <EditText
-            android:id="@+id/et_reg_mob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/et_reg_mob"
+            android:inputType="number"
+            android:hint="Enter mobile number"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="3dp"/>
             android:hint="Enter mobile number"
             android:inputType="number" />
+
 
     </android.support.design.widget.TextInputLayout>
 
@@ -48,8 +58,13 @@
             android:id="@+id/et_reg_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Enter email"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="3dp"/>
             android:hint="Enter email"
             android:inputType="textEmailAddress" />
+
 
     </android.support.design.widget.TextInputLayout>
 
@@ -64,8 +79,13 @@
             android:id="@+id/et_reg_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Enter password"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="3dp"/>
             android:hint="Enter password"
             android:inputType="textPassword" />
+
 
     </android.support.design.widget.TextInputLayout>
 
@@ -80,12 +100,15 @@
         android:text="Select Department"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
+
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:id="@+id/sp_select_dept">
+
 
     </Spinner>
 
