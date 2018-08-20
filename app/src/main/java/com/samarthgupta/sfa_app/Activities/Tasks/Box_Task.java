@@ -458,6 +458,10 @@ public class Box_Task extends AppCompatActivity {
         String totalNumber = processes.getTotalNumber();
         String totalForms = processes.getTotalForms();
 
+        if(totalForms == null || totalForms.isEmpty()){
+            totalForms = processes.getTotalSets();
+        }
+
         String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
                 updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
 
@@ -499,6 +503,8 @@ public class Box_Task extends AppCompatActivity {
 
         String totalNumber = processes.getTotalNumber();
         String totalForms = processes.getTotalForms();
+
+
 
         String doneByTotalBefore = sizeOfList >= 2 ? updates.get(sizeOfList - 2).getDone() + " / " + totalNumber :
                 updates.get(sizeOfList - 1).getDone() + " / " + totalNumber;
