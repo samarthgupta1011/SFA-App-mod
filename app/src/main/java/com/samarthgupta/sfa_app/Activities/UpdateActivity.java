@@ -18,6 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.WT_Processes.UpdatePF;
@@ -26,6 +28,7 @@ import com.samarthgupta.sfa_app.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,15 +44,34 @@ public class UpdateActivity extends AppCompatActivity {
     LinearLayout llSets, llEnterProgress;
     TextView tvCurrStatusDone, tvCurrStatusTotal;
     String wtID;
-    TextView tvTaskDone ;
+
+    //Socket object
+    private Socket mSocket;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        {
+            try {
+                mSocket = IO.socket(baseUrl);
+
+                //Connect socket
+                mSocket.connect();
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
         //Set current status and total number to be done
         //Get intent from previous activity
-
 
         updateProgress = (Button) findViewById(R.id.bt_update_progress);
         tvTime = (TextView) findViewById(R.id.tv_time);
@@ -60,9 +82,11 @@ public class UpdateActivity extends AppCompatActivity {
         llEnterProgress = (LinearLayout) findViewById(R.id.ll_progress);
         llSets.setVisibility(View.GONE);
         llEnterProgress.setVisibility(View.GONE);
-        tvCurrStatusDone = (TextView) findViewById(R.id.tv_curr_status_done);
-        tvCurrStatusTotal = (TextView) findViewById(R.id.tv_curr_status_total);
-        tvTaskDone = (TextView)findViewById(R.id.tv_task_done_update);
+
+        //View removed
+
+//        tvCurrStatusDone = (TextView) findViewById(R.id.tv_curr_status_done);
+//        tvCurrStatusTotal = (TextView) findViewById(R.id.tv_curr_status_total);
         wtID = getIntent().getStringExtra("wt_id");
 
         Toast.makeText(this, wtID, Toast.LENGTH_SHORT).show();
@@ -71,40 +95,29 @@ public class UpdateActivity extends AppCompatActivity {
 
 
         //Send values for other jobs and boolean for the 4 jobs
-        tvCurrStatusTotal.setText(getIntent().getStringExtra("Total"));
-        tvCurrStatusDone.setText(getIntent().getStringExtra("Done"));
+
+//        tvCurrStatusTotal.setText(getIntent().getStringExtra("Total"));
+//        tvCurrStatusDone.setText(getIntent().getStringExtra("Done"));
 
         SimpleDateFormat sdfPosted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
         Calendar calendar = Calendar.getInstance();
         tvTime.setText(sdfPosted.format(calendar.getTime()));
 
 
-        if (empDept.equals("designing")){
-            // TODO set done or not done before visible
-            tvTaskDone.setVisibility(View.VISIBLE);
-        }else if (empDept.equals("ferro")){
+        if (empDept.equals("printing") || empDept.equals("folding")) {
 
-        }else if (empDept.equals("plates")){
+            llEnterProgress.setVisibility(View.VISIBLE);
+            llSets.setVisibility(View.VISIBLE);
 
-        }else if (empDept.equals("printing")){
+            //Post update PF
 
-        }else if (empDept.equals("folding")){
 
-        }else if (empDept.equals("gathering")){
+        } else if (empDept.equals("designing") || empDept.equals("ferro") || empDept.equals("plates")) {
 
-        }else if (empDept.equals("perfect")){
 
-        }else if (empDept.equals("ferro")){
-
-        }else if (empDept.equals("centre_pin")){
-
-        }else if (empDept.equals("packing")){
-
-        }else if (empDept.equals("dispatch")){
-
-        }else if (empDept.equals("challan")){
-
-        }else if (empDept.equals("bill")){
+        } else {
+            //Post update object
+            llEnterProgress.setVisibility(View.VISIBLE);
 
         }
 
@@ -172,6 +185,8 @@ public class UpdateActivity extends AppCompatActivity {
                                     Boolean status = response.getBoolean("success");
 
                                     if (status) {
+                                        emitProgress("X", empDept);
+
                                         Intent intent = new Intent(UpdateActivity.this, HomeActivity.class);
                                         Toast.makeText(UpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -207,6 +222,23 @@ public class UpdateActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void emitProgress(String client, String job){
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("client", client);
+            obj.put("job", job);
+
+            Log.e("Sending obj", obj.toString());
+            mSocket.emit("update", obj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }

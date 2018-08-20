@@ -1,6 +1,5 @@
 package com.samarthgupta.sfa_app.Activities.CreatingWorkTicket;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +31,6 @@ import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.X_Processes.Books_Processes;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.X_Processes.Box_Processes;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.X_Processes.Cover_Processes;
-import com.samarthgupta.sfa_app.Activities.TaskDetailsActivity;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Client;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.Job;
 import com.samarthgupta.sfa_app.POJO.WT_JobTicket.JobTicket;
@@ -60,7 +58,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
     EditText etJobName;
     RadioGroup rgJobType;
     RadioButton rbBook, rbBox, rbCover, rbPoster, rbLeaflet;
-    EditText etPrintRun, etWastage, etNumOfCol, etJobSize;
+    EditText etPrintRun, etWastage, etNumOfCol, etJobSize, etNumberOfPages;
     String jobType, jobName, printRun, wastage, numOfCol, jobSize;
 
     //Machine Class
@@ -115,6 +113,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         etWastage = (EditText) findViewById(R.id.et_paper_wastage);
         etNumOfCol = (EditText) findViewById(R.id.et_number_col);
         etJobSize = (EditText) findViewById(R.id.et_job_size);
+        etNumberOfPages = (EditText) findViewById(R.id.et_number_of_pages);
 
         //Machine
         cbMachDome = (CheckBox) findViewById(R.id.cb_mach_dom);
@@ -184,7 +183,6 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             }
         });
 
-
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -207,59 +205,6 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
             }
         };
-
-        cbMachDome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbMachDome.isChecked()) {
-                    machines.add(cbMachDome.getText().toString());
-                } else {
-                    machines.remove(cbMachDome.getText().toString());
-                }
-            }
-        });
-
-        cbMachKba.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbMachKba.isChecked()) {
-                    machines.add(cbMachKba.getText().toString());
-                } else {
-                    machines.remove(cbMachKba.getText().toString());
-                }
-            }
-        });
-
-        cbMachSm72.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbMachSm72.isChecked()) {
-                    machines.add(cbMachSm72.getText().toString());
-                } else {
-                    machines.remove(cbMachSm72.getText().toString());
-                }
-            }
-        });
-
-        cbMachSm102.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbMachSm102.isChecked()) {
-                    machines.add(cbMachSm102.getText().toString());
-                } else {
-                    machines.remove(cbMachSm102.getText().toString());
-                }
-            }
-        });
-
-        cbMachOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbMachOther.isChecked()) {
-                    machines.add(etMachOther.getText().toString());
-                } //else statement not added ?
-            }
-        });
 
         btProceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,8 +238,9 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                     return;
                 }
 
-                job = new Job(etJobName.getText().toString(), jobType, etPrintRun.getText().toString(),
-                        etWastage.getText().toString(), etJobSize.getText().toString(), etNumOfCol.getText().toString());
+                job = new Job(etJobName.getText().toString().trim(), jobType, etPrintRun.getText().toString().trim(),
+                        etWastage.getText().toString().trim(), etJobSize.getText().toString().trim(), etNumOfCol.getText().toString().trim(),
+                        etNumberOfPages.getText().toString().trim());
 
                 if (job.getName().isEmpty() || job.getType().isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
@@ -310,12 +256,81 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                     AlertDialog dialog = builder.create();
                     dialog.show();
                     return;
-                } else {
-                    jobTicket.setJob(job);
-                    String wt = (job.getName() + currentDate).replaceAll("[^a-zA-Z0-9]", "");
-                    wt = wt.trim();
-                    jobTicket.setWt(wt);
                 }
+
+                if (job.getNumPages().isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
+                    builder.setTitle("Enter Job Details");
+                    builder.setMessage("Please enter the number of pages");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
+
+                jobTicket.setJob(job);
+                String wt = (job.getName() + currentDate).replaceAll("[^a-zA-Z0-9]", "");
+                wt = wt.trim();
+                jobTicket.setWt(wt);
+
+                cbMachDome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cbMachDome.isChecked()) {
+                            machines.add(cbMachDome.getText().toString());
+                        } else {
+                            machines.remove(cbMachDome.getText().toString());
+                        }
+                    }
+                });
+
+                cbMachKba.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cbMachKba.isChecked()) {
+                            machines.add(cbMachKba.getText().toString());
+                        } else {
+                            machines.remove(cbMachKba.getText().toString());
+                        }
+                    }
+                });
+
+                cbMachSm72.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cbMachSm72.isChecked()) {
+                            machines.add(cbMachSm72.getText().toString());
+                        } else {
+                            machines.remove(cbMachSm72.getText().toString());
+                        }
+                    }
+                });
+
+                cbMachSm102.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cbMachSm102.isChecked()) {
+                            machines.add(cbMachSm102.getText().toString());
+                        } else {
+                            machines.remove(cbMachSm102.getText().toString());
+                        }
+                    }
+                });
+
+                cbMachOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (cbMachOther.isChecked()) {
+                            machines.add(etMachOther.getText().toString());
+                        } //else statement not added ?
+                    }
+                });
 
                 if (cloningTicket) {
                     setMachines();

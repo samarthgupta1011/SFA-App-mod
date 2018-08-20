@@ -26,14 +26,26 @@ public class Job {
     @SerializedName("noOfCol")
     @Expose
     private String noOfCol;
+    @SerializedName("numPages")
+    @Expose
+    private String numPages;
 
-    public Job(String name, String type, String printRun, String wastage, String size, String noOfCol) {
+    public Job(String name, String type, String printRun, String wastage, String size, String noOfCol, String numPages) {
         this.name = name;
         this.type = type;
         this.printRun = printRun;
         this.wastage = wastage;
         this.size = size;
         this.noOfCol = noOfCol;
+        this.numPages = numPages;
+    }
+
+    public String getNumPages() {
+        return numPages;
+    }
+
+    public void setNumPages(String numPages) {
+        this.numPages = numPages;
     }
 
     public String getName() {

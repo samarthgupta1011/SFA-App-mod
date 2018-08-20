@@ -40,12 +40,14 @@ import com.google.gson.GsonBuilder;
 import com.samarthgupta.sfa_app.Activities.CreatingWorkTicket.ClientDetailsActivity;
 import com.samarthgupta.sfa_app.Activities.Settings.SettingsActivity;
 import com.samarthgupta.sfa_app.Activities.SignIn_Register.SignInActivity;
+import com.samarthgupta.sfa_app.NotificationService.MyService;
 import com.samarthgupta.sfa_app.POJO.Employee;
 import com.samarthgupta.sfa_app.POJO.Notice;
 import com.samarthgupta.sfa_app.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -68,6 +70,11 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //TODO : Notification service
+        //Starting notif service
+        startService(new Intent(HomeActivity.this, MyService.class));
+
         homeRefresh = (SwipeRefreshLayout) findViewById(R.id.pullRefreshHome);
         rv = (RecyclerView) findViewById(R.id.rv_notice);
         pb = (ProgressBar) findViewById(R.id.pb_notice);
@@ -109,6 +116,7 @@ public class HomeActivity extends AppCompatActivity
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 String dept = et.getText().toString().trim();
                 data.setDept(dept);
@@ -230,6 +238,7 @@ public class HomeActivity extends AppCompatActivity
 
                     //for showing on the dialog
                     dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+
                     tvNoticeDate.setText(dateFormat.format(date));
                     // for sending to backend: format changes
                     dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);

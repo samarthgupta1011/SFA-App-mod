@@ -3,6 +3,7 @@
     package="com.samarthgupta.sfa_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 
     <application
         android:allowBackup="true"
@@ -70,6 +71,10 @@
         <activity android:name=".Activities.Settings.ChangePassword" />
         <activity android:name=".Activities.Settings.QueryActivity" />
         <activity android:name=".Activities.ReportTypeListActivity" />
+        <service
+            android:name=".NotificationService.MyService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>
