@@ -16,6 +16,7 @@ public class Machine {
     @Expose
     private String name;
 
+
     public Machine(List<String> machine, String name) {
         this.machine = machine;
         this.name = name;
@@ -36,5 +37,6 @@ public class Machine {
     public void setName(String name) {
         this.name = name;
     }
+
 
 }

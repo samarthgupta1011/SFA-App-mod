@@ -30,6 +30,7 @@ public class Job {
     @Expose
     private String numPages;
 
+
     public Job(String name, String type, String printRun, String wastage, String size, String noOfCol, String numPages) {
         this.name = name;
         this.type = type;

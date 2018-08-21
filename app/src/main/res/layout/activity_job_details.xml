@@ -267,7 +267,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Number of col."
-                            android:inputType="number" />
+                            android:inputType="number"
+                            android:visibility="gone"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -324,6 +325,23 @@
                             android:inputType="number" />
 
                     </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Number of colours"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:id="@+id/sp_select_num_colors"/>
 
 
                     <android.support.design.widget.TextInputLayout

@@ -24,6 +24,8 @@ public class Paper {
     @Expose
     private String location;
 
+
+
     public Paper(String details, String quality, String quantity, String paperBy, String location) {
         this.details = details;
         this.quality = quality;
@@ -89,5 +91,6 @@ public class Paper {
     public void setLocation(String location) {
         this.location = location;
     }
+
 
 }
