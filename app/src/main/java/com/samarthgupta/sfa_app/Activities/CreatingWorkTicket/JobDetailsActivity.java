@@ -271,7 +271,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                         etWastage.getText().toString().trim(), etJobSize.getText().toString().trim(), strNumberOfCol,
                         etNumberOfPages.getText().toString().trim());
 
-                if(job.getNoOfCol().equals("---")){
+                if(job.getNoOfCol().equals("---") || job.getNoOfCol().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
                     builder.setTitle("Enter job details");
                     builder.setMessage("Please select number of colours");
@@ -622,7 +622,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         }
         etPrintRun.setText(taskDetailsClone.getJob().getPrintRun());
         etWastage.setText(taskDetailsClone.getJob().getWastage());
-        etNumOfCol.setText(taskDetailsClone.getJob().getNoOfCol());
+//        etNumOfCol.setText(taskDetailsClone.getJob().getNoOfCol());
 
         switch (taskDetailsClone.getPlate().getPlate()) {
             case "CTP":
