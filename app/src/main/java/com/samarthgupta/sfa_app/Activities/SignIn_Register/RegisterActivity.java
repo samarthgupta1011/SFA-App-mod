@@ -65,8 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
         final List<String> options = Arrays.asList(getResources().getStringArray(R.array.dept_list));
 
 
-
-
         spSelectDept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -83,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                 pass = etPass.getText().toString();
                 mob = etMobile.getText().toString();
 
-                if(deptSelected.equals("---")){
+                if (deptSelected.equals("---")) {
                     Toast.makeText(RegisterActivity.this, "Select your department", Toast.LENGTH_SHORT).show();
                     return;
                 } else {

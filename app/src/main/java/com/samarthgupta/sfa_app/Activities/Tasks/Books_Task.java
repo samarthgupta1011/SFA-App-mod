@@ -320,9 +320,9 @@ public class Books_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
                 builder.setTitle("Ferro Progress 📈");
-                if (processes.getBook().getDesigning().getIsDone()) {
+                if (processes.getBook().getFerro().getIsDone()) {
                     builder.setMessage("Ferro Done 👍 ");
-                } else if (!processes.getBook().getDesigning().getIsDone()) {
+                } else if (!processes.getBook().getFerro().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -343,9 +343,9 @@ public class Books_Task extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Books_Task.this);
                 builder.setTitle("Plates Progress 📈");
-                if (processes.getBook().getDesigning().getIsDone()) {
+                if (processes.getBook().getPlates().getIsDone()) {
                     builder.setMessage("Plates Done 👍 ");
-                } else if (!processes.getBook().getDesigning().getIsDone()) {
+                } else if (!processes.getBook().getPlates().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);

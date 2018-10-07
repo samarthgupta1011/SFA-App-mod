@@ -11,6 +11,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -95,6 +99,11 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
 
     String responseToClone;
     Boolean cloningTicket = false;
+    Spinner spNumOfCol;
+
+    List<String> options;
+    private String strNumberOfCol;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +120,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         rgJobType.setOnCheckedChangeListener(this);
         etPrintRun = (EditText) findViewById(R.id.et_print_run);
         etWastage = (EditText) findViewById(R.id.et_paper_wastage);
-        etNumOfCol = (EditText) findViewById(R.id.et_number_col);
+//        etNumOfCol = (EditText) findViewById(R.id.et_number_col);
         etJobSize = (EditText) findViewById(R.id.et_job_size);
         etNumberOfPages = (EditText) findViewById(R.id.et_number_of_pages);
 
@@ -156,6 +165,14 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         rbCover = (RadioButton) findViewById(R.id.rb_job_cover);
         rbPoster = (RadioButton) findViewById(R.id.rb_job_poster);
         rbLeaflet = (RadioButton) findViewById(R.id.rb_job_leaflet);
+
+        //Spinner select number of colors
+        spNumOfCol = (Spinner) findViewById(R.id.sp_select_num_colors);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.list_num_of_colors, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNumOfCol.setAdapter(adapter);
+        options = Arrays.asList(getResources().getStringArray(R.array.list_num_of_colors));
 
 
         if (getIntent().getStringExtra("task_response") != null) {
@@ -206,6 +223,18 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
             }
         };
 
+        spNumOfCol.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strNumberOfCol = options.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -239,8 +268,24 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
                 }
 
                 job = new Job(etJobName.getText().toString().trim(), jobType, etPrintRun.getText().toString().trim(),
-                        etWastage.getText().toString().trim(), etJobSize.getText().toString().trim(), etNumOfCol.getText().toString().trim(),
+                        etWastage.getText().toString().trim(), etJobSize.getText().toString().trim(), strNumberOfCol,
                         etNumberOfPages.getText().toString().trim());
+
+                if(job.getNoOfCol().equals("---") || job.getNoOfCol().isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
+                    builder.setTitle("Enter job details");
+                    builder.setMessage("Please select number of colours");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return;
+                }
 
                 if (job.getName().isEmpty() || job.getType().isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
@@ -577,7 +622,7 @@ public class JobDetailsActivity extends AppCompatActivity implements RadioGroup.
         }
         etPrintRun.setText(taskDetailsClone.getJob().getPrintRun());
         etWastage.setText(taskDetailsClone.getJob().getWastage());
-        etNumOfCol.setText(taskDetailsClone.getJob().getNoOfCol());
+//        etNumOfCol.setText(taskDetailsClone.getJob().getNoOfCol());
 
         switch (taskDetailsClone.getPlate().getPlate()) {
             case "CTP":

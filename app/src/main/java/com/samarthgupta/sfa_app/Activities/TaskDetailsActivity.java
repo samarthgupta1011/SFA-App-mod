@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -46,6 +47,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
     Button btClone;
     String responseToClone;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
         PlateName = (TextView) findViewById(R.id.tv_plate_name);
         plateType = (TextView) findViewById(R.id.tv_plate_type);
         PlateQuantity = (TextView) findViewById(R.id.tv_plate_quantity);
+
+
 
         btClone = (Button) findViewById(R.id.bt_clone);
         pb.setVisibility(View.VISIBLE);

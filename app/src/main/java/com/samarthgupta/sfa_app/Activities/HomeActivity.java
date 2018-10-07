@@ -227,76 +227,76 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this, ReportTypeListActivity.class));
         } else if (id == R.id.nav_notices) {
 
-                    //Show dialogue
-                    final Dialog dialog = new Dialog(HomeActivity.this);
-                    dialog.setContentView(R.layout.layout_add_notice);
+            //Show dialogue
+            final Dialog dialog = new Dialog(HomeActivity.this);
+            dialog.setContentView(R.layout.layout_add_notice);
 
-                    TextView tvNoticeDate = (TextView) dialog.findViewById(R.id.tv_notice_date);
-                    Button btSubmit = (Button) dialog.findViewById(R.id.bt_post_notice);
-                    final EditText etNoticeBody = (EditText) dialog.findViewById(R.id.et_notice_body);
-                    final EditText etNoticeTitle = (EditText) dialog.findViewById(R.id.et_notice_title);
-                    date = System.currentTimeMillis();
+            TextView tvNoticeDate = (TextView) dialog.findViewById(R.id.tv_notice_date);
+            Button btSubmit = (Button) dialog.findViewById(R.id.bt_post_notice);
+            final EditText etNoticeBody = (EditText) dialog.findViewById(R.id.et_notice_body);
+            final EditText etNoticeTitle = (EditText) dialog.findViewById(R.id.et_notice_title);
+            date = System.currentTimeMillis();
 
-                    //for showing on the dialog
-                    dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
+            //for showing on the dialog
+            dateFormat = new SimpleDateFormat("EEE,dd MMM yyyy", Locale.UK);
 
-                    tvNoticeDate.setText(dateFormat.format(date));
-                    // for sending to backend: format changes
-                    dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
+            tvNoticeDate.setText(dateFormat.format(date));
+            // for sending to backend: format changes
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.UK);
 
 
-                    dialog.setCancelable(true);
-                    dialog.show();
-                    btSubmit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+            dialog.setCancelable(true);
+            dialog.show();
+            btSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                            String noticeBody = etNoticeBody.getText().toString();
-                            String noticeTitle = etNoticeTitle.getText().toString();
-                            JSONObject obj = new JSONObject();
-                            try {
-                                obj.put("title", noticeTitle);
-                                obj.put("date", dateFormat.format(date));
-                                obj.put("body", noticeBody);
-                                obj.put("noticeBy", data.getMobile());
+                    String noticeBody = etNoticeBody.getText().toString();
+                    String noticeTitle = etNoticeTitle.getText().toString();
+                    JSONObject obj = new JSONObject();
+                    try {
+                        obj.put("title", noticeTitle);
+                        obj.put("date", dateFormat.format(date));
+                        obj.put("body", noticeBody);
+                        obj.put("noticeBy", data.getMobile());
 
-                                Volley.newRequestQueue(HomeActivity.this).add(new JsonObjectRequest(Request.Method.POST, baseUrl + "/notice", obj, new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        Log.d("Notice", response.toString());
-                                        try {
-                                            if (response.getBoolean("success")) {
-                                                Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss();
-                                                Intent intent = getIntent();
-                                                finish();
-                                                startActivity(intent);
-                                            } else {
-                                                //Not authorised
-                                                Toast.makeText(HomeActivity.this, "Not authorised to post notice", Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss();
-                                            }
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
+                        Volley.newRequestQueue(HomeActivity.this).add(new JsonObjectRequest(Request.Method.POST, baseUrl + "/notice", obj, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.d("Notice", response.toString());
+                                try {
+                                    if (response.getBoolean("success")) {
+                                        Toast.makeText(HomeActivity.this, "Notice posted successfully", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                        Intent intent = getIntent();
+                                        finish();
+                                        startActivity(intent);
+                                    } else {
+                                        //Not authorised
+                                        Toast.makeText(HomeActivity.this, "Not authorised to post notice", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
                                     }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
-//                                        Log.d("Notice", error.toString());
-                                    }
-                                }));
 
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(HomeActivity.this, "Can't post due to network error", Toast.LENGTH_SHORT).show();
+//                                        Log.d("Notice", error.toString());
+                            }
+                        }));
 
 
-                        }
-                    });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
 
         }
 

@@ -43,7 +43,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
 
 
-        if(getSharedPreferences("Login", Context.MODE_PRIVATE).getString("Data",null)!=null){
+        if (getSharedPreferences("Login", Context.MODE_PRIVATE).getString("Data", null) != null) {
             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
             finish();
         }
@@ -83,7 +83,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 pb.setVisibility(View.VISIBLE);
 
                 Employee emp = new Employee(mob, pass);
-                Log.d("Login", mob + " "+pass);
+                Log.d("Login", mob + " " + pass);
                 Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
                 DataInterface client = retrofit.create(DataInterface.class);
                 Call<Employee> call = client.empLogin(emp);
@@ -91,7 +91,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 call.enqueue(new Callback<Employee>() {
                     @Override
                     public void onResponse(Call<Employee> call, Response<Employee> response) {
-                        Log.i("resp",response.body().isStatus()+" ");
+                        Log.i("resp", response.body().isStatus() + " ");
 
                         //Status is false
                         if (!response.body().isStatus()) {
@@ -102,7 +102,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                         } else {
                             getSharedPreferences("Login", Context.MODE_PRIVATE).edit().
-                                    putString("Data",new GsonBuilder().create().toJson(response.body())).apply();
+                                    putString("Data", new GsonBuilder().create().toJson(response.body())).apply();
                             startActivity(new Intent(SignInActivity.this, HomeActivity.class));
                             finish();
                         }
@@ -111,7 +111,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onFailure(Call<Employee> call, Throwable t) {
 
-                        Log.i("err",t.toString());
+                        Log.i("err", t.toString());
                         pb.setVisibility(View.GONE);
                         btLogin.setVisibility(View.VISIBLE);
                         AlertDialog dial = new AlertDialog.Builder(SignInActivity.this).
