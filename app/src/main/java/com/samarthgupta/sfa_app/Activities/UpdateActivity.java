@@ -49,7 +49,6 @@ public class UpdateActivity extends AppCompatActivity {
     private Socket mSocket;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +65,6 @@ public class UpdateActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-
 
 
         //Set current status and total number to be done
@@ -226,7 +223,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
-    private void emitProgress(String client, String job){
+    private void emitProgress(String client, String job) {
 
         JSONObject obj = new JSONObject();
         try {

@@ -243,7 +243,7 @@ public class Cover_Task extends AppCompatActivity {
                 builder.setTitle("Designing Progress 📈");
                 if (processes.getCover().getDesigning().getIsDone()) {
                     builder.setMessage("Designing Done 👍 ");
-                } else if (!processes.getCover().getDesigning().getIsDone()){
+                } else if (!processes.getCover().getDesigning().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠‍");
                 }
                 builder.setCancelable(true);
@@ -265,7 +265,7 @@ public class Cover_Task extends AppCompatActivity {
                 builder.setTitle("Ferro Progress 📈");
                 if (processes.getCover().getFerro().getIsDone()) {
                     builder.setMessage("Ferro Done 👍 ");
-                } else if (!processes.getCover().getFerro().getIsDone()){
+                } else if (!processes.getCover().getFerro().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -287,7 +287,7 @@ public class Cover_Task extends AppCompatActivity {
                 builder.setTitle("Plates Progress 📈");
                 if (processes.getCover().getPlates().getIsDone()) {
                     builder.setMessage("Plates Done 👍");
-                } else if (!processes.getCover().getPlates().getIsDone()){
+                } else if (!processes.getCover().getPlates().getIsDone()) {
                     builder.setMessage("Not Done 👷️ 🛠");
                 }
                 builder.setCancelable(true);
@@ -342,14 +342,14 @@ public class Cover_Task extends AppCompatActivity {
         cv_dispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProgressAlert("Dispatch", updateDispatch, processes,Cover_Task.this);
+                showProgressAlert("Dispatch", updateDispatch, processes, Cover_Task.this);
             }
         });
 
         cv_challan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProgressAlert("Challan", updateChallan, processes,Cover_Task.this);
+                showProgressAlert("Challan", updateChallan, processes, Cover_Task.this);
             }
         });
 
@@ -374,16 +374,16 @@ public class Cover_Task extends AppCompatActivity {
 
     }
 
-    private static void setTextOfDoneByTotal(TextView tv, List<Update> updates, Processes processes){
+    private static void setTextOfDoneByTotal(TextView tv, List<Update> updates, Processes processes) {
         int sizeOfList = updates.size();
         String totalNumber = processes.getTotalNumber();
 
         String totalByDone = "";
 
-        if(sizeOfList >= 2){
+        if (sizeOfList >= 2) {
             totalByDone = updates.get(sizeOfList - 1).getDone() + "/" + totalNumber;
         } else {
-            totalByDone = "0/"+totalNumber;
+            totalByDone = "0/" + totalNumber;
         }
 
         tv.setText(totalByDone);
@@ -400,7 +400,7 @@ public class Cover_Task extends AppCompatActivity {
         String totalNumber = processes.getTotalNumber();
         String totalForms = processes.getTotalForms();
 
-        if(totalForms == null || totalForms.isEmpty()){
+        if (totalForms == null || totalForms.isEmpty()) {
             totalForms = processes.getTotalSets();
         }
 
@@ -455,7 +455,7 @@ public class Cover_Task extends AppCompatActivity {
         String lastUpdate = convertDateFromUTC(updates.get(sizeOfList - 1).getTime(), "dd-MM-yyyy HH:mm:ss");
 
         if (sizeOfList >= 2) {
-            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter +"\n\n -- Last Updated : \n" + lastUpdate);
+            builder.setMessage(jobName + " Done: " + doneByTotalBefore + " to " + doneByTotalAfter + "\n\n -- Last Updated : \n" + lastUpdate);
         } else {
             builder.setMessage(jobName + " Done: " + doneByTotalBefore + "\n\n -- Last Updated: " + lastUpdate);
         }

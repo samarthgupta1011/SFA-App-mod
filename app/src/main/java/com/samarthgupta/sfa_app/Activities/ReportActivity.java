@@ -67,7 +67,7 @@ public class ReportActivity extends AppCompatActivity {
                             try {
                                 if (response.getBoolean("success")) {
                                     Toast.makeText(ReportActivity.this, "Issue reported successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(ReportActivity.this, HomeActivity.class) ;
+                                    Intent intent = new Intent(ReportActivity.this, HomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                 } else {
@@ -94,9 +94,6 @@ public class ReportActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 
 
 }
